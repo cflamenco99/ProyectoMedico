@@ -70,7 +70,7 @@ gulp.task('scss', function() {
 
 gulp.task('minify:css', function() {
   return gulp.src([
-        paths.src.css + '/argon.css'
+        paths.src.css + '/estilos.css'
     ])
     .pipe(cleanCss())
     .pipe(rename({ suffix: '.min' }))
@@ -93,7 +93,7 @@ gulp.task('concat:js', function(done) {
 
 	return gulp
 		.src(files)
-		.pipe(concat("argon.js"))
+		.pipe(concat("plantilla.js"))
 		.pipe(gulp.dest(paths.dist.base + '/js'));
 
 	done();
@@ -103,7 +103,7 @@ gulp.task('concat:js', function(done) {
 
 gulp.task('minify:js', function(cb) {
     return gulp.src([
-            paths.src.base + '/assets/js/argon.js'
+            paths.src.base + '/assets/js/plantilla.js'
         ])
         .pipe(uglify())
         .pipe(rename({ suffix: '.min' }))
@@ -140,7 +140,7 @@ gulp.task('clean:dist', function() {
 
 gulp.task('copy:css', function() {
     return gulp.src([
-        'assets/css/argon.css'
+        'assets/css/estilos.css'
     ])
     .pipe(gulp.dest(paths.dist.base + '/css'))
 });
@@ -149,7 +149,7 @@ gulp.task('copy:css', function() {
 
 gulp.task('copy:js', function() {
     return gulp.src([
-        'assets/js/argon.js'
+        'assets/js/plantilla.js'
     ])
     .pipe(gulp.dest(paths.dist.base + '/js'))
 });
