@@ -1,5 +1,5 @@
 /**
- * Gulp file to automate the various tasks
+ * Gulp file para automatizar tareas
 **/
 
 var autoprefixer = require('gulp-autoprefixer');
