@@ -29821,3 +29821,12 @@ input.datetimepicker[data-color='yellow'] + .bootstrap-datetimepicker-widget.dro
 {
     background: transparent;
 }
+
+.textbox{
+    display: flex;
+    flex-direction: column;
+
+    width: 85rem;
+    margin: 0.75rem 0;
+}
+ 
