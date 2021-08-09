@@ -54,12 +54,12 @@
           </li>
           <li class="nav-item">
             <a class="nav-link" href="historialmedico.html">
-              <i class="ni ni-bullet-list-67 text-default"></i>
+              <i class="ni ni-bullet-list-67 text-red"></i>
               <span class="nav-link-text">Historiales Medicos</span>
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="AdmCitas.html">
+            <a class="nav-link" href="examples/register.html">
               <i class="ni ni-circle-08 text-pink"></i>
               <span class="nav-link-text">Administrar Citas</span>
             </a>
@@ -103,6 +103,8 @@
     </nav>
     <!-- Header -->
     <!-- Header -->
+
+    <h6 class="h2 text-black d-inline-block mb-0"></h6>   
     <div class="header pb-6 d-flex align-items-center" style="min-height: 200px; background-color: #f8f9fe; background-size: cover; background-position: center top;">
       <!-- Mask -->
       <span class="mask bg-gradient-default opacity-8"></span>
@@ -110,7 +112,7 @@
       <div class="container-fluid d-flex align-items-center">
         <div class="row">
           <div class="col-lg-12">
-            <h1 class="display-2 text-white">Administrar Pacientes</h1>
+            <h1 class="display-2 text-white">Historial Médico</h1>
           </div>
         </div>
       </div>
@@ -124,59 +126,64 @@
               <div class="col-lg-3 order-lg-2">
                 <div class="card-profile-image">
                   <a href="#">
-                    <img src="assets/img/theme/team-4.jpg" class="rounded-circle">
+                    <img src="https://cdn3.vectorstock.com/i/1000x1000/25/22/search-patient-rounded-icon-vector-6462522.jpg" class="rounded-circle">
                   </a>
                 </div>
               </div>
             </div>
             <div class="card-header text-center border-0 pt-8 pt-md-4 pb-0 pb-md-4">
               <div class="d-flex justify-content-between">
-                <a href="#" class="btn btn-sm btn-info  mr-4 ">Nueva Cita</a>
-                <a href="#" class="btn btn-sm btn-default float-right">Nueva Receta</a>
+                <a href="RecetasMedicas.html" class="btn btn-sm btn-info  mr-4 ">Generar Receta Médica Nueva</a>
+                <a href="AdmCitas.html" class="btn btn-sm btn-default float-right">Generar Nueva Cita Médica</a>
               </div>
             </div>
             <div class="card-body pt-0">
               <div class="text-center">
                 <h5 class="h3">
-                  Heyzi Irias<span class="font-weight-light">, 19</span>
+                  Sistema Médico<span class="font-weight-light"> </span>
                 </h5>
                 <div class="h5 font-weight-300">
-                  <i class="ni location_pin mr-2"></i>San Pedro Sula, Honduras
+                  <i class="ni location_pin mr-2"></i>Honduras
                 </div>
                 <div class="h5 mt-4">
-                  <i class="ni business_briefcase-24 mr-2"></i>Programador Front-End
+                  <i class="ni business_briefcase-24 mr-2"></i>No Lo Olvides Vacúnate!
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <div class="col-xl-8 order-xl-1">
+        <div class="col-xl-8 order-xl-5">
           <div class="card">
             <div class="card-header">
               <div class="row align-items-center">
                 <div class="col-8">
-                  <h3 class="mb-0">Datos del paciente </h3>
+                  <h3 class="mb-0">Ingrese Datos del paciente </h3>
+                </div>
+                <div class="col-lg-4 order-lg-2">
+                  <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Ingrese aqui ID para su búsqueda">
+                  </div>
                 </div>
                 <div class="col-4 text-right">
-                  <a href="#!" class="btn btn-sm btn-primary">Nuevo</a>
+                  <a href="#!" class="btn btn-sm btn-primary">Buscar Historial</a>
                 </div>
               </div>
             </div>
             <div class="card-body">
               <form>
-                <h6 class="heading-small text-muted mb-4">Informacion General</h6>
+                <h6 class="heading-small text-muted mb-4">Información General</h6>
                 <div class="pl-lg-4">
                   <div class="row">
                     <div class="col-lg-6">
                       <div class="form-group">
                         <label class="form-control-label" for="input-first-name">Primer nombre</label>
-                        <input type="text" class="form-control" placeholder="Primer nombre">
+                        <input type="text" class="form-control" placeholder="Alvaro">
                       </div>
                     </div>
                     <div class="col-lg-6">
                       <div class="form-group">
                         <label class="form-control-label" for="input-last-name">Segundo nombre</label>
-                        <input type="text" class="form-control" placeholder="Segundo nombre">
+                        <input type="text" class="form-control" placeholder="Vicente">
                       </div>
                     </div>
                   </div>
@@ -184,13 +191,13 @@
                     <div class="col-lg-6">
                       <div class="form-group">
                         <label class="form-control-label" for="input-first-name">Primer apellido</label>
-                        <input type="text" class="form-control" placeholder="Primer apellido">
+                        <input type="text" class="form-control" placeholder="Meza">
                       </div>
                     </div>
                     <div class="col-lg-6">
                       <div class="form-group">
                         <label class="form-control-label" for="input-last-name">Segundo apellido</label>
-                        <input type="text" class="form-control" placeholder="Segundo apellido">
+                        <input type="text" class="form-control" placeholder="Rodriguez">
                       </div>
                     </div>
                   </div>
@@ -203,41 +210,41 @@
                     </div>
                     <div class="col-lg-6">
                       <div class="form-group">
-                        <label class="form-control-label" for="input-email">Correo Electronico</label>
-                        <input type="email" class="form-control" placeholder="carlos@ejemplo.com">
+                        <label class="form-control-label" for="input-email">Enfermedad Base</label>
+                        <input type="email" class="form-control" placeholder="COVID-39">
                       </div>
                     </div>
                   </div>                  
                 </div>
                 <hr class="my-4" />
                 <!-- Address -->
-                <h6 class="heading-small text-muted mb-4">Informacion de Contacto</h6>
+                <h6 class="heading-small text-muted mb-4">Informacion de Historial</h6>
                 <div class="pl-lg-4">
                   <div class="row">
                     <div class="col-md-12">
                       <div class="form-group">
-                        <label class="form-control-label" for="input-address">Direccion</label>
-                        <input class="form-control" placeholder="Direccion de casa" value="Residencial costas del sol 15 calle SE" type="text">
-                      </div>
+                        <textarea name="comentarios" rows="10" cols="90">Paciente tiene COVID-39 la nueva variante del año 2050, VACUNATE!
+                        </textarea>
+                        </div>
                     </div>
                   </div>
                   <div class="row">
                     <div class="col-lg-4">
                       <div class="form-group">
-                        <label class="form-control-label" for="input-country">Pais</label>
-                        <input type="number" class="form-control" placeholder="Pais">
+                        <label class="form-control-label" for="input-country">Médico</label>
+                        <input type="number" class="form-control" placeholder="Cantinflas Jr.">
                       </div>
                     </div>
                     <div class="col-lg-4">
                       <div class="form-group">
-                        <label class="form-control-label" for="input-city">Ciudad</label>
+                        <label class="form-control-label" for="input-city">Clínica</label>
+                        <input type="text" class="form-control" placeholder="Clínica" value="Hospital HN">
+                      </div>
+                    </div>
+                    <div class="col-lg-4">
+                      <div class="form-group">
+                        <label class="form-control-label" for="input-country">Ciudad</label>
                         <input type="text" class="form-control" placeholder="Ciudad" value="San Pedro Sula">
-                      </div>
-                    </div>
-                    <div class="col-lg-4">
-                      <div class="form-group">
-                        <label class="form-control-label" for="input-country">Departamento</label>
-                        <input type="text" class="form-control" placeholder="Departamento" value="Cortes">
                       </div>
                     </div>                    
                   </div>
