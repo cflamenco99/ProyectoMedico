@@ -28,7 +28,7 @@ var SalesChart = (function() {
             ticks: {
               callback: function(value) {
                 if (!(value % 10)) {
-                  return '$' + value + 'k';
+                  return 'Lps.' + value + 'k';
                 }
               }
             }
@@ -52,9 +52,9 @@ var SalesChart = (function() {
         }
       },
       data: {
-        labels: ['May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+        labels: ['Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre'],
         datasets: [{
-          label: 'Performance',
+          label: 'Ganancias',
           data: [0, 20, 10, 30, 15, 40, 20, 60, 60]
         }]
       }
