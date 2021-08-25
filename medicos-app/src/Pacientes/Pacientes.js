@@ -1,3 +1,7 @@
+import React from 'react';
+import { useFormik } from 'formik';
+import ls from 'local-storage';
+
 import {
     Button,
     Card,
@@ -14,6 +18,48 @@ import {
   import UserHeader from "components/Headers/UserHeader.js";
   
   const Pacientes = () => {
+
+    function guardarPaciente(paciente){
+      if (
+        paciente.id_paciente >= 0 &&
+        paciente.primerNombre !== "" &&
+        paciente.segundoNombre !== "" &&
+        paciente.primerApellido !== "" &&
+        paciente.segundoApellido !== "" &&
+        paciente.pais !== "" &&
+        paciente.ciudad !== "" &&
+        paciente.codigoPostal > 0 &&
+        paciente.direccion !== ""
+      ) {
+        let listaGuardar = [];
+        let lista = ls.get("misPacientes");
+        if (lista && lista.length > 0) listaGuardar = lista;
+        listaGuardar = listaGuardar.concat(paciente);
+        ls.set("misPacientes", listaGuardar);
+        window.alert("Paciente guardado exitosamente");      
+      } else {
+        window.alert("Favor ingresar correctamente los datos");
+      }
+    }
+
+    const formik = useFormik({
+      initialValues: {
+          id_paciente: '',
+          primerNombre: '',
+          segundoNombre: '',
+          primerApellido: '',
+          segundoApellido: '',
+          pais:'',
+          ciudad:'',
+          codigoPostal:'',
+          direccion: ''  
+      },
+      onSubmit: values => {
+        guardarPaciente(values);
+        formik.resetForm();
+      },
+    });
+
     return (
       <>
         <UserHeader />
@@ -39,11 +85,30 @@ import {
                   </Row>
                 </CardHeader>
                 <CardBody>
-                  <Form>
+                  <Form onSubmit={formik.handleSubmit}>
                     <h6 className="heading-small text-muted mb-4">
                     Informacion General
                     </h6>
                     <div className="pl-lg-4">
+                      <Row>
+                      <Col lg="6">
+                          <FormGroup>
+                            <label
+                              className="form-control-label"
+                            >
+                              ID Paciente
+                            </label>
+                            <Input
+                              className="form-control-alternative"
+                              placeholder="ID Paciente"
+                              type="number"
+                              id="id_paciente"
+                              onChange={formik.handleChange}
+                              value={formik.values.id_paciente}
+                            />
+                          </FormGroup>
+                        </Col>
+                      </Row>
                       <Row>
                         <Col lg="6">
                           <FormGroup>
@@ -56,6 +121,9 @@ import {
                               className="form-control-alternative"
                               placeholder="Primer nombre"
                               type="text"
+                              id="primerNombre"
+                              onChange={formik.handleChange}
+                              value={formik.values.primerNombre}
                             />
                           </FormGroup>
                         </Col>
@@ -70,6 +138,9 @@ import {
                               className="form-control-alternative"
                               placeholder="Segundo nombre"
                               type="text"
+                              id="segundoNombre"
+                              onChange={formik.handleChange}
+                              value={formik.values.segundoNombre}
                             />
                           </FormGroup>
                         </Col>                        
@@ -86,6 +157,9 @@ import {
                               className="form-control-alternative"
                               placeholder="Primer apellido"
                               type="text"
+                              id="primerApellido"
+                              onChange={formik.handleChange}
+                              value={formik.values.primerApellido}
                             />
                           </FormGroup>
                         </Col>
@@ -100,6 +174,9 @@ import {
                               className="form-control-alternative"
                               placeholder="Segundo apellido"
                               type="text"
+                              id="segundoApellido"
+                              onChange={formik.handleChange}
+                              value={formik.values.segundoApellido}
                             />
                           </FormGroup>
                         </Col>                        
@@ -122,6 +199,9 @@ import {
                               className="form-control-alternative"
                               placeholder="Pais"
                               type="text"
+                              id="pais"
+                              onChange={formik.handleChange}
+                              value={formik.values.pais}
                             />
                           </FormGroup>
                         </Col>
@@ -136,6 +216,9 @@ import {
                               className="form-control-alternative"
                               placeholder="Ciudad"
                               type="text"
+                              id="ciudad"
+                              onChange={formik.handleChange}
+                              value={formik.values.ciudad}
                             />
                           </FormGroup>
                         </Col>                        
@@ -151,6 +234,9 @@ import {
                               className="form-control-alternative"
                               placeholder="Codigo postal"
                               type="number"
+                              id="codigoPostal"
+                              onChange={formik.handleChange}
+                              value={formik.values.codigoPostal}
                             />
                           </FormGroup>
                         </Col>
@@ -167,9 +253,17 @@ import {
                               className="form-control-alternative"
                               placeholder="Direccion"
                               type="text"
+                              id="direccion"
+                              onChange={formik.handleChange}
+                              value={formik.values.direccion}
                             />
                           </FormGroup>
                         </Col>
+                      </Row>
+                      <Row>
+                        <Button type="submit" className="col-md-2 offset-md-5" color="primary">
+                        Guardar
+                        </Button>
                       </Row>
                     </div>
                   </Form>
