@@ -47,14 +47,14 @@ _In development mode, some of the above plugins will throw a warning because the
 
 ### Bug fixing
 
-- https://github.com/creativetimofficial/argon-dashboard-react/pull/38
-- https://github.com/creativetimofficial/argon-dashboard-react/pull/33
-- https://github.com/creativetimofficial/argon-dashboard-react/issues/29
-- https://github.com/creativetimofficial/argon-dashboard-react/issues/23
+- https://github.com/creativetimofficial/medicos-dashboard-react/pull/38
+- https://github.com/creativetimofficial/medicos-dashboard-react/pull/33
+- https://github.com/creativetimofficial/medicos-dashboard-react/issues/29
+- https://github.com/creativetimofficial/medicos-dashboard-react/issues/23
 
 ### Major style changes
 
-- Moved all `src/scss/argon-dashboard/bootstrap` files to `node_modules/bootstrap`
+- Moved all `src/scss/medicos-dashboard/bootstrap` files to `node_modules/bootstrap`
 
 ### Deleted components
 
@@ -111,11 +111,11 @@ _In development mode, some of the above plugins will throw a warning because the
 
 ### Bug fixing
 
-- https://github.com/creativetimofficial/argon-dashboard-react/issues/18 (Added this in live docs, we need for our product to have a homepage prop inside the package.json. If build is not working, just delete the homepage prop from inside the package.json, or configure it to your own specs.)
-- https://github.com/creativetimofficial/argon-dashboard-react/issues/17
-- https://github.com/creativetimofficial/argon-dashboard-react/issues/15
-- https://github.com/creativetimofficial/argon-dashboard-react/issues/12
-- https://github.com/creativetimofficial/argon-dashboard-react/issues/3
+- https://github.com/creativetimofficial/medicos-dashboard-react/issues/18 (Added this in live docs, we need for our product to have a homepage prop inside the package.json. If build is not working, just delete the homepage prop from inside the package.json, or configure it to your own specs.)
+- https://github.com/creativetimofficial/medicos-dashboard-react/issues/17
+- https://github.com/creativetimofficial/medicos-dashboard-react/issues/15
+- https://github.com/creativetimofficial/medicos-dashboard-react/issues/12
+- https://github.com/creativetimofficial/medicos-dashboard-react/issues/3
 - Changed `componentWillMount` with `constructor` function inside `src/views/Index.js` (this was for initializing the charts)
 
 ### Major style changes
@@ -179,4 +179,4 @@ Please update the following components: withScriptjs(withGoogleMap(Component))
 ### Original Release
 
 - Added Reactstrap as base framework
-- Added design from Argon Dashboard by Creative Tim
+- Added design from medicos Dashboard by Creative Tim
