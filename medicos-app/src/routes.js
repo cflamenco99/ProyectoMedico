@@ -1,5 +1,7 @@
 import Login from "Login/Login";
 import Pacientes from "Pacientes/Pacientes";
+import HistorialMedico from "Historial/HistorialMedico"
+
 
 
 var routes = [
@@ -17,5 +19,14 @@ var routes = [
     component: Pacientes,
     layout: "/admin",
   },
+
+  {
+    path: "/historial-medico",
+    name: "Historial Medico",
+    icon: "ni ni-single-copy-04 text-blue",
+    component: HistorialMedico,
+    layout: "/admin",
+  },
+
 ];
 export default routes;
