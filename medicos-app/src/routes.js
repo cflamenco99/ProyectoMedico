@@ -1,4 +1,3 @@
-import Historial from "Historial-Medico/Historial.js";
 import Index from "views/Index.js";
 import Profile from "views/examples/Profile.js";
 import Maps from "views/examples/Maps.js";
@@ -38,13 +37,6 @@ var routes = [
     layout: "/admin",
   },
 
-  {
-    path: "/historial",
-    name: "Historial Medico",
-    icon: "ni ni-single-copy-04 text-blue",
-    component: Historial,
-    layout: "/admin",
-  },
   {
     path: "/login",
     name: "Login",
