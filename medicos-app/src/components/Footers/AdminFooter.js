@@ -7,12 +7,7 @@ const Footer = () => {
         <Col xl="6">
           <div className="copyright text-center text-xl-left text-muted">
             © {new Date().getFullYear()}{" "}
-            <a
-              className="font-weight-bold ml-1"
-              rel="noopener noreferrer"
-            >
-              Medicos App
-            </a>
+            Medicos App
           </div>
         </Col>
       </Row>

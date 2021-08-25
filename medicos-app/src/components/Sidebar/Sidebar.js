@@ -1,8 +1,6 @@
-import { useState } from "react";
 import { NavLink as NavLinkRRD } from "react-router-dom";
 
 import {
-  Collapse,
   Navbar,
   NavItem,
   NavLink,
@@ -10,7 +8,6 @@ import {
 } from "reactstrap";
 
 const Sidebar = (props) => {
-  const [collapseOpen] = useState();
 
   const createLinks = (routes) => {
     return routes.map((prop, key) => {

@@ -1,7 +1,6 @@
 import {
     Button,
     Card,
-    CardHeader,
     CardBody,
     FormGroup,
     Form,
@@ -9,7 +8,6 @@ import {
     InputGroupAddon,
     InputGroupText,
     InputGroup,
-    Row,
     Col,
   } from "reactstrap";
   
@@ -17,15 +15,10 @@ import {
     return (
       <>
         <Col lg="5" md="7">
-          <Card className="bg-secondary shadow border-0">
-            <CardHeader className="bg-transparent pb-5">
-              <div className="text-muted text-center mt-2 mb-3">
-                <small>Sign in with</small>
-              </div>
-            </CardHeader>
+          <Card className="bg-secondary shadow border-0">            
             <CardBody className="px-lg-5 py-lg-5">
               <div className="text-center text-muted mb-4">
-                <small>Or sign in with credentials</small>
+                <small>Ingresa tus credenciales</small>
               </div>
               <Form role="form">
                 <FormGroup className="mb-3">
@@ -36,7 +29,7 @@ import {
                       </InputGroupText>
                     </InputGroupAddon>
                     <Input
-                      placeholder="Email"
+                      placeholder="Correo electronico"
                       type="email"
                       autoComplete="new-email"
                     />
@@ -50,53 +43,20 @@ import {
                       </InputGroupText>
                     </InputGroupAddon>
                     <Input
-                      placeholder="Password"
+                      placeholder="Contraseña"
                       type="password"
                       autoComplete="new-password"
                     />
                   </InputGroup>
-                </FormGroup>
-                <div className="custom-control custom-control-alternative custom-checkbox">
-                  <input
-                    className="custom-control-input"
-                    id=" customCheckLogin"
-                    type="checkbox"
-                  />
-                  <label
-                    className="custom-control-label"
-                    htmlFor=" customCheckLogin"
-                  >
-                    <span className="text-muted">Remember me</span>
-                  </label>
-                </div>
+                </FormGroup>                
                 <div className="text-center">
                   <Button className="my-4" color="primary" type="button">
-                    Sign in
+                    Iniciar Sesion
                   </Button>
                 </div>
               </Form>
             </CardBody>
-          </Card>
-          <Row className="mt-3">
-            <Col xs="6">
-              <a
-                className="text-light"
-                href="#pablo"
-                onClick={(e) => e.preventDefault()}
-              >
-                <small>Forgot password?</small>
-              </a>
-            </Col>
-            <Col className="text-right" xs="6">
-              <a
-                className="text-light"
-                href="#pablo"
-                onClick={(e) => e.preventDefault()}
-              >
-                <small>Create new account</small>
-              </a>
-            </Col>
-          </Row>
+          </Card>          
         </Col>
       </>
     );
