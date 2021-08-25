@@ -37,9 +37,7 @@ const Sidebar = (props) => {
       expand="md"
       id="sidenav-main"
     >
-      <Collapse navbar isOpen={collapseOpen}>         
-          <Nav navbar>{createLinks(routes)}</Nav>         
-      </Collapse>
+      <Nav navbar>{createLinks(routes)}</Nav> 
     </Navbar>
   );
 };
