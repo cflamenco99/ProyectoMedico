@@ -299,7 +299,7 @@ let chartExample1 = {
           ticks: {
             callback: function (value) {
               if (!(value % 10)) {
-                return "$" + value + "k";
+                return "L." + value + "k";
               }
             },
           },
@@ -317,7 +317,7 @@ let chartExample1 = {
             content += label;
           }
 
-          content += "$" + yLabel + "k";
+          content += "L." + yLabel + "k";
           return content;
         },
       },
@@ -380,11 +380,11 @@ let chartExample2 = {
     },
   },
   data: {
-    labels: ["Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+    labels: ["Lun", "Mar", "Mi", "Jue", "Vie", "Sab"],
     datasets: [
       {
-        label: "Sales",
-        data: [25, 20, 30, 22, 17, 29],
+        label: "Pacientes por Semana",
+        data: [15, 20, 34, 15, 26, 12],
         maxBarThickness: 10,
       },
     ],
