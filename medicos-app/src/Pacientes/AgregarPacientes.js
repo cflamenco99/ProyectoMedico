@@ -2,6 +2,7 @@ import React from 'react';
 import { useFormik } from 'formik';
 import ls from 'local-storage';
 import { useHistory } from "react-router-dom";
+import swal from 'sweetalert';
 
 import {
     Button,
@@ -41,10 +42,21 @@ import {
         let lista = ls.get("misPacientes");
         if (lista && lista.length > 0) listaGuardar = lista;
         listaGuardar = listaGuardar.concat(paciente);
-        ls.set("misPacientes", listaGuardar);
-        window.alert("Paciente guardado exitosamente");      
+        ls.set("misPacientes", listaGuardar); 
+        swal({
+          text: "¡Paciente guardado exitosamente!",
+          icon: "success",
+          buttons: false,
+          timer: 2000
+        });
       } else {
-        window.alert("Favor ingresar correctamente los datos");
+        swal({
+          text: "¡Favor ingresar correctamente los datos!",
+          className: "text-center",
+          icon: "error",
+          buttons: false,
+          timer: 2000
+        }); 
       }
     }
 
