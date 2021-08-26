@@ -49,7 +49,7 @@ const Admin = (props) => {
         return routes[i].name;
       }
     }
-    return "Medicos App";
+    return path;
   };
 
   return (
