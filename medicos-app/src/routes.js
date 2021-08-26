@@ -1,8 +1,6 @@
 import Login from "Login/Login";
-import Pacientes from "Pacientes/Pacientes";
+import ListadoPacientes from "Pacientes/ListadoPacientes";
 import HistorialMedico from "Historial/HistorialMedico"
-
-
 
 var routes = [
   {
@@ -13,10 +11,10 @@ var routes = [
     layout: "/auth",
   },
   {
-    path: "/pacientes",
+    path: "/listadoPacientes",
     name: "Administrar Pacientes",
     icon: "ni ni-single-02 text-yellow",
-    component: Pacientes,
+    component: ListadoPacientes,
     layout: "/admin",
   },
 

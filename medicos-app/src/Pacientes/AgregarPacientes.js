@@ -1,6 +1,7 @@
 import React from 'react';
 import { useFormik } from 'formik';
 import ls from 'local-storage';
+import { useHistory } from "react-router-dom";
 
 import {
     Button,
@@ -17,7 +18,12 @@ import {
 
   import UserHeader from "components/Headers/UserHeader.js";
   
-  const Pacientes = () => {
+  const AgregarPacientes = () => {
+    let history = useHistory();
+
+    function abrirListadoPacientes() {
+        history.push('/admin/listadoPacientes');
+    }
 
     function guardarPaciente(paciente){
       if (
@@ -75,8 +81,7 @@ import {
                     <Col className="text-right" xs="4">
                       <Button
                         color="primary"
-                        href="#pablo"
-                        onClick={(e) => e.preventDefault()}
+                        onClick={abrirListadoPacientes}
                         size="sm"
                       >
                         Listado de pacientes
@@ -276,5 +281,5 @@ import {
     );
   };
   
-  export default Pacientes;
+  export default AgregarPacientes;
   

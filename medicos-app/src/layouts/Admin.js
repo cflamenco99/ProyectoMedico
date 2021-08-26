@@ -1,13 +1,18 @@
+//react
 import React from "react";
 import { useLocation, Route, Switch, Redirect } from "react-router-dom";
-// reactstrap components
+
+// reactstrap componentes
 import { Container } from "reactstrap";
-// core components
+// core componentes
 import AdminNavbar from "components/Navbars/AdminNavbar.js";
 import AdminFooter from "components/Footers/AdminFooter.js";
 import Sidebar from "components/Sidebar/Sidebar.js";
 
 import routes from "routes.js";
+
+//componentes
+import AgregarPacientes from "Pacientes/AgregarPacientes";
 
 const Admin = (props) => {
   const mainContent = React.useRef(null);
@@ -44,7 +49,7 @@ const Admin = (props) => {
         return routes[i].name;
       }
     }
-    return "Brand";
+    return "Medicos App";
   };
 
   return (
@@ -60,7 +65,11 @@ const Admin = (props) => {
         />
         <Switch>
           {getRoutes(routes)}
-          <Redirect from="*" to="/admin/index" />
+          <Route
+            path="/admin/agregarPacientes"
+            component={AgregarPacientes}
+          />
+          <Redirect from="*" to="/admin/listadoPacientes" />
         </Switch>
         <Container fluid>
           <AdminFooter />
