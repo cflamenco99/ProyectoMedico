@@ -13,6 +13,7 @@ import routes from "routes.js";
 
 //componentes
 import AgregarPacientes from "Pacientes/AgregarPacientes";
+import AgregarCitas from "AdminCitas/AgregarCitas";
 
 const Admin = (props) => {
   const mainContent = React.useRef(null);
@@ -69,7 +70,12 @@ const Admin = (props) => {
             path="/admin/agregarPacientes"
             component={AgregarPacientes}
           />
-          <Redirect from="*" to="/admin/listadoPacientes" />
+         
+          <Route
+            path="/admin/agregarCitas"
+            component={AgregarCitas}
+          />
+         <Redirect from="*" to="/admin/listadoPacientes" />
         </Switch>
         <Container fluid>
           <AdminFooter />

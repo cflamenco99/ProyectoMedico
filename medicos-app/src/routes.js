@@ -1,6 +1,8 @@
 import Login from "Login/Login";
 import ListadoPacientes from "Pacientes/ListadoPacientes";
 import HistorialMedico from "Historial/HistorialMedico"
+import ListaCitas from "AdminCitas/ListaCitas";
+
 
 var routes = [
   {
@@ -26,5 +28,16 @@ var routes = [
     layout: "/admin",
   },
 
+  {
+    path: "/ListaCitas",
+    name: "Administracion de Citas",
+    icon: "ni ni-single-copy-04 text-red",
+    component: ListaCitas,
+    layout: "/admin",
+  },
+
+
 ];
 export default routes;
+
+
