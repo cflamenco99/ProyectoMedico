@@ -121,7 +121,7 @@ const HistorialMedico = () => {
                             <th scope="col">Nombre Completo</th>
                             <th scope="col">Pais</th>
                             <th scope="col">Ciudad</th>
-                            <th scope="col">Codigo Postal</th>
+                            <th scope="col">Fecha Cita</th>
                             <th scope="col">Doctor en Turno</th>
                             <th scope="col">Descripcion de Consulta</th>
                           </tr>
