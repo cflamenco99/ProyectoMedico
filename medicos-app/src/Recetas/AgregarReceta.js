@@ -37,8 +37,11 @@ const AgregarReceta = () => {
             receta.direccion !== "" &&
             receta.telefono > 0 &&
             receta.correo !== "" &&
+            receta.medicinas !== ""&&
+            receta.diagnostico !== ""&&
             receta.fechaCita !== "" &
             receta.hora !== ""
+            
         ) {
             let listaGuardar = [];
             let lista = ls.get("misRecetas");
@@ -73,6 +76,8 @@ const AgregarReceta = () => {
             direccion: '',
             telefono: '',
             correo: '',
+            medicinas:'',
+            diagnostico:'',
             fechaCita: '',
             hora: '',
 
@@ -93,7 +98,13 @@ const AgregarReceta = () => {
                             <CardHeader className="bg-white border-0">
                                 <Row className="align-items-center">
                                     <Col xs="8">
-                                        <h3 className="mb-0">Nueva Receta</h3>
+                                        <h1 className="mb-0">CLINICA CHAB </h1>
+                  <h3> Direccion: Colonia Trejo 21 y 22 avenida SO 9 calle</h3>
+                  <h3>Telefono: 2982-9800</h3>
+                  <br></br>
+                  <h1> DR. CARLOS FLAMENCO </h1>
+                  <h2>Medico Especialista</h2>
+                  <h2>MN.0000000</h2>
                                     </Col>
                                     <Col className="text-right" xs="4">
                                         <Button
@@ -127,6 +138,23 @@ const AgregarReceta = () => {
                                                         id="id"
                                                         onChange={formik.handleChange}
                                                         value={formik.values.id}
+                                                    />
+                                                </FormGroup>
+                                            </Col>
+                                            <Col lg="4">
+                                                <FormGroup>
+                                                    <label
+                                                        className="form-control-label"
+                                                    >
+                                                        Edad
+                                                    </label>
+                                                    <Input
+                                                        className="form-control-alternative"
+                                                        placeholder="Edad"
+                                                        type="number"
+                                                        id="edad"
+                                                        onChange={formik.handleChange}
+                                                        value={formik.values.edad}
                                                     />
                                                 </FormGroup>
                                             </Col>
@@ -202,48 +230,10 @@ const AgregarReceta = () => {
                                                     />
                                                 </FormGroup>
                                             </Col>
-                                            <Col lg="3">
-                                                <FormGroup>
-                                                    <label
-                                                        className="form-control-label"
-                                                    >
-                                                        Edad
-                                                    </label>
-                                                    <Input
-                                                        className="form-control-alternative"
-                                                        placeholder="Edad"
-                                                        type="number"
-                                                        id="edad"
-                                                        onChange={formik.handleChange}
-                                                        value={formik.values.edad}
-                                                    />
-                                                </FormGroup>
-                                            </Col>
                                         </Row>
                                     </div>
-                                    <hr className="my-4" />
-                                    <h6 className="heading-small text-muted mb-4">
-                                        Informacion de contacto
-                                    </h6>
                                     <div className="pl-lg-4">
                                         <Row>
-                                            <Col lg="11">
-                                                <FormGroup>
-                                                    <label
-                                                        className="form-control-label"
-                                                    >
-                                                        Direccion
-                                                    </label>
-                                                    <Input
-                                                        className="form-control-alternative"
-                                                        placeholder="Direccion"
-                                                        type="text"
-                                                        id="direccion"
-                                                        onChange={formik.handleChange}
-                                                        value={formik.values.direccion}
-                                                    />
-                                                </FormGroup>
-                                            </Col>
                                             <Col lg="4">
                                                 <FormGroup>
                                                     <label
@@ -279,14 +269,69 @@ const AgregarReceta = () => {
                                                     />
                                                 </FormGroup>
                                             </Col>
+                                            <Col lg="11">
+                                                <FormGroup>
+                                                    <label
+                                                        className="form-control-label"
+                                                    >
+                                                        Direccion
+                                                    </label>
+                                                    <Input
+                                                        className="form-control-alternative"
+                                                        placeholder="Direccion"
+                                                        type="text"
+                                                        id="direccion"
+                                                        onChange={formik.handleChange}
+                                                        value={formik.values.direccion}
+                                                    />
+                                                </FormGroup>
+                                            </Col>
                                         </Row>
+                                        <hr className="my-4" />
+                                        <Row>
+                                        <Col lg="11">
+                                                <FormGroup>
+                                                    <label
+                                                        className="form-control-label"
+                                                    >
+                                                        Medicinas 
+                                                    </label>
+                                                    <Input
+                                                        className="form-control-alternative"
+                                                        placeholder="Medicinas"
+                                                        type="text"
+                                                        id="medicinas"
+                                                        onChange={formik.handleChange}
+                                                        value={formik.values.medicinas}
+                                                    />
+                                                </FormGroup>
+                                            </Col>
+                                            <Col lg="11">
+                                                <FormGroup>
+                                                    <label
+                                                        className="form-control-label"
+                                                    >
+                                                        Diagnostico
+                                                    </label>
+                                                    <Input
+                                                        className="form-control-alternative"
+                                                        placeholder="Diagnostico"
+                                                        type="text"
+                                                        id="diagnostico"
+                                                        onChange={formik.handleChange}
+                                                        value={formik.values.diagnostico}
+                                                    />
+                                                </FormGroup>
+                                            </Col>
+                                        </Row>
+                                        <hr className="my-4" />
                                         <Row>
                                             <Col md="4">
                                                 <FormGroup>
                                                     <label
                                                         className="form-control-label"
                                                     >
-                                                        Fecha de Cita
+                                                        Fecha
                                                     </label>
                                                     <Input
                                                         className="form-control-alternative"
@@ -315,6 +360,7 @@ const AgregarReceta = () => {
                                                     />
                                                 </FormGroup>
                                             </Col>
+                                            <h5>Sello</h5>
                                         </Row>
                                         <Row>
                                             <Button type="submit" className="col-md-2 offset-md-5" color="primary">

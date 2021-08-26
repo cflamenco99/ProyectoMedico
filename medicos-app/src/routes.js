@@ -2,6 +2,7 @@ import Login from "Login/Login";
 import ListadoPacientes from "Pacientes/ListadoPacientes";
 import HistorialMedico from "Historial/HistorialMedico"
 import ListaCitas from "AdminCitas/ListaCitas";
+import AgregarReceta from "Recetas/AgregarReceta";
 
 
 var routes = [
@@ -35,6 +36,15 @@ var routes = [
     component: ListaCitas,
     layout: "/admin",
   },
+
+  {
+    path: "/listadoRectas",
+    name: "Recetas Medicas",
+    icon: "ni ni-single-copy-04 text-green",
+    component: AgregarReceta,
+    layout: "/admin",
+  },
+
 
 
 ];

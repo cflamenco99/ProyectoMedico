@@ -31,7 +31,7 @@ const ListadoRecetas = () => {
   let listaRecetas = obtenerRecetas();
   let history = useHistory();
 
-  function AgregarReceta() {
+  function abrirAgregarReceta() {
     history.push("/admin/agregarReceta");
   }  
 
@@ -59,7 +59,7 @@ const ListadoRecetas = () => {
                   <Col className="text-right" xs="4">
                     <Button
                       color="primary"
-                      onClick={AgregarReceta}
+                      onClick={abrirAgregarReceta}
                       size="sm"
                     >
                       Nueva Receta
