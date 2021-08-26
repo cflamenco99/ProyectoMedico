@@ -31,8 +31,8 @@ const ListadoRecetas = () => {
   let listaRecetas = obtenerRecetas();
   let history = useHistory();
 
-  function abrirAgregarReceta() {
-    history.push("/admin/agregarReceta");
+  function AgregarReceta() {
+    history.push("/admin/AgregarReceta");
   }  
 
   function obtenerRecetas(){
@@ -59,7 +59,7 @@ const ListadoRecetas = () => {
                   <Col className="text-right" xs="4">
                     <Button
                       color="primary"
-                      onClick={abrirAgregarReceta}
+                      onClick={AgregarReceta}
                       size="sm"
                     >
                       Nueva Receta
@@ -80,10 +80,10 @@ const ListadoRecetas = () => {
                             <th scope="col">ID</th>
                             <th scope="col">Nombre Completo</th>
                             <th scope="col">Edad</th>
+                            <th scope="col">Diagnostico</th>
                             <th scope="col">Telefono</th>
-                            <th scope="col">Fecha cita</th>
-                            <th scope="col">Hora cita</th>
-                            <th scope="col">Correo</th>
+                            <th scope="col">Fecha</th>
+                            <th scope="col">Hora</th>
                           </tr>
                         </thead>
                         <tbody>
@@ -92,10 +92,10 @@ const ListadoRecetas = () => {
                         <th scope="row">{currentValue.id}</th>
                         <td>{currentValue.primerNombre + ' ' +currentValue.segundoNombre+' '+currentValue.primerApellido+' '+currentValue.segundoApellido}</td>
                         <td>{currentValue.edad}</td>
+                        <td>{currentValue.diagnostico}</td>
                         <td>{currentValue.telefono}</td>
                         <td>{currentValue.fechaCita}</td>
                         <td>{currentValue.hora}</td>
-                        <td>{currentValue.correo}</td>
                         </tr>                        
                         )}
                         </tbody>

@@ -325,21 +325,21 @@ let chartExample1 = {
   },
   data1: (canvas) => {
     return {
-      labels: ["May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+      labels: ["Mayo", "Junio", "Julio", "Ago", "Sept", "Oct", "Nov", "Dic"],
       datasets: [
         {
-          label: "Performance",
-          data: [0, 20, 10, 30, 15, 40, 20, 60, 60],
+          label: "Ganancias",
+          data: [0, 20, 10, 30, 35, 40, 45, 60, 60],
         },
       ],
     };
   },
   data2: (canvas) => {
     return {
-      labels: ["May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+      labels: ["Lun", "Mar", "Mi", "Jue", "Vie", "Sab", "Dom"],
       datasets: [
         {
-          label: "Performance",
+          label: "Ganancias",
           data: [0, 20, 5, 25, 10, 30, 15, 40, 40],
         },
       ],

@@ -2,7 +2,8 @@ import Login from "Login/Login";
 import ListadoPacientes from "Pacientes/ListadoPacientes";
 import HistorialMedico from "Historial/HistorialMedico"
 import ListaCitas from "AdminCitas/ListaCitas";
-import AgregarReceta from "Recetas/AgregarReceta";
+import ListadoRecetas from "Recetas/ListadoRecetas";
+import Index from "Dashboard/Index";
 
 
 var routes = [
@@ -13,6 +14,15 @@ var routes = [
     component: Login,
     layout: "/auth",
   },
+
+  {
+    path: "/Index",
+    name: "Inicio",
+    icon: "ni ni-app text-purple",
+    component: Index,
+    layout: "/admin",
+  },
+
   {
     path: "/listadoPacientes",
     name: "Administrar Pacientes",
@@ -38,10 +48,10 @@ var routes = [
   },
 
   {
-    path: "/listadoRectas",
+    path: "/ListadoRecetas",
     name: "Recetas Medicas",
     icon: "ni ni-single-copy-04 text-green",
-    component: AgregarReceta,
+    component: ListadoRecetas,
     layout: "/admin",
   },
 
