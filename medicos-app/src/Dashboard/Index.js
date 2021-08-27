@@ -167,7 +167,7 @@ const Index = (props) => {
                     <td> carlosflam@gmail.com</td>
                   </tr>
                   <tr>
-                  <th scope="row">Bryan Paz</th>
+                  <th scope="row">Alvaro Vicente</th>
                     <td>28</td>
                     <td>3475-6789</td>
                     <td> alvarovicent@hotmail.com</td>
