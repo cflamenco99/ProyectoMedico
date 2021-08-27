@@ -26,6 +26,26 @@ const AgregarCitas = () => {
         history.push('/admin/ListaCitas');
     }
 
+    const formik = useFormik({
+        initialValues: {
+            id: '',
+            primerNombre: '',
+            segundoNombre: '',
+            primerApellido: '',
+            segundoApellido: '',
+            edad: '',
+            direccion: '',
+            telefono: '',
+            correo: '',
+            fechaCita: '',
+            hora: '',
+
+        },
+        onSubmit: values => {
+            guardarCita(values);
+        },
+    });
+
     function guardarCita(cita) {
         if (
             cita.id  > 0 && 
@@ -51,6 +71,7 @@ const AgregarCitas = () => {
                 buttons: false,
                 timer: 2000
             });
+            formik.resetForm();
         } else {
             swal({
                 text: "¡Favor ingresar correctamente los datos!",
@@ -59,29 +80,11 @@ const AgregarCitas = () => {
                 buttons: false,
                 timer: 2000
             });
+            
         }
     }
 
-    const formik = useFormik({
-        initialValues: {
-            id: '',
-            primerNombre: '',
-            segundoNombre: '',
-            primerApellido: '',
-            segundoApellido: '',
-            edad: '',
-            direccion: '',
-            telefono: '',
-            correo: '',
-            fechaCita: '',
-            hora: '',
-
-        },
-        onSubmit: values => {
-            guardarCita(values);
-            formik.resetForm();
-        },
-    });
+   
 
     return (
         <>
