@@ -82,7 +82,7 @@ const Admin = (props) => {
             component={AgregarReceta}
           />
 
-         <Redirect from="*" to="/admin/listadoPacientes" />
+         <Redirect from="*" to="/admin/index" />
         </Switch>
         <Container fluid>
           <AdminFooter />
