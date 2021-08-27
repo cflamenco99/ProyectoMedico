@@ -28,7 +28,7 @@ const AgregarCitas = () => {
 
     function guardarCita(cita) {
         if (
-            cita.id >= 0 &&
+            cita.id  > 0 && 
             cita.primerNombre !== "" &&
             cita.segundoNombre !== "" &&
             cita.primerApellido !== "" &&
