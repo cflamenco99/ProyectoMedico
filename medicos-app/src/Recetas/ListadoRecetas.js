@@ -32,7 +32,7 @@ const ListadoRecetas = () => {
   let history = useHistory();
 
   function AgregarReceta() {
-    history.push("/admin/AgregarReceta");
+    history.push("/admin/agregarReceta");
   }  
 
   function obtenerRecetas(){

@@ -23,7 +23,7 @@ const AgregarReceta = () => {
     let history = useHistory();
 
     function abrirListadoRecetas() {
-        history.push('/admin/ListadoRecetas');
+        history.push('/admin/listadoRecetas');
     }
 
     function guardarReceta(receta) {

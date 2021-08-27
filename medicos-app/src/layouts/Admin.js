@@ -14,6 +14,7 @@ import routes from "routes.js";
 //componentes
 import AgregarPacientes from "Pacientes/AgregarPacientes";
 import AgregarCitas from "AdminCitas/AgregarCitas";
+import AgregarReceta from "Recetas/AgregarReceta";
 
 const Admin = (props) => {
   const mainContent = React.useRef(null);
@@ -75,6 +76,12 @@ const Admin = (props) => {
             path="/admin/agregarCitas"
             component={AgregarCitas}
           />
+
+           <Route
+            path="/admin/agregarReceta"
+            component={AgregarReceta}
+          />
+
          <Redirect from="*" to="/admin/listadoPacientes" />
         </Switch>
         <Container fluid>
