@@ -26,6 +26,23 @@ import {
         history.push('/admin/listadoPacientes');
     }
 
+    const formik = useFormik({
+      initialValues: {
+          id_paciente: '',
+          primerNombre: '',
+          segundoNombre: '',
+          primerApellido: '',
+          segundoApellido: '',
+          pais:'',
+          ciudad:'',
+          codigoPostal:'',
+          direccion: ''  
+      },
+      onSubmit: values => {
+        guardarPaciente(values);        
+      },
+    });
+
     function guardarPaciente(paciente){
       if (
         paciente.id_paciente >= 0 &&
@@ -49,6 +66,7 @@ import {
           buttons: false,
           timer: 2000
         });
+        formik.resetForm();
       } else {
         swal({
           text: "¡Favor ingresar correctamente los datos!",
@@ -58,25 +76,7 @@ import {
           timer: 2000
         }); 
       }
-    }
-
-    const formik = useFormik({
-      initialValues: {
-          id_paciente: '',
-          primerNombre: '',
-          segundoNombre: '',
-          primerApellido: '',
-          segundoApellido: '',
-          pais:'',
-          ciudad:'',
-          codigoPostal:'',
-          direccion: ''  
-      },
-      onSubmit: values => {
-        guardarPaciente(values);
-        formik.resetForm();
-      },
-    });
+    }    
 
     return (
       <>

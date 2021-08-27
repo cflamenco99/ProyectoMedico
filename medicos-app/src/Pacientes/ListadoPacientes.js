@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import ls from 'local-storage';
 import { useHistory } from "react-router-dom";
 
@@ -11,19 +11,7 @@ import {
   Container,
   Row,
   Col,
-  Badge,
-  CardFooter,
-  DropdownMenu,
-  DropdownItem,
-  UncontrolledDropdown,
-  DropdownToggle,
-  Media,
-  Pagination,
-  PaginationItem,
-  PaginationLink,
-  Progress,
   Table,
-  UncontrolledTooltip,
 } from "reactstrap";
 
 import UserHeader from "components/Headers/UserHeader.js";
