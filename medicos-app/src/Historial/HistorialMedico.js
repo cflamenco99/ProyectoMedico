@@ -29,19 +29,23 @@ const HistorialMedico = () => {
   let historialMedico = obtenerHistorial();
   let history = useHistory();
 
-  function buscarPaciente() {
-    if (
-      HistorialMedico.id == AgregarPacientes.id_paciente
-    );
-    else
-    swal({
-      text: "¡Paciente NO registrado!",
-      className: "text-center",
-      icon: "error",
-      buttons: false,
-      timer: 2000
-    });
-  }  
+ // function buscarPaciente() {
+ //   if (
+ //     HistorialMedico.id == AgregarPacientes.id_paciente
+ //   );
+ //   else
+ //   swal({
+ //     text: "¡Paciente NO registrado!",
+ //     className: "text-center",
+  //    icon: "error",
+  //    buttons: false,
+  //    timer: 2000
+  //  });
+  //}  
+
+  function LimpiarBoton(){
+    //id="";
+ }
 
   
   function obtenerHistorial(){
@@ -65,8 +69,8 @@ const HistorialMedico = () => {
         direccion: AgregarPacientes.direccion 
     },
     onSubmit: values => {
-      obtenerHistorial(values);
-      //formik.resetForm();
+      //obtenerHistorial(values);
+      formik.resetForm();
     },
   });
 
@@ -82,36 +86,48 @@ const HistorialMedico = () => {
                   <Col xs="8">
                     <h3 className="mb-0">Historial del Paciente</h3>
                   </Col>
-                  <Col xs="8">
+                  <Col xs="5">
                             <label
                               className="form-control-label"
                             >
-                              Ingrese ID del Paciente: 
+                              Ingrese ID: 
                             </label>
                             <Input  
                               className="form-control-label"
                               placeholder="ID Paciente"
                               type="number"
                               id="id_paciente"
+                              
                               />
                   </Col>  
 
-                    <Col className="text-right" xs="4">
+                    <Col className="text-right" xs="2">
                     <Button
                       color="primary"
-                      onClick={buscarPaciente}
+                      //onClick={buscarPaciente}
                       size="sm"
                     >
                       Buscar Historial
                     </Button>
                   </Col>
+
+                  <Col className="text-right" xs="0">
+                    <Button
+                      color="primary"
+                    // onClick={LimpiarBoton}
+                      size="sm"
+                    >
+                      Limpiar Historial
+                    </Button>
+                  </Col>
+
                 </Row>
               </CardHeader>
               <CardBody>
                 <Row>
                   <div className="col">
                     <Card className="shadow">
-                      <Table
+                      <Table 
                         className="align-items-center table-flush"
                         responsive
                       >
