@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\cflam\\source\\repos\\SistemaMedicoAPI\\SistemaMedicoAPI\\SistemaMedicoAPI.csproj": {}
+    "C:\\Users\\cflam\\OneDrive\\Documentos\\GitHub\\ProyectoMedico\\SistemaMedicoAPI\\SistemaMedicoAPI\\SistemaMedicoAPI.csproj": {}
   },
   "projects": {
-    "C:\\Users\\cflam\\source\\repos\\SistemaMedicoAPI\\SistemaMedicoAPI\\SistemaMedicoAPI.csproj": {
+    "C:\\Users\\cflam\\OneDrive\\Documentos\\GitHub\\ProyectoMedico\\SistemaMedicoAPI\\SistemaMedicoAPI\\SistemaMedicoAPI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\cflam\\source\\repos\\SistemaMedicoAPI\\SistemaMedicoAPI\\SistemaMedicoAPI.csproj",
+        "projectUniqueName": "C:\\Users\\cflam\\OneDrive\\Documentos\\GitHub\\ProyectoMedico\\SistemaMedicoAPI\\SistemaMedicoAPI\\SistemaMedicoAPI.csproj",
         "projectName": "SistemaMedicoAPI",
-        "projectPath": "C:\\Users\\cflam\\source\\repos\\SistemaMedicoAPI\\SistemaMedicoAPI\\SistemaMedicoAPI.csproj",
+        "projectPath": "C:\\Users\\cflam\\OneDrive\\Documentos\\GitHub\\ProyectoMedico\\SistemaMedicoAPI\\SistemaMedicoAPI\\SistemaMedicoAPI.csproj",
         "packagesPath": "C:\\Users\\cflam\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\cflam\\source\\repos\\SistemaMedicoAPI\\SistemaMedicoAPI\\obj\\",
+        "outputPath": "C:\\Users\\cflam\\OneDrive\\Documentos\\GitHub\\ProyectoMedico\\SistemaMedicoAPI\\SistemaMedicoAPI\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -44,6 +44,20 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "dependencies": {
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[5.0.9, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[5.0.9, )"
+            },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[5.0.9, )"
+            },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
               "version": "[5.6.3, )"
