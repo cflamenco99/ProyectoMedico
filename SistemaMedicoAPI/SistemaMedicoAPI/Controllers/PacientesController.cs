@@ -49,7 +49,7 @@ namespace SistemaMedicoAPI.Controllers
             {
                 _logger.LogError(ex.Message);
                 return BadRequest(ex.Message);
-            }            
+            }
         }
 
         // GET api/Pacientes/5
