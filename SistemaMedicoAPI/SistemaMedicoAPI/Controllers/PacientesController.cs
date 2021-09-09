@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore; 
 using Microsoft.Extensions.Logging;
 using SistemaMedicoAPI.Models;
 using SistemaMedicoAPI.Models.DTOs;
@@ -84,7 +84,6 @@ namespace SistemaMedicoAPI.Controllers
             {
                 Pacientes Paciente = new Pacientes
                 {
-                    IdPaciente = paciente.IdPaciente,
                     Nombres = paciente.Nombres,
                     Apellidos = paciente.Apellidos,
                     IdCiudad = paciente.IdCiudad,
