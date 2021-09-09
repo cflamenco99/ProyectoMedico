@@ -84,7 +84,6 @@ namespace SistemaMedicoAPI.Controllers
             {
                 Pacientes Paciente = new Pacientes
                 {
-                    IdPaciente = paciente.IdPaciente,
                     Nombres = paciente.Nombres,
                     Apellidos = paciente.Apellidos,
                     IdCiudad = paciente.IdCiudad,
