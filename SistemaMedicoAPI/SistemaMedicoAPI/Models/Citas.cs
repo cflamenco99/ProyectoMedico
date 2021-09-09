@@ -7,20 +7,16 @@ using System.Threading.Tasks;
 
 namespace SistemaMedicoAPI.Models
 {
-    public class Pacientes
+    public class Citas
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Key]
-        public int IdPaciente { get; set; }
-        public string Nombres { get; set; }
-        public string Apellidos { get; set; }
-        public virtual Ciudades Ciudades { get; set; }
+        public int IdCita { get; set; }
 
-        [ForeignKey("Ciudades")]
-        public int IdCiudad { get; set; }
-        public int CodigoPostal { get; set; }
-        public string Direccion { get; set; }
+        [ForeignKey("Pacientes")]
+        public int IdPaciente { get; set; }
+
         [Column(TypeName = "Date")]
-        public DateTime FechaNacimiento { get; set; }
+        public DateTime FechaCita { get; set; }
     }
-} 
+}

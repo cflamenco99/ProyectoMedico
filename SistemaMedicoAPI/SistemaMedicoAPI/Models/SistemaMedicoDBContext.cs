@@ -8,11 +8,12 @@ namespace SistemaMedicoAPI.Models
 {
     public class SistemaMedicoDBContext : DbContext
     {
-        public DbSet<Paises> Paises { get; set; }
+        
         public DbSet<Ciudades> Ciudades { get; set; }
         public DbSet<Pacientes> Pacientes { get; set; }
         public DbSet<Usuarios> Usuarios { get; set; }
-        public DbSet<Recetas> Receta { get; set; }
+        public DbSet<Citas> Citas { get; set; }
+        public DbSet<Recetas> Recetas { get; set; }
 
         public SistemaMedicoDBContext(DbContextOptions<SistemaMedicoDBContext> options)
             : base(options)
@@ -25,12 +26,8 @@ namespace SistemaMedicoAPI.Models
             modelBuilder.Entity<Ciudades>().ToTable("Ciudades");
             modelBuilder.Entity<Pacientes>().ToTable("Pacientes");
             modelBuilder.Entity<Usuarios>().ToTable("Usuarios");
-            modelBuilder.Entity<Recetas>().ToTable("Receta");
-        }
-
-        internal Task<int> SaveChangesAsync()
-        {
-            throw new NotImplementedException();
+            modelBuilder.Entity<Citas>().ToTable("Citas");
+            modelBuilder.Entity<Recetas>().ToTable("Recetas");
         }
     }
 }
