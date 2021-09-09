@@ -13,6 +13,7 @@ namespace SistemaMedicoAPI.Models
         public DbSet<Pacientes> Pacientes { get; set; }
         public DbSet<Usuarios> Usuarios { get; set; }
         public DbSet<Citas> Citas { get; set; }
+        public DbSet<Recetas> Recetas { get; set; }
 
         public SistemaMedicoDBContext(DbContextOptions<SistemaMedicoDBContext> options)
             : base(options)
@@ -26,6 +27,7 @@ namespace SistemaMedicoAPI.Models
             modelBuilder.Entity<Pacientes>().ToTable("Pacientes");
             modelBuilder.Entity<Usuarios>().ToTable("Usuarios");
             modelBuilder.Entity<Citas>().ToTable("Citas");
+            modelBuilder.Entity<Recetas>().ToTable("Recetas");
         }
     }
 }
