@@ -74,7 +74,7 @@ namespace SistemaMedicoAPI.Controllers
 
         // POST api/<RecetasController>
         [HttpPost]
-        public async Task<ActionResult<RecetasDTO>> AgregarPaciente(RecetasDTO receta)
+        public async Task<ActionResult<RecetasDTO>> AgregarReceta(RecetasDTO receta)
         {
             try
             {
