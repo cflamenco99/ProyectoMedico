@@ -31,7 +31,7 @@ namespace SistemaMedicoAPI.Controllers
         {
             try
             {
-                var result = from r in _db.Receta
+                var result = from r in _db.Recetas
                              select new RecetasDTO
                              {
                                 IdRecetas = r.IdRecetas,
@@ -53,7 +53,7 @@ namespace SistemaMedicoAPI.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<RecetasDTO>> ObtenerRecetaPorId(int id)
         {
-            Recetas RecetasEF = await _db.Receta.FindAsync(id);
+            Recetas RecetasEF = await _db.Recetas.FindAsync(id);
 
             if (RecetasEF != null)
             {
