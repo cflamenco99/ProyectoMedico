@@ -28,27 +28,8 @@ import {
 const HistorialMedico = () => {
   let historialMedico = obtenerHistorial();
   let history = useHistory();
-
- // function buscarPaciente() {
- //   if (
- //     HistorialMedico.id == AgregarPacientes.id_paciente
- //   );
- //   else
- //   swal({
- //     text: "¡Paciente NO registrado!",
- //     className: "text-center",
-  //    icon: "error",
-  //    buttons: false,
-  //    timer: 2000
-  //  });
-  //}  
-
-  function LimpiarBoton(){
-    //id="";
- }
-
-  
-  function obtenerHistorial(){
+ 
+  function obtenerHistorialMedico(){
     
     let lista = ls.get('historial');
     if (lista && lista.length > 0) {
@@ -69,7 +50,7 @@ const HistorialMedico = () => {
         direccion: AgregarPacientes.direccion 
     },
     onSubmit: values => {
-      //obtenerHistorial(values);
+      obtenerHistorial(values);
       formik.resetForm();
     },
   });
@@ -104,7 +85,8 @@ const HistorialMedico = () => {
                     <Col className="text-right" xs="2">
                     <Button
                       color="primary"
-                      //onClick={buscarPaciente}
+                      onClick={obtenerHistorialMedico
+                      }
                       size="sm"
                     >
                       Buscar Historial
