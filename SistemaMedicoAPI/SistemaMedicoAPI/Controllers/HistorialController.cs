@@ -54,7 +54,7 @@ namespace SistemaMedicoAPI.Controllers
 
         // GET api/<HistorialController>/
         [HttpGet("{id}")]
-        public async Task<ActionResult<CitasDTO>> ObtenerHistorialPorID(int id)
+        public async Task<ActionResult<HistorialDTO>> ObtenerHistorialPorID(int id)
         {
             Historial HistorialEF = await _db.HistorialMedico.FindAsync(id);
 
