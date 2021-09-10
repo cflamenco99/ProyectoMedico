@@ -12,7 +12,6 @@ namespace SistemaMedicoAPI.Models
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Key]
-        [ForeignKey("IdPacientes")]
         public int IdPaciente { get; set; }
         public string NombrePaciente { get; set; }
         public string ApellidoPaciente { get; set; }

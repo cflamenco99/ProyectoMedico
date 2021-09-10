@@ -1,6 +1,7 @@
 {
   "format": 1,
   "restore": {
+<<<<<<< HEAD
     "C:\\Users\\Latitude E6440\\Documents\\GitHub\\ProyectoMedico\\SistemaMedicoAPI\\SistemaMedicoAPI\\SistemaMedicoAPI.csproj": {}
   },
   "projects": {
@@ -15,6 +16,22 @@
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Latitude E6440\\AppData\\Roaming\\NuGet\\NuGet.Config",
+=======
+    "C:\\Users\\HMIF\\Documents\\GitHub\\ProyectoMedico\\SistemaMedicoAPI\\SistemaMedicoAPI\\SistemaMedicoAPI.csproj": {}
+  },
+  "projects": {
+    "C:\\Users\\HMIF\\Documents\\GitHub\\ProyectoMedico\\SistemaMedicoAPI\\SistemaMedicoAPI\\SistemaMedicoAPI.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\HMIF\\Documents\\GitHub\\ProyectoMedico\\SistemaMedicoAPI\\SistemaMedicoAPI\\SistemaMedicoAPI.csproj",
+        "projectName": "SistemaMedicoAPI",
+        "projectPath": "C:\\Users\\HMIF\\Documents\\GitHub\\ProyectoMedico\\SistemaMedicoAPI\\SistemaMedicoAPI\\SistemaMedicoAPI.csproj",
+        "packagesPath": "C:\\Users\\HMIF\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\HMIF\\Documents\\GitHub\\ProyectoMedico\\SistemaMedicoAPI\\SistemaMedicoAPI\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\HMIF\\AppData\\Roaming\\NuGet\\NuGet.Config",
+>>>>>>> 2302c936d22b4c43076569a4a9b02462f669e2b5
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [

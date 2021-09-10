@@ -74,7 +74,7 @@ namespace SistemaMedicoAPI.Controllers
 
         // POST api/<RecetasController>
         [HttpPost]
-        public async Task<ActionResult<RecetasDTO>> AgregarPaciente(RecetasDTO receta)
+        public async Task<ActionResult<RecetasDTO>> AgregarReceta(RecetasDTO receta)
         {
             try
             {
@@ -87,7 +87,7 @@ namespace SistemaMedicoAPI.Controllers
                     IdCita = receta.IdCita,
                 };
 
-                _db.Receta.Add(Receta);
+                _db.Recetas.Add(Receta);
                 int result = await _db.SaveChangesAsync();
                 if (result > 0)
                 {
@@ -111,7 +111,7 @@ namespace SistemaMedicoAPI.Controllers
         {
             try
             {
-                Recetas recetaEF = _db.Receta.Find(receta.IdRecetas);
+                Recetas recetaEF = _db.Recetas.Find(receta.IdRecetas);
                 if (recetaEF != null)
                 {
                     recetaEF.IdRecetas = receta.IdRecetas;
@@ -147,10 +147,10 @@ namespace SistemaMedicoAPI.Controllers
         {
             try
             {
-                Recetas recetaEF = _db.Receta.Find(id);
+                Recetas recetaEF = _db.Recetas.Find(id);
                 if (recetaEF != null)
                 {
-                    _db.Receta.Remove(recetaEF);
+                    _db.Recetas.Remove(recetaEF);
                     int result = await _db.SaveChangesAsync();
                     if (result > 0)
                     {
