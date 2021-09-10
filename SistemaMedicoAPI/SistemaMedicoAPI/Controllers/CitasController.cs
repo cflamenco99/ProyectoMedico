@@ -88,7 +88,7 @@ namespace SistemaMedicoAPI.Controllers
                 }
                 else
                 {
-                    return BadRequest("Ocurrio un problema al agregar el paciente");
+                    return BadRequest("Ocurrio un problema al agregar la cita");
                 }
             }
             catch (Exception ex)
@@ -122,7 +122,7 @@ namespace SistemaMedicoAPI.Controllers
                 }
                 else
                 {
-                    return NotFound($"No hemos encontrado un paciente con el id {cita.IdCita}");
+                    return NotFound($"No hemos encontrado una cita con el id {cita.IdCita}");
                 }
             }
             catch (Exception ex)
@@ -154,7 +154,7 @@ namespace SistemaMedicoAPI.Controllers
                 }
                 else
                 {
-                    return NotFound($"No hemos encontrado un paciente con el id {id}");
+                    return NotFound($"No hemos encontrado una cita con el id {id}");
                 }
             }
             catch (Exception ex)
