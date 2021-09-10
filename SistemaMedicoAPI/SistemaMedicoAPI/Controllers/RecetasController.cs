@@ -31,7 +31,7 @@ namespace SistemaMedicoAPI.Controllers
         {
             try
             {
-                var result = from r in _db.Recetas
+                var result = from r in _db.Receta
                              select new RecetasDTO
                              {
                                 IdRecetas = r.IdRecetas,
@@ -53,7 +53,7 @@ namespace SistemaMedicoAPI.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<RecetasDTO>> ObtenerRecetaPorId(int id)
         {
-            Recetas RecetasEF = await _db.Recetas.FindAsync(id);
+            Recetas RecetasEF = await _db.Receta.FindAsync(id);
 
             if (RecetasEF != null)
             {
@@ -87,7 +87,7 @@ namespace SistemaMedicoAPI.Controllers
                     IdCita = receta.IdCita,
                 };
 
-                _db.Recetas.Add(Receta);
+                _db.Receta.Add(Receta);
                 int result = await _db.SaveChangesAsync();
                 if (result > 0)
                 {
@@ -111,7 +111,7 @@ namespace SistemaMedicoAPI.Controllers
         {
             try
             {
-                Recetas recetaEF = _db.Recetas.Find(receta.IdRecetas);
+                Recetas recetaEF = _db.Receta.Find(receta.IdRecetas);
                 if (recetaEF != null)
                 {
                     recetaEF.IdRecetas = receta.IdRecetas;
@@ -147,10 +147,10 @@ namespace SistemaMedicoAPI.Controllers
         {
             try
             {
-                Recetas recetaEF = _db.Recetas.Find(id);
+                Recetas recetaEF = _db.Receta.Find(id);
                 if (recetaEF != null)
                 {
-                    _db.Recetas.Remove(recetaEF);
+                    _db.Receta.Remove(recetaEF);
                     int result = await _db.SaveChangesAsync();
                     if (result > 0)
                     {
