@@ -26,7 +26,7 @@ import {
 
 
 const HistorialMedico = () => {
-  let historialMedico = obtenerHistorial();
+  let historialMedico = obtenerHistorialMedico();
   let history = useHistory();
  
   function obtenerHistorialMedico(){
@@ -50,7 +50,7 @@ const HistorialMedico = () => {
         direccion: AgregarPacientes.direccion 
     },
     onSubmit: values => {
-      obtenerHistorial(values);
+      obtenerHistorialMedico(values);
       formik.resetForm();
     },
   });
