@@ -11,5 +11,7 @@ namespace SistemaMedicoAPI.Models.DTOs
         public int CodigoPostal { get; set; }
         public string Direccion { get; set; }
         public DateTime FechaNacimiento { get; set; }
+        public string Ciudad { get; set; }
+        public string Pais { get; set; }
     }
 }

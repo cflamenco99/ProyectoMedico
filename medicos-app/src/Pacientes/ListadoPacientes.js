@@ -1,7 +1,5 @@
 import React from 'react';
-import ls from 'local-storage';
-import { useHistory } from "react-router-dom";
-
+import axios from 'axios';
 
 import {
   Button,
@@ -15,25 +13,26 @@ import {
 } from "reactstrap";
 
 import UserHeader from "components/Headers/UserHeader.js";
-
-const ListadoPacientes = () => {
-  let listaPacientes = obtenerPacientes();
-  let history = useHistory();
-
-  function abrirAgregarPaciente() {
-    history.push("/admin/agregarPacientes");
+export default class ListadoPacientes extends React.Component{
+  state = {
+    listaPacientes: []
   }  
 
-  function obtenerPacientes(){
-    let lista = ls.get('misPacientes');
-    if (lista && lista.length > 0) {
-        return lista;
-    }
-    return lista = [];
+  abrirAgregarPaciente() {
+    this.props.history.push('/admin/agregarPacientes')
   }
 
-  return (
-    <>
+  componentDidMount() {
+    axios.get(`https://localhost:44310/api/Pacientes`)
+      .then(res => {
+        const listaPacientes = res.data;
+        this.setState({ listaPacientes: listaPacientes });
+      })
+  }
+
+  render() {
+    return (
+      <>
       <UserHeader />
       <Container className="mt--7" fluid>
         <Row>
@@ -47,7 +46,7 @@ const ListadoPacientes = () => {
                   <Col className="text-right" xs="4">
                     <Button
                       color="primary"
-                      onClick={abrirAgregarPaciente}
+                      onClick={this.abrirAgregarPaciente}
                       size="sm"
                     >
                       Nuevo paciente
@@ -73,10 +72,10 @@ const ListadoPacientes = () => {
                           </tr>
                         </thead>
                         <tbody>
-                        {listaPacientes.map( (currentValue) => 
-                        <tr>
-                        <th scope="row">{currentValue.id_paciente}</th>
-                        <td>{currentValue.primerNombre + ' ' +currentValue.primerApellido}</td>
+                        {this.state.listaPacientes.map( (currentValue, i) => 
+                        <tr key={i}>
+                        <th scope="row">{currentValue.idPaciente}</th>
+                        <td>{currentValue.nombres + ' ' +currentValue.apellidos}</td>
                         <td>{currentValue.pais}</td>
                         <td>{currentValue.ciudad}</td>
                         <td>{currentValue.codigoPostal}</td>
@@ -93,7 +92,6 @@ const ListadoPacientes = () => {
         </Row>
       </Container>
     </>
-  );
-};
-
-export default ListadoPacientes;
+    )
+  }
+}

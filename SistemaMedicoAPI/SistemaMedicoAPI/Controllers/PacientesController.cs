@@ -41,7 +41,9 @@ namespace SistemaMedicoAPI.Controllers
                                  IdCiudad = p.IdCiudad,
                                  CodigoPostal = p.CodigoPostal,
                                  Direccion = p.Direccion,
-                                 FechaNacimiento = p.FechaNacimiento
+                                 FechaNacimiento = p.FechaNacimiento,
+                                 Ciudad = p.Ciudades.Descripcion,
+                                 Pais = p.Ciudades.Paises.Descripcion
                              };               
                 return Ok(await result.ToListAsync());
             }

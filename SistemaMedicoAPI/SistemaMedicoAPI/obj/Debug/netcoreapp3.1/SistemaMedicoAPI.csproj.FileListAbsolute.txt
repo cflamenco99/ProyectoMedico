@@ -129,7 +129,6 @@ C:\Users\cflam\OneDrive\Documentos\GitHub\ProyectoMedico\SistemaMedicoAPI\Sistem
 C:\Users\cflam\OneDrive\Documentos\GitHub\ProyectoMedico\SistemaMedicoAPI\SistemaMedicoAPI\obj\Debug\netcoreapp3.1\scopedcss\bundle\SistemaMedicoAPI.styles.css
 C:\Users\cflam\OneDrive\Documentos\GitHub\ProyectoMedico\SistemaMedicoAPI\SistemaMedicoAPI\obj\Debug\netcoreapp3.1\staticwebassets\SistemaMedicoAPI.StaticWebAssets.Manifest.cache
 C:\Users\cflam\OneDrive\Documentos\GitHub\ProyectoMedico\SistemaMedicoAPI\SistemaMedicoAPI\obj\Debug\netcoreapp3.1\SistemaMedicoAPI.RazorTargetAssemblyInfo.cache
-C:\Users\cflam\OneDrive\Documentos\GitHub\ProyectoMedico\SistemaMedicoAPI\SistemaMedicoAPI\obj\Debug\netcoreapp3.1\SistemaMedicoAPI.csproj.CopyComplete
 C:\Users\cflam\OneDrive\Documentos\GitHub\ProyectoMedico\SistemaMedicoAPI\SistemaMedicoAPI\obj\Debug\netcoreapp3.1\SistemaMedicoAPI.dll
 C:\Users\cflam\OneDrive\Documentos\GitHub\ProyectoMedico\SistemaMedicoAPI\SistemaMedicoAPI\obj\Debug\netcoreapp3.1\SistemaMedicoAPI.pdb
 C:\Users\cflam\OneDrive\Documentos\GitHub\ProyectoMedico\SistemaMedicoAPI\SistemaMedicoAPI\obj\Debug\netcoreapp3.1\SistemaMedicoAPI.genruntimeconfig.cache
