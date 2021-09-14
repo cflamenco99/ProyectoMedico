@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 import {
   Button,
@@ -16,10 +17,6 @@ import UserHeader from "components/Headers/UserHeader.js";
 export default class ListadoPacientes extends React.Component{
   state = {
     listaPacientes: []
-  }  
-
-  abrirAgregarPaciente() {
-    this.props.history.push('/admin/agregarPacientes')
   }
 
   componentDidMount() {
@@ -44,13 +41,7 @@ export default class ListadoPacientes extends React.Component{
                     <h3 className="mb-0">Listado de pacientes</h3>
                   </Col>
                   <Col className="text-right" xs="4">
-                    <Button
-                      color="primary"
-                      onClick={this.abrirAgregarPaciente}
-                      size="sm"
-                    >
-                      Nuevo paciente
-                    </Button>
+                  <Link to="/admin/agregarPacientes" className="btn btn-sm btn-primary">Nuevo paciente</Link>
                   </Col>
                 </Row>
               </CardHeader>

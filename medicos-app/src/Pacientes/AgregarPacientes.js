@@ -1,8 +1,11 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useFormik } from 'formik';
-import ls from 'local-storage';
+import axios from 'axios';
 import { useHistory } from "react-router-dom";
 import swal from 'sweetalert';
+import Select from 'react-select'
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 import {
     Button,
@@ -19,7 +22,36 @@ import {
 
   import UserHeader from "components/Headers/UserHeader.js";
   
+  
   const AgregarPacientes = () => {
+    const [listaPaises, setListaPaises] = useState(0);
+    const [listaCiudades, setListaCiudades] = useState(1);
+    
+    useEffect(() => {
+      axios.get(`https://localhost:44310/api/PaisesCiudades`)
+      .then(res => {
+        const listaPaises = res.data;
+        setListaPaises(listaPaises);        
+      })
+    }, []);
+
+    const handleChange = (pais) => {
+      formik.setFieldValue('pais',pais)
+      ObtenerCiudades(pais.idPais)
+    }  
+
+    const handleChangeCiudades = (ciudad) => {
+      formik.setFieldValue('ciudad',ciudad)
+    }
+
+    function ObtenerCiudades(idPais){
+      axios.get(`https://localhost:44310/api/PaisesCiudades/${idPais}`)
+      .then(res => {
+        const listaCiudades = res.data;
+        setListaCiudades(listaCiudades);
+      })      
+    }
+
     let history = useHistory();
 
     function abrirListadoPacientes() {
@@ -28,15 +60,15 @@ import {
 
     const formik = useFormik({
       initialValues: {
-          id_paciente: '',
           primerNombre: '',
           segundoNombre: '',
           primerApellido: '',
-          segundoApellido: '',
-          pais:'',
-          ciudad:'',
+          segundoApellido: '',          
+          pais:[],
+          ciudad:[],
           codigoPostal:'',
-          direccion: ''  
+          direccion: '',
+          fechaNacimiento: new Date()
       },
       onSubmit: values => {
         guardarPaciente(values);        
@@ -45,28 +77,35 @@ import {
 
     function guardarPaciente(paciente){
       if (
-        paciente.id_paciente >= 0 &&
         paciente.primerNombre !== "" &&
         paciente.segundoNombre !== "" &&
         paciente.primerApellido !== "" &&
         paciente.segundoApellido !== "" &&
-        paciente.pais !== "" &&
-        paciente.ciudad !== "" &&
+        paciente.pais !== undefined &&
+        paciente.ciudad !== undefined &&
         paciente.codigoPostal > 0 &&
-        paciente.direccion !== ""
+        paciente.direccion !== "" &&
+        paciente.fechaNacimiento !== undefined
       ) {
-        let listaGuardar = [];
-        let lista = ls.get("misPacientes");
-        if (lista && lista.length > 0) listaGuardar = lista;
-        listaGuardar = listaGuardar.concat(paciente);
-        ls.set("misPacientes", listaGuardar); 
-        swal({
-          text: "¡Paciente guardado exitosamente!",
-          icon: "success",
-          buttons: false,
-          timer: 2000
-        });
-        formik.resetForm();
+        const pacienteDTO = { 
+          Nombres: paciente.primerNombre + ' ' + paciente.segundoNombre,
+          Apellidos: paciente.primerApellido + ' ' + paciente.segundoApellido,
+          IdCiudad: paciente.ciudad.idCiudad,
+          CodigoPostal: paciente.codigoPostal,
+          Direccion: paciente.direccion,
+          FechaNacimiento: paciente.fechaNacimiento
+        };
+        axios.post(`https://localhost:44310/api/Pacientes`, pacienteDTO)
+          .then(res => {
+            console.log(res);
+            swal({
+              text: "¡Paciente guardado exitosamente!",
+              icon: "success",
+              buttons: false,
+              timer: 2500
+            });
+            formik.resetForm();            
+          });
       } else {
         swal({
           text: "¡Favor ingresar correctamente los datos!",
@@ -76,7 +115,7 @@ import {
           timer: 2000
         }); 
       }
-    }    
+    }
 
     return (
       <>
@@ -106,26 +145,7 @@ import {
                     <h6 className="heading-small text-muted mb-4">
                     Informacion General
                     </h6>
-                    <div className="pl-lg-4">
-                      <Row>
-                      <Col lg="6">
-                          <FormGroup>
-                            <label
-                              className="form-control-label"
-                            >
-                              ID Paciente
-                            </label>
-                            <Input
-                              className="form-control-alternative"
-                              placeholder="ID Paciente"
-                              type="number"
-                              id="id_paciente"
-                              onChange={formik.handleChange}
-                              value={formik.values.id_paciente}
-                            />
-                          </FormGroup>
-                        </Col>
-                      </Row>
+                    <div className="pl-lg-4">                      
                       <Row>
                         <Col lg="6">
                           <FormGroup>
@@ -205,41 +225,45 @@ import {
                     </h6>
                     <div className="pl-lg-4">                      
                       <Row>
-                      <Col lg="4">
+                      <Col lg="6">
                           <FormGroup>
                             <label
                               className="form-control-label"
                             >
                               Pais
                             </label>
-                            <Input
-                              className="form-control-alternative"
-                              placeholder="Pais"
-                              type="text"
-                              id="pais"
-                              onChange={formik.handleChange}
-                              value={formik.values.pais}
-                            />
+                            <Select 
+                            options={listaPaises} 
+                            className="form-control-alternative" 
+                            id="pais"
+                            onChange={handleChange}
+                            value={formik.values.pais}
+                            getOptionLabel={(option) => option.descripcion}
+                            getOptionValue={(option) => option.idPais}
+                            placeholder="Seleccione un pais"/>
                           </FormGroup>
                         </Col>
-                        <Col lg="4">
+                        <Col lg="6">
                           <FormGroup>
                             <label
                               className="form-control-label"
                             >
                               Ciudad
                             </label>
-                            <Input
-                              className="form-control-alternative"
-                              placeholder="Ciudad"
-                              type="text"
-                              id="ciudad"
-                              onChange={formik.handleChange}
-                              value={formik.values.ciudad}
-                            />
+                            <Select 
+                            options={listaCiudades} 
+                            className="form-control-alternative" 
+                            id="pais"
+                            onChange={handleChangeCiudades}
+                            value={formik.values.ciudad}
+                            getOptionLabel={(option) => option.descripcion}
+                            getOptionValue={(option) => option.idCiudad}
+                            placeholder="Seleccione una ciudad"/>
                           </FormGroup>
-                        </Col>                        
-                        <Col lg="4">
+                        </Col>
+                      </Row>
+                      <Row>
+                      <Col lg="6">
                           <FormGroup>
                             <label
                               className="form-control-label"
@@ -254,6 +278,24 @@ import {
                               id="codigoPostal"
                               onChange={formik.handleChange}
                               value={formik.values.codigoPostal}
+                            />
+                          </FormGroup>
+                        </Col>
+                        <Col lg="6">
+                          <FormGroup>
+                            <label
+                              className="form-control-label"
+                              htmlFor="input-country"
+                            >
+                              Fecha Nacimiento
+                            </label>
+                            <Input
+                            className="form-control-alternative"
+                            placeholder="Fecha Nacimiento"
+                            type="date"
+                            id="fechaNacimiento"
+                            onChange={formik.handleChange}
+                            value={formik.values.fechaNacimiento}
                             />
                           </FormGroup>
                         </Col>

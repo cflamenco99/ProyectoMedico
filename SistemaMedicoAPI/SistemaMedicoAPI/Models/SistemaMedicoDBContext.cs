@@ -8,7 +8,7 @@ namespace SistemaMedicoAPI.Models
 {
     public class SistemaMedicoDBContext : DbContext
     {
-        
+        public DbSet<Paises> Paises { get; set; }
         public DbSet<Ciudades> Ciudades { get; set; }
         public DbSet<Pacientes> Pacientes { get; set; }
         public DbSet<Usuarios> Usuarios { get; set; }
