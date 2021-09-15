@@ -88,7 +88,7 @@ const Admin = (props) => {
             component={AgregarReceta}
           />
 
-         <Redirect from="*" to="/admin/index" />
+         <Redirect from="*" to="/auth/login" />
         </Switch>
         <Container fluid>
           <AdminFooter />
