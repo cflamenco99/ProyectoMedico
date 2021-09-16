@@ -1,3 +1,7 @@
 is_global = true
 build_property.RootNamespace = SistemaMedicoAPI
+<<<<<<< HEAD
 build_property.ProjectDir = C:\Users\Latitude E6440\Documents\GitHub\ProyectoMedico\SistemaMedicoAPI\SistemaMedicoAPI\
+=======
+build_property.ProjectDir = C:\Users\cflam\OneDrive\Documentos\GitHub\ProyectoMedico\SistemaMedicoAPI\SistemaMedicoAPI\
+>>>>>>> a3bfca97458936b653347d28974b18cd7f88295c
