@@ -28,7 +28,7 @@ namespace SistemaMedicoAPI.Models
             modelBuilder.Entity<Usuarios>().ToTable("Usuarios");
             modelBuilder.Entity<Citas>().ToTable("Citas");
             modelBuilder.Entity<Recetas>().ToTable("Recetas");
-            modelBuilder.Entity<Historial>().ToTable("HistorialMedico");
+           modelBuilder.Entity<Historial>().ToTable("HistorialMedico");
         }
     }
 }

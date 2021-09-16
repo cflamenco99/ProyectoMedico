@@ -1,62 +1,43 @@
 import React from 'react';
-import { useFormik } from 'formik';
-import ls from 'local-storage';
+import axios from 'axios';
+import { Link } from 'react-router-dom';
+//import React, { useState, useEffect } from 'react';
+//import { useFormik } from 'formik';
 import { useHistory } from "react-router-dom";
 import swal from 'sweetalert';
-import AgregarPacientes from 'Pacientes/AgregarPacientes';
-import AgregarCitas from 'AdminCitas/AgregarCitas';
+import Select from 'react-select'
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 
 import {
-    Button,
-    Card,
-    CardHeader,
-    CardBody,
-    FormGroup,
-    Form,
-    Input,
-    Container,
-    Row,
-    Col,
-    Table,
-  } from "reactstrap";
+  Button,
+  Card,
+  CardHeader,
+  CardBody,
+  Container,
+  Row,
+  Col,
+  Table,
+} from "reactstrap";
 
-  import UserHeader from "components/Headers/UserHeader.js";
-  
-
-
-const HistorialMedico = () => {
-  let historialMedico = obtenerHistorialMedico();
-  let history = useHistory();
- 
-  function obtenerHistorialMedico(){
-    
-    let lista = ls.get('historial');
-    if (lista && lista.length > 0) {
-        return lista;
-    }
-    return lista = [];
+import UserHeader from "components/Headers/UserHeader.js";
+export default class ListadoPacientes extends React.Component{
+  state = {
+    listaPacientes: []
   }
 
-  const formik = useFormik({
-    initialValues: {
-        primerNombre: AgregarPacientes.primerNombre,
-        segundoNombre: AgregarPacientes.segundoNombre,
-        primerApellido: AgregarPacientes.primerApellido,
-        segundoApellido: AgregarPacientes.segundoApellido,
-        pais:AgregarPacientes.pais,
-        ciudad: AgregarPacientes.ciudad,
-        codigoPostal: AgregarPacientes.codigoPostal,
-        direccion: AgregarPacientes.direccion 
-    },
-    onSubmit: values => {
-      obtenerHistorialMedico(values);
-      formik.resetForm();
-    },
-  });
+  componentDidMount() {
+    axios.get(`https://localhost:44310/api/HistorialMedico`)
+      .then(res => {
+        const listaPacientes = res.data;
+        this.setState({ listaPacientes: listaPacientes });
+      })
+  }
 
-  return (
-    <>
+  render() {
+    return (
+      <>
       <UserHeader />
       <Container className="mt--7" fluid>
         <Row>
@@ -65,73 +46,56 @@ const HistorialMedico = () => {
               <CardHeader className="bg-white border-0">
                 <Row className="align-items-center">
                   <Col xs="8">
-                    <h3 className="mb-0">Historial del Paciente</h3>
+                    <h3 className="mb-0">Historial de Pacientes</h3>
                   </Col>
                   <Col xs="5">
                             <label
-                              className="form-control-label"
-                            >
-                              Ingrese ID: 
-                            </label>
-                            <Input  
-                              className="form-control-label"
-                              placeholder="ID Paciente"
-                              type="number"
-                              id="id_paciente"
-                              
+                              className="form-control-label"> Ingrese su ID: </label>
+                            <input className="form-control-label" placeholder="Escriba aqui su ID" type="number" id="id_paciente"
                               />
                   </Col>  
-
-                    <Col className="text-right" xs="2">
-                    <Button
-                      color="primary"
-                      onClick={obtenerHistorialMedico
-                      }
-                      size="sm"
-                    >
-                      Buscar Historial
-                    </Button>
+                  <Col className="text-right" xs="3">
+                  <Link to="/admin/HistorialMedico" className="btn btn-sm btn-primary">Buscar Historial</Link>
                   </Col>
-
-                  <Col className="text-right" xs="0">
-                    <Button
-                      color="primary"
-                    // onClick={LimpiarBoton}
-                      size="sm"
-                    >
-                      Limpiar Historial
-                    </Button>
+                  <Col className="text-right" xs="1.5">
+                  <Link to="/admin/HistorialMedico" className="btn btn-sm btn-primary">Limpiar Historial</Link>
                   </Col>
-
                 </Row>
               </CardHeader>
+
               <CardBody>
+              <Col xs="5">
+                            <label className="form-control-label"> Paciente: </label>
+                            <input className="form-control-label" placeholder="Alvaro Banquito" type="text" id="paciente"/>
+              </Col>  
+              <Col xs="3">
+                            <label className="form-control-label"> Ciudad: </label>
+                            <input className="form-control-label" placeholder="San Pedro Sula" type="text" id="ciudad"/>
+              </Col>  
                 <Row>
                   <div className="col">
                     <Card className="shadow">
-                      <Table 
+                      <Table
                         className="align-items-center table-flush"
                         responsive
                       >
                         <thead className="thead-light">
                           <tr>
-                            <th scope="col">ID</th>
                             <th scope="col">Nombre Completo</th>
-                            <th scope="col">Pais</th>
                             <th scope="col">Ciudad</th>
+                            <th scope="col">ID Cita</th>
                             <th scope="col">Fecha Cita</th>
-                            <th scope="col">Doctor en Turno</th>
-                            <th scope="col">Descripcion de Consulta</th>
+                            <th scope="col">ID Receta</th>
+                            <th scope="col">Medicinas</th>
+                            <th scope="col">Descripcion</th>
                           </tr>
                         </thead>
                         <tbody>
-                        {historialMedico.map( (currentValue) => 
-                        <tr>
-                        <th scope="row">{currentValue.id_paciente}</th>
-                        <td>{currentValue.primerNombre + ' ' +currentValue.primerApellido}</td>
-                        <td>{currentValue.pais}</td>
+                        {this.state.listaPacientes.map( (currentValue, i) => 
+                        <tr key={i}>
+                        <th scope="row">{currentValue.idPaciente}</th>
+                        <td>{currentValue.nombres + ' ' +currentValue.apellidos}</td>
                         <td>{currentValue.ciudad}</td>
-                        <td>{currentValue.codigoPostal}</td>
                         </tr>                        
                         )}
                         </tbody>
@@ -145,7 +109,6 @@ const HistorialMedico = () => {
         </Row>
       </Container>
     </>
-  );
-};
-
-export default HistorialMedico;
+    )
+  }
+}
