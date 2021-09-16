@@ -22,16 +22,16 @@ import {
 } from "reactstrap";
 
 import UserHeader from "components/Headers/UserHeader.js";
-export default class ListadoPacientes extends React.Component{
+export default class HistorialDTO extends React.Component{
   state = {
-    listaPacientes: []
+    historialDTO: []
   }
 
   componentDidMount() {
     axios.get(`https://localhost:44310/api/HistorialMedico`)
       .then(res => {
-        const listaPacientes = res.data;
-        this.setState({ listaPacientes: listaPacientes });
+        const historialDTO = res.data;
+        this.setState({ historialDTO: historialDTO });
       })
   }
 
@@ -55,7 +55,7 @@ export default class ListadoPacientes extends React.Component{
                               />
                   </Col>  
                   <Col className="text-right" xs="3">
-                  <Link to="/admin/HistorialMedico" className="btn btn-sm btn-primary">Buscar Historial</Link>
+                  <Link to="https://localhost:44310/api/HistorialMedico" className="btn btn-sm btn-primary">Buscar Historial</Link>
                   </Col>
                   <Col className="text-right" xs="1.5">
                   <Link to="/admin/HistorialMedico" className="btn btn-sm btn-primary">Limpiar Historial</Link>
@@ -66,11 +66,11 @@ export default class ListadoPacientes extends React.Component{
               <CardBody>
               <Col xs="5">
                             <label className="form-control-label"> Paciente: </label>
-                            <input className="form-control-label" placeholder="Alvaro Banquito" type="text" id="paciente"/>
+                            <label className="form-control-label" placeholder={HistorialDTO.nombres + ' ' +HistorialDTO.apellidos} type="text" id="paciente"/>
               </Col>  
-              <Col xs="3">
+              <Col xs="1">
                             <label className="form-control-label"> Ciudad: </label>
-                            <input className="form-control-label" placeholder="San Pedro Sula" type="text" id="ciudad"/>
+                            <label className="form-control-label" placeholder="San Pedro Sula" type="text" id="ciudad"/>
               </Col>  
                 <Row>
                   <div className="col">
@@ -91,11 +91,17 @@ export default class ListadoPacientes extends React.Component{
                           </tr>
                         </thead>
                         <tbody>
-                        {this.state.listaPacientes.map( (currentValue, i) => 
+                        {this.state.historialDTO.map( (currentValue, i) => 
                         <tr key={i}>
                         <th scope="row">{currentValue.idPaciente}</th>
                         <td>{currentValue.nombres + ' ' +currentValue.apellidos}</td>
                         <td>{currentValue.ciudad}</td>
+                        <td>{currentValue.IdCita}</td>
+                        <td>{currentValue.FechaCita}</td>
+                        <td>{currentValue.IdRecetas}</td>
+                        <td>{currentValue.Medicinas}</td>    
+                        <td>{currentValue.Diagnostico}</td>                        
+
                         </tr>                        
                         )}
                         </tbody>

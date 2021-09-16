@@ -45,39 +45,39 @@ namespace SistemaMedicoAPI.Controllers
             else
                 return BadRequest("No existe Historial Medico para este Paciente");
         }
-        public async Task<ActionResult<HistorialDTO>> ObtenerCitasPorID(int id)
+        public async Task<ActionResult<List<Citas>>> ObtenerCitasPorID(int id)
         {
-            Citas HistorialEF = await _db.Citas.FindAsync(id);
+            List<Citas> HistorialEF = await _db.Citas.Where(x=> x.IdPaciente == id).ToListAsync();
 
             if (HistorialEF != null)
             {
-                HistorialDTO HistorialDTO = new HistorialDTO
-                {
-                    //IdPaciente = HistorialEF.IdPaciente,
-                    IdCita = HistorialEF.IdCita,
-                    FechaCita = HistorialEF.FechaCita,
-                };
+                //HistorialDTO HistorialDTO = new HistorialDTO
+                // {
+                   //IdPaciente = HistorialEF.IdPaciente,
+                //    IdCita = HistorialEF.IdCita,
+                //    FechaCita = HistorialEF.FechaCita,
+                // };
 
-                return HistorialDTO;
+                return HistorialEF;
             }
             else
                 return NotFound();
         }
-        public async Task<ActionResult<HistorialDTO>> ObtenerRecetasPorId(int id)
+        public async Task<ActionResult<List<Recetas>>> ObtenerRecetasPorId(int id)
         {
-            Recetas HistorialEF = await _db.Recetas.FindAsync(id);
+            List<Recetas> HistorialEF = await _db.Recetas.Where(x => x.IdPaciente == id).ToListAsync();
 
             if (HistorialEF != null)
             {
-                HistorialDTO HistorialDTO = new HistorialDTO
-                {
+                //HistorialDTO HistorialDTO = new HistorialDTO
+                //{
                     //IdPaciente = HistorialEF.IdPaciente,
-                    IdRecetas = HistorialEF.IdRecetas,
-                    Medicinas = HistorialEF.Medicinas,
-                    Diagnostico = HistorialEF.Diagnostico,
-                };
+                 //   IdRecetas = HistorialEF.IdRecetas,
+                //    Medicinas = HistorialEF.Medicinas,
+                //    Diagnostico = HistorialEF.Diagnostico,
+                //};
 
-                return HistorialDTO;
+                return HistorialEF;
             }
             else
                 return NotFound();
