@@ -29,7 +29,7 @@ namespace SistemaMedicoAPI.Controllers
             try
             {
                 Usuarios usuario = _db.Usuarios.Where(x => x.Correo == credenciales.Correo && x.Clave == credenciales.Clave).FirstOrDefault();
-                if (usuario.IdUsuario > 0)
+                if (usuario != null)
                 {
                     return Ok("Inicio de sesion exitoso.");
                 }

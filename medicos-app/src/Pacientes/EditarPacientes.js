@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useFormik } from 'formik';
 import axios from 'axios';
-import { useHistory } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import swal from 'sweetalert';
 import Select from 'react-select'
 import "react-datepicker/dist/react-datepicker.css";
@@ -22,16 +22,50 @@ import {
   import UserHeader from "components/Headers/UserHeader.js";
   
   
-  const AgregarPacientes = () => {
+  const EditarPacientes = () => {
     const [listaPaises, setListaPaises] = useState(0);
     const [listaCiudades, setListaCiudades] = useState(1);
+
+    let history = useHistory();
+    let { id } = useParams();
+
+    const formik = useFormik({
+        initialValues: {
+            primerNombre: '',
+            segundoNombre: '',
+            primerApellido: '',
+            segundoApellido: '',          
+            pais:{},
+            ciudad:{},
+            codigoPostal:'',
+            direccion: '',
+            fechaNacimiento: ""
+        },
+        onSubmit: values => {
+          editarPaciente(values);        
+        },
+    });
     
     useEffect(() => {
+      axios.get(`https://localhost:44310/api/Pacientes/${id}`)
+      .then(res => {
+        const infoPaciente = res.data;
+        formik.setFieldValue('primerNombre',infoPaciente.nombres.split(' ')[0]);
+        formik.setFieldValue('segundoNombre',infoPaciente.nombres.split(' ')[1]);
+        formik.setFieldValue('primerApellido',infoPaciente.apellidos.split(' ')[0]);
+        formik.setFieldValue('segundoApellido',infoPaciente.apellidos.split(' ')[1]);
+        formik.setFieldValue('codigoPostal',infoPaciente.codigoPostal);
+        formik.setFieldValue('direccion',infoPaciente.direccion);
+        formik.setFieldValue('fechaNacimiento', infoPaciente.fechaNacimiento.substr(0,10));
+        formik.setFieldValue('pais',{idPais: infoPaciente.idPais, descripcion: infoPaciente.pais});
+        formik.setFieldValue('ciudad',{idCiudad: infoPaciente.idCiudad, descripcion: infoPaciente.ciudad});
+      });
+
       axios.get(`https://localhost:44310/api/PaisesCiudades`)
       .then(res => {
         const listaPaises = res.data;
         setListaPaises(listaPaises);        
-      })
+      });
     }, []);
 
     const handleChange = (pais) => {
@@ -49,32 +83,13 @@ import {
         const listaCiudades = res.data;
         setListaCiudades(listaCiudades);
       })      
-    }
-
-    let history = useHistory();
+    }    
 
     function abrirListadoPacientes() {
         history.push('/admin/listadoPacientes');
-    }
+    }    
 
-    const formik = useFormik({
-      initialValues: {
-          primerNombre: '',
-          segundoNombre: '',
-          primerApellido: '',
-          segundoApellido: '',          
-          pais:[],
-          ciudad:[],
-          codigoPostal:'',
-          direccion: '',
-          fechaNacimiento: new Date()
-      },
-      onSubmit: values => {
-        guardarPaciente(values);        
-      },
-    });
-
-    function guardarPaciente(paciente){
+    function editarPaciente(paciente){
       if (
         paciente.primerNombre !== "" &&
         paciente.segundoNombre !== "" &&
@@ -94,16 +109,14 @@ import {
           Direccion: paciente.direccion,
           FechaNacimiento: paciente.fechaNacimiento
         };
-        axios.post(`https://localhost:44310/api/Pacientes`, pacienteDTO)
+        axios.put(`https://localhost:44310/api/Pacientes/${id}`, pacienteDTO)
           .then(res => {
-            console.log(res);
             swal({
-              text: "¡Paciente guardado exitosamente!",
-              icon: "success",
-              buttons: false,
-              timer: 2500
-            });
-            formik.resetForm();            
+              text: "¡Paciente editado exitosamente!",
+              icon: "success"
+            }).then(() => {
+                abrirListadoPacientes();
+              });                                   
           });
       } else {
         swal({
@@ -126,7 +139,7 @@ import {
                 <CardHeader className="bg-white border-0">
                   <Row className="align-items-center">
                     <Col xs="8">
-                      <h3 className="mb-0">Nuevo paciente</h3>
+                      <h3 className="mb-0">Editando paciente</h3>
                     </Col>
                     <Col className="text-right" xs="4">
                       <Button
@@ -295,6 +308,7 @@ import {
                             id="fechaNacimiento"
                             onChange={formik.handleChange}
                             value={formik.values.fechaNacimiento}
+                            selected={formik.values.fechaNacimiento}
                             />
                           </FormGroup>
                         </Col>
@@ -334,5 +348,5 @@ import {
     );
   };
   
-  export default AgregarPacientes;
+  export default EditarPacientes;
   

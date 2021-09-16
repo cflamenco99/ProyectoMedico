@@ -68,6 +68,9 @@ namespace SistemaMedicoAPI.Controllers
                     Nombres = PacienteEF.Nombres,
                     Apellidos = PacienteEF.Apellidos,
                     IdCiudad = PacienteEF.IdCiudad,
+                    Ciudad = _db.Ciudades.Where(x=> x.IdCiudad == PacienteEF.IdCiudad).Select(x=> x.Descripcion).FirstOrDefault(),
+                    IdPais = (from c in _db.Ciudades join p in _db.Paises on c.IdPais equals p.IdPais where c.IdCiudad == PacienteEF.IdCiudad select p.IdPais).FirstOrDefault(),
+                    Pais = (from c in _db.Ciudades join p in _db.Paises on c.IdPais equals p.IdPais where c.IdCiudad == PacienteEF.IdCiudad select p.Descripcion).FirstOrDefault(),
                     CodigoPostal = PacienteEF.CodigoPostal,
                     Direccion = PacienteEF.Direccion,
                     FechaNacimiento = PacienteEF.FechaNacimiento
@@ -114,11 +117,11 @@ namespace SistemaMedicoAPI.Controllers
 
         // PUT api/Pacientes/5
         [HttpPut("{id}")]
-        public async Task<ActionResult<PacienteDTO>> EditarPaciente(PacienteDTO paciente)
+        public async Task<ActionResult<PacienteDTO>> EditarPaciente(int id, PacienteDTO paciente)
         {
             try
             {
-                Pacientes pacienteEF = _db.Pacientes.Find(paciente.IdPaciente);
+                Pacientes pacienteEF = _db.Pacientes.Find(id);
                 if (pacienteEF != null)
                 {
                     pacienteEF.Nombres = paciente.Nombres;
@@ -126,7 +129,7 @@ namespace SistemaMedicoAPI.Controllers
                     pacienteEF.IdCiudad = paciente.IdCiudad;
                     pacienteEF.CodigoPostal = paciente.CodigoPostal;
                     pacienteEF.Direccion = paciente.Direccion;
-                    pacienteEF.FechaNacimiento = pacienteEF.FechaNacimiento;
+                    pacienteEF.FechaNacimiento = paciente.FechaNacimiento;
                     int result = await _db.SaveChangesAsync();
                     if (result > 0)
                     {

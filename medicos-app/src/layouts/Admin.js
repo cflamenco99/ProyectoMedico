@@ -15,6 +15,7 @@ import routes from "routes.js";
 import AgregarPacientes from "Pacientes/AgregarPacientes";
 import AgregarCitas from "AdminCitas/AgregarCitas";
 import AgregarReceta from "Recetas/AgregarReceta";
+import EditarPacientes from "Pacientes/EditarPacientes"
 
 const Admin = (props) => {
   const mainContent = React.useRef(null);
@@ -71,6 +72,11 @@ const Admin = (props) => {
             path="/admin/agregarPacientes"
             component={AgregarPacientes}
           />
+
+          <Route
+            path="/admin/editarPacientes/:id"
+            component={EditarPacientes}
+          />
          
           <Route
             path="/admin/agregarCitas"
@@ -82,7 +88,7 @@ const Admin = (props) => {
             component={AgregarReceta}
           />
 
-         <Redirect from="*" to="/admin/index" />
+         <Redirect from="*" to="/auth/login" />
         </Switch>
         <Container fluid>
           <AdminFooter />

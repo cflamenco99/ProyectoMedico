@@ -8,13 +8,14 @@ namespace SistemaMedicoAPI.Models.DTOs
     public class HistorialDTO
     {
         public int IdPaciente { get; set; }
-        public string NombrePaciente { get; set; }
-        public string ApellidoPaciente { get; set; }
-        public string Pais { get; set; }
-        public string Ciudad { get; set; }
+        public string Nombres { get; set; }
+        public string Apellidos { get; set; }
+        public int IdCiudad { get; set; }
+        public int IdCita { get; set; }
         public DateTime FechaCita { get; set; }
-        public string DoctorTurno { get; set; }
-        public string Descripcion { get; set; }
-    }
+        public int IdRecetas { get; set; }
+        public string Medicinas { get; set; }
+        public string Diagnostico { get; set; }
+}
 }
 

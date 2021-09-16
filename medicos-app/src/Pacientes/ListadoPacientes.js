@@ -1,6 +1,8 @@
 import React from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import swal from 'sweetalert';
+import { useHistory } from 'react-router-dom';
 
 import {
   Button,
@@ -15,16 +17,44 @@ import {
 
 import UserHeader from "components/Headers/UserHeader.js";
 export default class ListadoPacientes extends React.Component{
-  state = {
-    listaPacientes: []
+  constructor(props) {
+    super(props);
+    this.state = {listaPacientes: []};
+
+    this.handleClickDelete = this.handleClickDelete.bind(this);
   }
 
-  componentDidMount() {
+  componentDidMount(){
+    this.ObtenerPacientes(); 
+  }
+
+  ObtenerPacientes(){
     axios.get(`https://localhost:44310/api/Pacientes`)
       .then(res => {
         const listaPacientes = res.data;
         this.setState({ listaPacientes: listaPacientes });
       })
+  }
+
+  handleClickDelete(id){
+    swal({
+      title: "¿Esta seguro que desea eliminar?",
+      text: `El paciente con ID: ${id} sera eliminado permanentemente.`,
+      icon: "warning",
+      buttons: ["Cancelar", "Si"],
+      dangerMode: true,
+    })
+    .then((willDelete) => {
+      if (willDelete) {
+        axios.delete(`https://localhost:44310/api/Pacientes/${id}`)
+          .then(res => {
+            this.ObtenerPacientes();
+            swal("¡El paciente ha sido eliminado!", {
+              icon: "success",
+            });
+          })        
+      }
+    });
   }
 
   render() {
@@ -60,6 +90,7 @@ export default class ListadoPacientes extends React.Component{
                             <th scope="col">Pais</th>
                             <th scope="col">Ciudad</th>
                             <th scope="col">Codigo Postal</th>
+                            <th scope="col">Acciones</th>
                           </tr>
                         </thead>
                         <tbody>
@@ -70,6 +101,10 @@ export default class ListadoPacientes extends React.Component{
                         <td>{currentValue.pais}</td>
                         <td>{currentValue.ciudad}</td>
                         <td>{currentValue.codigoPostal}</td>
+                        <td>
+                          <Button className="btn btn-sm btn-danger" onClick={() => this.handleClickDelete(currentValue.idPaciente)}>Eliminar</Button>
+                          <Link to={`/admin/editarPacientes/${currentValue.idPaciente}`} className="btn btn-sm btn-info">Editar</Link>   
+                        </td>
                         </tr>                        
                         )}
                         </tbody>
