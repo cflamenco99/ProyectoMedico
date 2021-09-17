@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useFormik } from 'formik';
-import ls from 'local-storage';
+import axios from 'axios';
 import { useHistory } from "react-router-dom";
 import swal from 'sweetalert';
+import Select from 'react-select'
+import "react-datepicker/dist/react-datepicker.css";
 
 import {
     Button,
@@ -19,7 +21,38 @@ import {
 
 import UserHeader from "components/Headers/UserHeader.js";
 
+
 const AgregarCitas = () => {
+    const [Pacientes, setPacientes] = useState(0);
+   
+
+    useEffect(() => {
+        axios.get(`https://localhost:44310/api/Pacientes`)
+        .then(res => {
+          const Pacientes = res.data;
+          setPacientes(Pacientes);        
+        })
+      }, []);
+
+    const handleChange = (paciente) => {
+        formik.setFieldValue('primer nombre', primerNombre)
+        formik.setFieldValue('segundo nombre', segundoNombre)
+        formik.setFieldValue('primer apellido', primerApellido)
+        formik.setFieldValue('segundo apellido', segundoApellido)
+        formik.setFieldValue('direccion', direccion)
+        formik.setFieldValue('fecha nacimiento', fechaNacimiento)
+        ObtenerPacientes(paciente.IdPaciente)
+    }
+
+
+    function ObtenerPacientes(IdPaciente) {
+        axios.get(`https://localhost:44310/Pacientes/${IdPaciente}`)
+            .then(res => {
+                const ListaPaciente = res.data;
+                setPacientes(ListaPaciente);
+            })
+    }
+
     let history = useHistory();
 
     function abrirListaCitas() {
@@ -28,18 +61,15 @@ const AgregarCitas = () => {
 
     const formik = useFormik({
         initialValues: {
-            id: '',
-            primerNombre: '',
-            segundoNombre: '',
-            primerApellido: '',
-            segundoApellido: '',
-            edad: '',
-            direccion: '',
-            telefono: '',
-            correo: '',
-            fechaCita: '',
-            hora: '',
-
+            IdPaciente:'',
+            /* primerNombre: [],
+            segundoNombre: [],
+            primerApellido: [],
+            segundoApellido: [], 
+            direccion: [],
+            fechaNacimiento: new Date(), */
+            fechaCita: new Date(),
+ 
         },
         onSubmit: values => {
             guardarCita(values);
@@ -48,30 +78,24 @@ const AgregarCitas = () => {
 
     function guardarCita(cita) {
         if (
-            cita.id  > 0 && 
-            cita.primerNombre !== "" &&
-            cita.segundoNombre !== "" &&
-            cita.primerApellido !== "" &&
-            cita.segundoApellido !== "" &&
-            cita.edad > 0 &&
-            cita.direccion !== "" &&
-            cita.telefono > 0 &&
-            cita.correo !== "" &&
-            cita.fechaCita !== "" &
-            cita.hora !== ""
+            cita.IdPaciente !== undefined &&
+            cita.fechaCita !== undefined
         ) {
-            let listaGuardar = [];
-            let lista = ls.get("misCitas");
-            if (lista && lista.length > 0) listaGuardar = lista;
-            listaGuardar = listaGuardar.concat(cita);
-            ls.set("misCitas", listaGuardar);
-            swal({
-                text: "¡Cita Creada Exitosamente!",
-                icon: "success",
-                buttons: false,
-                timer: 2000
-            });
-            formik.resetForm();
+            const citasDTO = {
+                IdPaciente: cita.IdPaciente,
+                FechaCita: cita.FechaCita
+            };
+            axios.post(`https://localhost:44310/api/Citas`, citasDTO)
+                .then(res => {
+                    console.log(res);
+                    swal({
+                        text: "¡Cita Creada Exitosamente!",
+                        icon: "success",
+                        buttons: false,
+                        timer: 2500
+                    });
+                    formik.resetForm();
+                });
         } else {
             swal({
                 text: "¡Favor ingresar correctamente los datos!",
@@ -80,11 +104,8 @@ const AgregarCitas = () => {
                 buttons: false,
                 timer: 2000
             });
-            
         }
     }
-
-   
 
     return (
         <>
@@ -121,16 +142,17 @@ const AgregarCitas = () => {
                                                     <label
                                                         className="form-control-label"
                                                     >
-                                                        ID Persona
+                                                        ID Paciente
                                                     </label>
-                                                    <Input
+                                                    <Select
+                                                        options={Pacientes}
                                                         className="form-control-alternative"
-                                                        placeholder="ID Persona"
-                                                        type="number"
-                                                        id="id"
-                                                        onChange={formik.handleChange}
-                                                        value={formik.values.id}
-                                                    />
+                                                        id="IDPaciente"
+                                                        onChange={handleChange}
+                                                        value={formik.values.IdPaciente}
+                                                        getOptionLabel={(option) => option.primerNombre+' '+option.primerApellido}
+                                                        getOptionValue={(option) => option.IdPaciente}
+                                                        placeholder="Seleccione un ID" />
                                                 </FormGroup>
                                             </Col>
                                         </Row>
@@ -205,23 +227,7 @@ const AgregarCitas = () => {
                                                     />
                                                 </FormGroup>
                                             </Col>
-                                            <Col lg="3">
-                                                <FormGroup>
-                                                    <label
-                                                        className="form-control-label"
-                                                    >
-                                                        Edad
-                                                    </label>
-                                                    <Input
-                                                        className="form-control-alternative"
-                                                        placeholder="Edad"
-                                                        type="number"
-                                                        id="edad"
-                                                        onChange={formik.handleChange}
-                                                        value={formik.values.edad}
-                                                    />
-                                                </FormGroup>
-                                            </Col>
+                                           
                                         </Row>
                                     </div>
                                     <hr className="my-4" />
@@ -247,38 +253,22 @@ const AgregarCitas = () => {
                                                     />
                                                 </FormGroup>
                                             </Col>
-                                            <Col lg="4">
-                                                <FormGroup>
-                                                    <label
-                                                        className="form-control-label"
-                                                    >
-                                                        Telefono
-                                                    </label>
-                                                    <Input
-                                                        className="form-control-alternative"
-                                                        placeholder="Telefono"
-                                                        type="tel"
-                                                        id="telefono"
-                                                        onChange={formik.handleChange}
-                                                        value={formik.values.telefono}
-                                                    />
-                                                </FormGroup>
-                                            </Col>
+                                          
                                             <Col lg="5">
                                                 <FormGroup>
                                                     <label
                                                         className="form-control-label"
 
                                                     >
-                                                        Correo Electronico
+                                                        Fecha Nacimiento
                                                     </label>
                                                     <Input
                                                         className="form-control-alternative"
-                                                        placeholder="Correo Electronico"
-                                                        type="email"
-                                                        id="correo"
+                                                        placeholder="Fecha Nacimiento"
+                                                        type="date"
+                                                        id="fechaNacimiento"
                                                         onChange={formik.handleChange}
-                                                        value={formik.values.correo}
+                                                        value={formik.values.fechaNacimiento}
                                                     />
                                                 </FormGroup>
                                             </Col>

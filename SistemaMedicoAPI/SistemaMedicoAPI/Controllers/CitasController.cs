@@ -75,7 +75,7 @@ namespace SistemaMedicoAPI.Controllers
             {
                 Citas Cita = new Citas
                 {
-                    IdCita = cita.IdCita,
+                    
                     IdPaciente = cita.IdPaciente,
                     FechaCita = cita.FechaCita
                 };

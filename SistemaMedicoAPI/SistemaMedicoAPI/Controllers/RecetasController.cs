@@ -80,7 +80,7 @@ namespace SistemaMedicoAPI.Controllers
             {
                 Recetas Receta = new Recetas
                 {
-                    IdRecetas = receta.IdRecetas,
+                    
                     IdPaciente = receta.IdPaciente,
                     Medicinas = receta.Medicinas,
                     Diagnostico = receta.Diagnostico,
