@@ -4,6 +4,10 @@ import axios from 'axios';
 import { useHistory } from "react-router-dom";
 import swal from 'sweetalert';
 import Select from 'react-select'
+<<<<<<< Updated upstream
+=======
+import DatePicker from "react-datepicker";
+>>>>>>> Stashed changes
 import "react-datepicker/dist/react-datepicker.css";
 
 import {
@@ -17,12 +21,13 @@ import {
     Container,
     Row,
     Col,
-} from "reactstrap";
+  } from "reactstrap";
 
 import UserHeader from "components/Headers/UserHeader.js";
 
 
 const AgregarReceta = () => {
+<<<<<<< Updated upstream
     const [Pacientes, setPacientes] = useState(0);
 
     
@@ -54,6 +59,35 @@ const AgregarReceta = () => {
                 setPacientes(ListaPacientes);
             })
     }
+=======
+    const [listaPacientes, setlistaPacientes] = useState(0);
+    const [listaCitas, setListaCitas] = useState(1);
+
+    useEffect(() => {
+        axios.get(`https://localhost:44310/api/Pacientes`)
+        .then(res => {
+          const listaPacientes = res.data;
+          setlistaPacientes(listaPacientes);        
+        })
+      }, []);
+
+      const handleChange = (paciente) => {
+        formik.setFieldValue('paciente',paciente)
+        ObtenerReceta(paciente.idPaciente);
+      } 
+
+   const handleChangeReceta = (receta) => {
+        formik.setFieldValue('receta',receta)
+      }
+
+      function ObtenerReceta(idReceta){
+        axios.get(`https://localhost:44310/api/Citas/${idReceta}`)
+        .then(res => {
+          const listadoRecetas = res.data;
+          setListaCitas(listadoRecetas);
+        })      
+      }
+>>>>>>> Stashed changes
     let history = useHistory();
 
     function abrirListadoRecetas() {
@@ -83,6 +117,7 @@ const AgregarReceta = () => {
     function guardarReceta(receta) {
         if (
             receta.IdPaciente >= 0 &&
+<<<<<<< Updated upstream
             receta.edad > 0 &&
             receta.telefono > 0 &&
             receta.correo !== "" &&
@@ -110,6 +145,32 @@ const AgregarReceta = () => {
                     });
                     formik.resetForm();
                 });
+=======
+            receta.medicinas !== ""&&
+            receta.diagnostico !== ""&&
+            receta.IdCita >= 0 
+            
+        ) {
+            const RecetasDTO= {
+                IdPaciente: receta.IdPaciente,
+                Medicinas: receta.Medicinas,
+                Diagnostico:receta.Diagnostico,
+                IdCita: receta.IdCita
+
+            };
+
+            axios.post(`https://localhost:44310/api/Recetas`, RecetasDTO)
+            .then(res => {
+                console.log(res);
+                swal({
+                  text: "¡Receta guardado exitosamente!",
+                  icon: "success",
+                  buttons: false,
+                  timer: 2500
+                });
+                formik.resetForm();            
+            });
+>>>>>>> Stashed changes
 
         } else {
             swal({
@@ -122,7 +183,32 @@ const AgregarReceta = () => {
         }
     }
 
+<<<<<<< Updated upstream
     
+=======
+    const formik = useFormik({
+        initialValues: {
+            IdPaciente:'',
+            primerNombre: '',
+            segundoNombre: '',
+            primerApellido: '',
+            segundoApellido: '',          
+            pais:[],
+            ciudad:[],
+            codigoPostal:'',
+            direccion: '',
+            fechaNacimiento: new Date(),
+            Medicinas:'',
+            Diagnostico:'',
+            IdCita:''
+
+        },
+        onSubmit: values => {
+            guardarReceta(values);
+            formik.resetForm();
+        },
+    });
+>>>>>>> Stashed changes
 
     return (
         <>
@@ -165,7 +251,28 @@ const AgregarReceta = () => {
                                                     <label
                                                         className="form-control-label"
                                                     >
+<<<<<<< Updated upstream
                                                         ID Paciente
+=======
+                                                        ID Persona
+                                                    </label>
+                                                    <Input
+                                                        className="form-control-alternative"
+                                                        placeholder="ID Persona"
+                                                        type="number"
+                                                        id="id"
+                                                        onChange={formik.handleChange}
+                                                        value={formik.values.IdPaciente}
+                                                    />
+                                                </FormGroup>
+                                            </Col>
+                                            <Col lg="4">
+                                                <FormGroup>
+                                                    <label
+                                                        className="form-control-label"
+                                                    >
+                                                        Edad
+>>>>>>> Stashed changes
                                                     </label>
                                                     <Select
                                                         options={Pacientes}
@@ -288,7 +395,7 @@ const AgregarReceta = () => {
                                                         type="text"
                                                         id="medicinas"
                                                         onChange={formik.handleChange}
-                                                        value={formik.values.medicinas}
+                                                        value={formik.values.Medicinas}
                                                     />
                                                 </FormGroup>
                                             </Col>
@@ -305,7 +412,7 @@ const AgregarReceta = () => {
                                                         type="text"
                                                         id="diagnostico"
                                                         onChange={formik.handleChange}
-                                                        value={formik.values.diagnostico}
+                                                        value={formik.values.Diagnostico}
                                                     />
                                                 </FormGroup>
                                             </Col>

@@ -1,8 +1,11 @@
 import React from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+<<<<<<< Updated upstream
 import swal from 'sweetalert';
 import { useHistory } from 'react-router-dom';
+=======
+>>>>>>> Stashed changes
 
 import {
   Button,
@@ -17,6 +20,7 @@ import {
 
 import UserHeader from "components/Headers/UserHeader.js";
 export default class ListadoRecetas extends React.Component{
+<<<<<<< Updated upstream
   constructor(props) {
     super(props);
     this.state = {listaRecetas: []};
@@ -29,11 +33,18 @@ export default class ListadoRecetas extends React.Component{
   }
 
   obtenerRecetas(){
+=======
+  state = {
+    listaRecetas: []
+  }
+  componentDidMount() {
+>>>>>>> Stashed changes
     axios.get(`https://localhost:44310/api/Recetas`)
       .then(res => {
         const listaRecetas = res.data;
         this.setState({ listaRecetas: listaRecetas });
       })
+<<<<<<< Updated upstream
   }
 
   handleClickDelete(id){
@@ -61,6 +72,14 @@ export default class ListadoRecetas extends React.Component{
   render(){
     return (
       <>
+=======
+  }
+
+render(){
+  return (
+    <>
+        
+>>>>>>> Stashed changes
       <UserHeader />
       <Container className="mt--7" fluid>
         <Row>
@@ -78,6 +97,7 @@ export default class ListadoRecetas extends React.Component{
               </CardHeader>
               <CardBody>
                 <Row>
+<<<<<<< Updated upstream
                     <div className="col">
                       <Card className="shadow">
                         <Table
@@ -123,3 +143,46 @@ export default class ListadoRecetas extends React.Component{
     )
   }
 }
+=======
+                  <div className="col">
+                    <Card className="shadow">
+                      <Table
+                        className="align-items-center table-flush"
+                        responsive
+                      >
+                        <thead className="thead-light">
+                          <tr>
+                          <th scope="col">ID</th>
+                            <th scope="col">Nombre Completo</th>
+                            <th scope="col">Diagnostico</th>
+                            <th scope="col">Fecha</th>
+                            
+                          </tr>
+                        </thead>
+                        <tbody>
+                        {this.state.listaRecetas.map( (currentValue, i) => 
+                        <tr key={i}>
+                        <th scope="row">{currentValue.idRecetas}</th>
+                        <td>{currentValue.nombres + ' ' +currentValue.apellidos}</td>
+                        <td>{currentValue.diagnostico}</td>
+                        <td>{currentValue.fechaCita}</td>
+                        </tr>                        
+                        )}
+                        </tbody>
+                      </Table>                      
+                    </Card>
+                  </div>
+                </Row>
+              </CardBody>
+            </Card>
+          </Col>
+        </Row>
+      </Container>
+    </>
+  );
+};
+}
+
+
+export default ListadoRecetas;
+>>>>>>> Stashed changes
