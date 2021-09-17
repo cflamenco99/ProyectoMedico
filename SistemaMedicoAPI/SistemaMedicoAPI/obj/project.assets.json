@@ -8600,11 +8600,16 @@
     ]
   },
   "packageFolders": {
+<<<<<<< HEAD
     "C:\\Users\\HMIF\\.nuget\\packages\\": {}
+=======
+    "C:\\Users\\Bryan Paz\\.nuget\\packages\\": {}
+>>>>>>> 5b10cb6ab5e77c88ebd4c37914f56ac68bdc878a
   },
   "project": {
     "version": "1.0.0",
     "restore": {
+<<<<<<< HEAD
       "projectUniqueName": "C:\\Users\\HMIF\\Documents\\GitHub\\ProyectoMedico\\SistemaMedicoAPI\\SistemaMedicoAPI\\SistemaMedicoAPI.csproj",
       "projectName": "SistemaMedicoAPI",
       "projectPath": "C:\\Users\\HMIF\\Documents\\GitHub\\ProyectoMedico\\SistemaMedicoAPI\\SistemaMedicoAPI\\SistemaMedicoAPI.csproj",
@@ -8613,6 +8618,16 @@
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\HMIF\\AppData\\Roaming\\NuGet\\NuGet.Config",
+=======
+      "projectUniqueName": "C:\\Users\\Bryan Paz\\Desktop\\Proyecto Programacion IV\\ProyectoMedico\\SistemaMedicoAPI\\SistemaMedicoAPI\\SistemaMedicoAPI.csproj",
+      "projectName": "SistemaMedicoAPI",
+      "projectPath": "C:\\Users\\Bryan Paz\\Desktop\\Proyecto Programacion IV\\ProyectoMedico\\SistemaMedicoAPI\\SistemaMedicoAPI\\SistemaMedicoAPI.csproj",
+      "packagesPath": "C:\\Users\\Bryan Paz\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Bryan Paz\\Desktop\\Proyecto Programacion IV\\ProyectoMedico\\SistemaMedicoAPI\\SistemaMedicoAPI\\obj\\",
+      "projectStyle": "PackageReference",
+      "configFilePaths": [
+        "C:\\Users\\Bryan Paz\\AppData\\Roaming\\NuGet\\NuGet.Config",
+>>>>>>> 5b10cb6ab5e77c88ebd4c37914f56ac68bdc878a
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -8675,7 +8690,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.400\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.202\\RuntimeIdentifierGraph.json"
       }
     }
   }
