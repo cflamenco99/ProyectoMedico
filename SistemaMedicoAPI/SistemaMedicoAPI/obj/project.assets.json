@@ -8600,19 +8600,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Latitude E6440\\.nuget\\packages\\": {}
+    "C:\\Users\\HMIF\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Latitude E6440\\Documents\\GitHub\\ProyectoMedico\\SistemaMedicoAPI\\SistemaMedicoAPI\\SistemaMedicoAPI.csproj",
+      "projectUniqueName": "C:\\Users\\HMIF\\Documents\\GitHub\\ProyectoMedico\\SistemaMedicoAPI\\SistemaMedicoAPI\\SistemaMedicoAPI.csproj",
       "projectName": "SistemaMedicoAPI",
-      "projectPath": "C:\\Users\\Latitude E6440\\Documents\\GitHub\\ProyectoMedico\\SistemaMedicoAPI\\SistemaMedicoAPI\\SistemaMedicoAPI.csproj",
-      "packagesPath": "C:\\Users\\Latitude E6440\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Latitude E6440\\Documents\\GitHub\\ProyectoMedico\\SistemaMedicoAPI\\SistemaMedicoAPI\\obj\\",
+      "projectPath": "C:\\Users\\HMIF\\Documents\\GitHub\\ProyectoMedico\\SistemaMedicoAPI\\SistemaMedicoAPI\\SistemaMedicoAPI.csproj",
+      "packagesPath": "C:\\Users\\HMIF\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\HMIF\\Documents\\GitHub\\ProyectoMedico\\SistemaMedicoAPI\\SistemaMedicoAPI\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Latitude E6440\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\HMIF\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -8678,13 +8678,5 @@
         "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.400\\RuntimeIdentifierGraph.json"
       }
     }
-  },
-  "logs": [
-    {
-      "code": "Undefined",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "Problem reading the cache file C:\\Users\\Latitude E6440\\Documents\\GitHub\\ProyectoMedico\\SistemaMedicoAPI\\SistemaMedicoAPI\\obj\\project.nuget.cache : Invalid property identifier character: <. Path 'version', line 3, position 0."
-    }
-  ]
+  }
 }
