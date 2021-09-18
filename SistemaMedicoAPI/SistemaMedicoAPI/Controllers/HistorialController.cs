@@ -24,7 +24,7 @@ namespace SistemaMedicoAPI.Controllers
             _db = db;
         }
 
-        // GET api/Historial/5
+        // GET api/Pacientes/5
         [HttpGet("{id}")]
         public async Task<ActionResult<HistorialDTO>> ObtenerPacientePorId(int id)
         {
@@ -51,6 +51,13 @@ namespace SistemaMedicoAPI.Controllers
 
             if (HistorialEF != null)
             {
+                //HistorialDTO HistorialDTO = new HistorialDTO
+                // {
+                   //IdPaciente = HistorialEF.IdPaciente,
+                //    IdCita = HistorialEF.IdCita,
+                //    FechaCita = HistorialEF.FechaCita,
+                // };
+
                 return HistorialEF;
             }
             else
@@ -62,11 +69,44 @@ namespace SistemaMedicoAPI.Controllers
 
             if (HistorialEF != null)
             {
+                //HistorialDTO HistorialDTO = new HistorialDTO
+                //{
+                    //IdPaciente = HistorialEF.IdPaciente,
+                 //   IdRecetas = HistorialEF.IdRecetas,
+                //    Medicinas = HistorialEF.Medicinas,
+                //    Diagnostico = HistorialEF.Diagnostico,
+                //};
+
                 return HistorialEF;
             }
             else
                 return NotFound();
         }
+
+        // GET api/<HistorialController>/
+        // [HttpGet("{id}")]
+        //public async Task<ActionResult<HistorialDTO>> ObtenerHistorialPorID(int id)
+        //{
+        //Historial HistorialEF = await _db.HistorialMedico.FindAsync(id);
+
+        //  if (HistorialEF != null)
+        //{
+        //HistorialDTO HistorialDTO = new HistorialDTO
+        //      {
+        //IdPaciente = HistorialEF.IdPaciente,
+        //NombrePaciente = HistorialEF.NombrePaciente,
+        //ApellidoPaciente = HistorialEF.ApellidoPaciente,
+        //Pais = HistorialEF.Pais,
+        //Ciudad = HistorialEF.Ciudad,
+        //FechaCita = HistorialEF.FechaCita,
+        //DoctorTurno = HistorialEF.DoctorTurno,
+        //Descripcion = HistorialEF.Descripcion
+        //};
+        //          return HistorialDTO;
+        //}
+        //      else
+        //        return BadRequest("No existe Historial Medico para este Paciente");
+        //}
 
     }
 }
