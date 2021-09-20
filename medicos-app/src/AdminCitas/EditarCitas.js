@@ -24,9 +24,9 @@ import {
 import UserHeader from "components/Headers/UserHeader.js";
 import { option } from 'commander';
 
-const EditarCitas = (props) => {
+const EditarCitas = () => {
     const [ListaCitas, setListaCitas] = useState([]);
-    /* const [lista, setLista] = useState([]); */
+    const [lista, setLista] = useState([]);
    
 
     let history = useHistory();
@@ -42,8 +42,8 @@ const EditarCitas = (props) => {
             primerApellido: '',
             segundoApellido: '',
             direccion: '',
-            fechaNacimiento: "", 
-            fechaCita: "",
+            fechaNacimiento: '', 
+            fechaCita: '',
 
         },
         onSubmit: values => {
@@ -54,10 +54,9 @@ const EditarCitas = (props) => {
 
 
     useEffect(() => {
-        axios.get(`https://localhost:44310/api/Citas${id}`)
+        axios.get(`https://localhost:44310/api/Citas/${id}`)
         .then(res => {
           const InfoCitas = res.data; 
-          formik.setFieldValue('idCita', InfoCitas.idCita)
           formik.setFieldValue('idPaciente', InfoCitas.idPaciente)
           formik.setFieldValue('primerNombre', InfoCitas.nombres.split(' ')[0]);
           formik.setFieldValue('segundoNombre', InfoCitas.nombres.split(' ')[1]);
@@ -66,10 +65,10 @@ const EditarCitas = (props) => {
           formik.setFieldValue('direccion', InfoCitas.direccion);
           formik.setFieldValue('fechaNacimiento', InfoCitas.fechaNacimiento.substr(0,10));  
           formik.setFieldValue('fechaCita', InfoCitas.fechaCita.substr(0,10));  
-         /*  setListaPacientes(listaPacientes); 
-          console.log(listaPacientes);  */     
+          setLista(InfoCitas); 
+          console.log(InfoCitas);      
         });
-        axios.get(`https://localhost:44310/api/Citas`)
+        axios.get(`https://localhost:44310/api/Citas/`)
         .then(res => {
           const listaP = res.data;
           setListaCitas(listaP);
@@ -78,33 +77,33 @@ const EditarCitas = (props) => {
 
       }, []);
 
-      
-      /* const handleChange = (cita) => {
-        formik.setFieldValue('idPaciente', cita.idPaciente)
+    
+       const handleChange = (cita) => {
+/*         formik.setFieldValue('idPaciente', cita.idPaciente)
         formik.setFieldValue('primerNombre', cita.nombres.split(' ')[0]);
         formik.setFieldValue('segundoNombre', cita.nombres.split(' ')[1]);
         formik.setFieldValue('primerApellido', cita.apellidos.split(' ')[0]);
         formik.setFieldValue('segundoApellido', cita.apellidos.split(' ')[1]);
         formik.setFieldValue('direccion', cita.direccion);
-        formik.setFieldValue('fechaNacimiento', cita.fechaNacimiento.substr(0,10)); 
+        formik.setFieldValue('fechaNacimiento', cita.fechaNacimiento.substr(0,10)); */ 
         ObtenerCitas(cita.idCita);
         console.log(cita);
       
-      }  */
+      }  
 
       /* const handleChangeLista = (nombre) => {
         formik.setFieldValue('primerNombre', nombre)
       
       } */
 
-    /*   function ObtenerCitas(idPaciente){
-        axios.get(`https://localhost:44310/api/Paciente/${idPaciente}`)
+      function ObtenerCitas(idCita){
+        axios.get(`https://localhost:44310/api/Paciente/${idCita}`)
         .then(res => {
           const listaP = res.data;
           setLista(listaP);
           console.log(listaP);
         })      
-      } */
+      }
 
 
     function abrirListaCitas() {
@@ -196,7 +195,7 @@ return (
                                                     placeholder="ID Paciente"
                                                     type="text"
                                                     id="idPaciente"
-                                                    onChange={formik.handleChange}
+                                                    onChange={handleChange}
                                                     value= {formik.values.idPaciente}                                                  
                                                 /> 
                                                {/*  <Select 
