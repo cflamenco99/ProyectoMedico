@@ -41,7 +41,7 @@ var routes = [
 
   {
     path: "/ListaCitas",
-    name: "Administracion de Citas",
+    name: "Administrar Citas",
     icon: "ni ni-single-copy-04 text-red",
     component: ListaCitas,
     layout: "/admin",

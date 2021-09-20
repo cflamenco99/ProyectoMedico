@@ -41,6 +41,7 @@ const AgregarCitas = () => {
 
       
       const handleChange = (paciente) => {
+        formik.setFieldValue('paciente', paciente)
         formik.setFieldValue('idPaciente', paciente.idPaciente)
         formik.setFieldValue('primerNombre', paciente.nombres.split(' ')[0])
         formik.setFieldValue('segundoNombre', paciente.nombres.split(' ')[1])
@@ -48,8 +49,7 @@ const AgregarCitas = () => {
         formik.setFieldValue('segundoApellido', paciente.apellidos.split(' ')[1])
         formik.setFieldValue('direccion', paciente.direccion)
         formik.setFieldValue('fechaNacimiento', paciente.fechaNacimiento.substr(0,10))
-        ObtenerPaciente(paciente.idPaciente)
-        console.log(paciente);
+         ObtenerPaciente(paciente.idPaciente)
       
       } 
 
@@ -76,15 +76,17 @@ const AgregarCitas = () => {
 
     const formik = useFormik({
         initialValues: {
+            paciente: '',
             idPaciente: '',
             primerNombre: '',
             segundoNombre: '',
             primerApellido: '',
             segundoApellido: '',
             direccion: '',
+            fechaCita: "",
             fechaNacimiento: new Date(), 
-            fechaCita: new Date(),
-
+            
+         
         },
         onSubmit: values => {
             guardarCita(values);
@@ -100,8 +102,9 @@ const AgregarCitas = () => {
             cita.primerApellido !== "" &&
             cita.segundoApellido !== "" &&
             cita.direccion !== "" &&
-            cita.fechaNacimiento !== undefined &&
-            cita.fechaCita !== undefined
+            cita.fechaCita !== "" &&
+            cita.fechaNacimiento !== undefined 
+            
            
         ) {
             const citasDTO = {
@@ -175,8 +178,8 @@ return (
                                                     className="form-control-alternative" 
                                                     id="idPaciente"
                                                     onChange={handleChange}
-                                                    value={formik.values.idPaciente}
-                                                    getOptionLabel={(option) =>option.nombres.split(' ')[0]+' '+option.apellidos.split(' ')[0]}
+                                                    value={formik.values.paciente}
+                                                    getOptionLabel={(option) =>option.idPaciente+' - '+option.nombres.split(' ')[0]+' '+option.apellidos.split(' ')[0]}
                                                     getOptionValue={(option) => option.idPaciente}
                                                     placeholder="Seleccione un Id"/>
                                             </FormGroup>
@@ -190,7 +193,7 @@ return (
                                                 >
                                                     Primer nombre
                                                 </label>                                          
-                                                    <Input  readOnly = "true" 
+                                                    <Input  readOnly={true} 
                                                     className="form-control"
                                                     placeholder="Primer nombre"
                                                     type="text"
@@ -208,7 +211,7 @@ return (
                                                 >
                                                     Segundo nombre
                                                 </label>
-                                                <Input readOnly = "true"
+                                                <Input readOnly={true} 
                                                     className="form-control-alternative"
                                                     placeholder="Segundo nombre"
                                                     type="text"
@@ -227,7 +230,7 @@ return (
                                                 >
                                                     Primer apellido
                                                 </label>
-                                                <Input readOnly = "true"
+                                                <Input readOnly={true} 
                                                     className="form-control-alternative"
                                                     placeholder="Primer apellido"
                                                     type="text"
@@ -244,7 +247,7 @@ return (
                                                 >
                                                     Segundo apellido
                                                 </label>
-                                                <Input readOnly = "true"
+                                                <Input readOnly={true} 
                                                     className="form-control-alternative"
                                                     placeholder="Segundo apellido"
                                                     type="text"
@@ -269,7 +272,7 @@ return (
                                                 >
                                                     Direccion
                                                 </label>
-                                                <Input readOnly = "true"
+                                                <Input readOnly={true} 
                                                     className="form-control-alternative"
                                                     placeholder="Direccion"
                                                     type="text"
@@ -286,7 +289,7 @@ return (
                                                 >
                                                     Fecha de Nacimiento
                                                 </label>
-                                                <Input readOnly = "true"
+                                                <Input readOnly={true} 
                                                     className="form-control-alternative"
                                                     placeholder="Fecha Nacimiento"
                                                     type="date"
