@@ -403,3 +403,4 @@ C:\Users\Bryan Paz\Desktop\Proyecto Programacion IV\ProyectoMedico\SistemaMedico
 C:\Users\Bryan Paz\Desktop\Proyecto Programacion IV\ProyectoMedico\SistemaMedicoAPI\SistemaMedicoAPI\obj\Debug\netcoreapp3.1\SistemaMedicoAPI.dll
 C:\Users\Bryan Paz\Desktop\Proyecto Programacion IV\ProyectoMedico\SistemaMedicoAPI\SistemaMedicoAPI\obj\Debug\netcoreapp3.1\SistemaMedicoAPI.pdb
 C:\Users\Bryan Paz\Desktop\Proyecto Programacion IV\ProyectoMedico\SistemaMedicoAPI\SistemaMedicoAPI\obj\Debug\netcoreapp3.1\SistemaMedicoAPI.genruntimeconfig.cache
+C:\Users\cflam\OneDrive\Documentos\GitHub\ProyectoMedico\SistemaMedicoAPI\SistemaMedicoAPI\obj\Debug\netcoreapp3.1\SistemaMedicoAPI.csproj.CopyComplete
