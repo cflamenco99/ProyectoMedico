@@ -2,6 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import swal from 'sweetalert';
+import { useHistory } from 'react-router-dom';
 
 import {
   Button,
@@ -19,7 +20,7 @@ import UserHeader from "components/Headers/UserHeader.js";
 export default class ListaCitas extends React.Component{
   constructor(props) {
     super(props);
-    this.state = {listaCitas: []};
+    this.state = {listaC: []};
 
     this.handleClickDelete = this.handleClickDelete.bind(this);
   }
@@ -27,23 +28,19 @@ export default class ListaCitas extends React.Component{
   componentDidMount(){
     this.obtenerCitas(); 
   }
-
- /*  function AgregarCitas() {
-    history.push("/admin/agregarCitas");
-  }  */ 
-
-   obtenerCitas(){
+ 
+  obtenerCitas(){
     axios.get(`https://localhost:44310/api/Citas`)
-    .then(res => {
-      const listaCitas = res.data;
-      this.setState({ listaCitas: listaCitas });
-    })
+      .then(res => {
+        const listaC = res.data;
+        this.setState({ listaC: listaC });
+      })
   }
 
   handleClickDelete(id){
     swal({
       title: "¿Esta seguro que desea eliminar?",
-      text: `La cita con ID: ${id} sera eliminada permanentemente.`,
+      text: `La cita con ID: ${id} sera eliminado permanentemente.`,
       icon: "warning",
       buttons: ["Cancelar", "Si"],
       dangerMode: true,
@@ -60,7 +57,7 @@ export default class ListaCitas extends React.Component{
       }
     });
   }
-
+  
   render(){
     return (
       <>
@@ -73,12 +70,12 @@ export default class ListaCitas extends React.Component{
                 <CardHeader className="bg-white border-0">
                   <Row className="align-items-center">
                     <Col xs="8">
-                      <h3 className="mb-0">Citas Medicas</h3>
-                      </Col>
-                      <Col className="text-right" xs="4">
-                        <Link to="/admin/agregarCitas" className="btn btn-sm btn-primary">Nueva cita</Link>
-                      </Col>
-                    </Row>
+                      <h3 className="mb-0">Listado de Citas Medicas</h3>
+                    </Col>
+                    <Col className="text-right" xs="4">
+                  <Link to="/admin/agregarCitas" className="btn btn-sm btn-primary">Nueva Cita</Link>
+                  </Col>
+                  </Row>
                 </CardHeader>
                 <CardBody>
                   <Row>
@@ -92,22 +89,20 @@ export default class ListaCitas extends React.Component{
                             <tr>
                               <th scope="col">ID</th>
                               <th scope="col">Nombre Completo</th>
-                              <th scope="col">Direccion</th>
-                              <th scope="col">Fecha de Cita</th>
+                              <th scope="col">Fecha cita</th>
                               <th scope="col">Acciones</th>
                             </tr>
                           </thead>
                           <tbody>
-                          {this.state.listaCitas.map( (currentValue, i) => 
+                          {this.state.listaC.map( (currentValue,i) => 
                           <tr key={i}>
-                          <th scope="row">{currentValue.id}</th>
-                          <td>{currentValue.primerNombre + ' ' +currentValue.segundoNombre+' '+currentValue.primerApellido+' '+currentValue.segundoApellido}</td>
-                          <td>{currentValue.direccion}</td>
-                          <td>{currentValue.fechaCita}</td>
+                          <th scope="row">{currentValue.idCita}</th>
+                          <td>{currentValue.nombres+' '+currentValue.apellidos}</td>
+                          <td>{currentValue.fechaCita.substr(0,10)}</td>
                           <td>
-                          <Button className="btn btn-sm btn-danger" onClick={() => this.handleClickDelete(currentValue.id)}>Eliminar</Button>
-                            <Link to={`/admin/editarCita/${currentValue.id}`} className="btn btn-sm btn-info">Editar</Link>  
-                          </td>
+                          <Button className="btn btn-sm btn-danger" onClick={() => this.handleClickDelete(currentValue.idCita)}>Eliminar</Button>
+                          <Link to={`/admin/editarCita/${currentValue.idCita}`} className="btn btn-sm btn-info">Editar</Link>   
+                        </td>
                           </tr>                        
                           )}
                           </tbody>

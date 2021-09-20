@@ -80,10 +80,7 @@ namespace SistemaMedicoAPI.Controllers
             {
                 Recetas Receta = new Recetas
                 {
-<<<<<<< Updated upstream
-                    
-=======
->>>>>>> Stashed changes
+                    IdRecetas = receta.IdRecetas,
                     IdPaciente = receta.IdPaciente,
                     Medicinas = receta.Medicinas,
                     Diagnostico = receta.Diagnostico,
@@ -117,7 +114,7 @@ namespace SistemaMedicoAPI.Controllers
                 Recetas recetaEF = _db.Recetas.Find(receta.IdRecetas);
                 if (recetaEF != null)
                 {
-                
+                    recetaEF.IdRecetas = receta.IdRecetas;
                    recetaEF.IdPaciente = receta.IdPaciente;
                    recetaEF.Medicinas = receta.Medicinas;
                    recetaEF.Diagnostico = receta.Diagnostico;

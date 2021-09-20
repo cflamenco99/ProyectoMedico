@@ -1,41 +1,95 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { useFormik } from 'formik';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
-//import React, { useState, useEffect } from 'react';
-//import { useFormik } from 'formik';
-import { useHistory } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import swal from 'sweetalert';
 import Select from 'react-select'
-import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-
 
 import {
   Button,
   Card,
   CardHeader,
   CardBody,
+  FormGroup,
+  Form,
+  Input,
   Container,
   Row,
   Col,
   Table,
+  
 } from "reactstrap";
 
 import UserHeader from "components/Headers/UserHeader.js";
-export default class HistorialDTO extends React.Component{
-  state = {
-    historialDTO: []
-  }
 
-  componentDidMount() {
-    axios.get(`https://localhost:44310/api/HistorialMedico`)
-      .then(res => {
-        const historialDTO = res.data;
-        this.setState({ historialDTO: historialDTO });
-      })
-  }
+const HistorialMedico = () => {
 
-  render() {
+  let history = useHistory();
+  let { id } = useParams();
+
+ const formik = useFormik({
+  initialValues: {
+      primerNombre: '',
+      segundoNombre: '',
+      primerApellido: '',
+      segundoApellido: '',          
+      ciudad:{},
+      idcita:'',
+      fechacita: "",
+      idrecetas: '',
+      medicinas: '',
+      diagnostico: ''
+      
+  },
+  onSubmit: values => {
+    HistorialMedico(values);        
+  },
+ });
+
+useEffect(() => {
+axios.get(`https://localhost:44310/api/Historial/${id}`)
+.then(res => {
+  const infoHistorial = res.data;
+  formik.setFieldValue('primerNombre',infoHistorial.nombres.split(' ')[0]);
+  formik.setFieldValue('segundoNombre',infoHistorial.nombres.split(' ')[1]);
+  formik.setFieldValue('primerApellido',infoHistorial.apellidos.split(' ')[0]);
+  formik.setFieldValue('segundoApellido',infoHistorial.apellidos.split(' ')[1]);
+  formik.setFieldValue('idcita',infoHistorial.idcita);
+  formik.setFieldValue('fechacita',infoHistorial.fechacita).substr(0,10);
+  formik.setFieldValue('idrecetas', infoHistorial.idrecetas);
+  formik.setFieldValue('medicinas', infoHistorial.medicinas);
+  formik.setFieldValue('diagnostico', infoHistorial.diagnostico);
+  formik.setFieldValue('ciudad',infoHistorial.ciudad);
+   });
+   }, []);
+
+   function buscarHistorial(historial){
+    if (
+      historial.primerNombre !== "" &&
+      historial.segundoNombre !== "" &&
+      historial.primerApellido !== "" &&
+      historial.segundoApellido !== "" &&
+      historial.ciudad !== undefined &&
+      historial.idcita !== "" &&
+      historial.fechacita !== undefined &&
+      historial.idrecetas !== "" &&
+      historial.medicinas !== "" &&
+      historial.diagnostico !== ""
+      
+    ) {
+      const historialDTO = { 
+        Nombres: historial.primerNombre + ' ' + historial.segundoNombre,
+        Apellidos: historial.primerApellido + ' ' + historial.segundoApellido,
+        IdCiudad: historial.ciudad.idCiudad,
+        IdCita: historial.idcita,
+        FechaCita: historial.fechacita,
+        IdRecetas: historial.idrecetas,
+        Medicinas: historial.medicinas,
+        Diagnostico: historial.diagnostico
+      };
+
+   
     return (
       <>
       <UserHeader />
@@ -54,20 +108,29 @@ export default class HistorialDTO extends React.Component{
                             <input className="form-control-label" placeholder="Escriba aqui su ID" type="number" id="id_paciente"
                               />
                   </Col>  
-                  <Col className="text-right" xs="3">
-                  <Link to="https://localhost:44310/api/HistorialMedico" className="btn btn-sm btn-primary">Buscar Historial</Link>
-                  </Col>
-                  <Col className="text-right" xs="1.5">
-                  <Link to="/admin/HistorialMedico" className="btn btn-sm btn-primary">Limpiar Historial</Link>
-                  </Col>
+                  <Col className="text-right" xs="4">
+                                        <Button
+                                            color="primary"
+                                            onClick={buscarHistorial}
+                                            size="sm"
+                                        >
+                                            Buscar Historial
+                                        </Button>
+                  </Col>                    
                 </Row>
               </CardHeader>
 
               <CardBody>
               <Col xs="5">
                             <label className="form-control-label"> Paciente: </label>
-                            <label className="form-control-label" placeholder={HistorialDTO.nombres + ' ' +HistorialDTO.apellidos} type="text" id="paciente"/>
-              </Col>  
+                            <Input
+                              className="form-control-alternative"
+                              placeholder="Primer nombre"
+                              type="text"
+                              id="primerNombre"
+                              onChange={formik.handleChange}
+                              value={formik.values.primerNombre + formik.values.segundoApellido}
+                            /></Col>  
               <Col xs="1">
                             <label className="form-control-label"> Ciudad: </label>
                             <label className="form-control-label" placeholder="San Pedro Sula" type="text" id="ciudad"/>
@@ -96,11 +159,11 @@ export default class HistorialDTO extends React.Component{
                         <th scope="row">{currentValue.idPaciente}</th>
                         <td>{currentValue.nombres + ' ' +currentValue.apellidos}</td>
                         <td>{currentValue.ciudad}</td>
-                        <td>{currentValue.IdCita}</td>
-                        <td>{currentValue.FechaCita}</td>
-                        <td>{currentValue.IdRecetas}</td>
-                        <td>{currentValue.Medicinas}</td>    
-                        <td>{currentValue.Diagnostico}</td>                        
+                        <td>{currentValue.idcita}</td>
+                        <td>{currentValue.fechacita}</td>
+                        <td>{currentValue.idrecetas}</td>
+                        <td>{currentValue.medicinas}</td>    
+                        <td>{currentValue.diagnostico}</td>                        
 
                         </tr>                        
                         )}
@@ -116,5 +179,7 @@ export default class HistorialDTO extends React.Component{
       </Container>
     </>
     )
-  }
-}
+};
+};
+};
+export default HistorialMedico;

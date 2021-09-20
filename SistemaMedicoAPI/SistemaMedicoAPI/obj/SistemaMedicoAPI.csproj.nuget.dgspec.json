@@ -1,22 +1,6 @@
 {
   "format": 1,
   "restore": {
-<<<<<<< HEAD
-    "C:\\Users\\HMIF\\Documents\\GitHub\\ProyectoMedico\\SistemaMedicoAPI\\SistemaMedicoAPI\\SistemaMedicoAPI.csproj": {}
-  },
-  "projects": {
-    "C:\\Users\\HMIF\\Documents\\GitHub\\ProyectoMedico\\SistemaMedicoAPI\\SistemaMedicoAPI\\SistemaMedicoAPI.csproj": {
-      "version": "1.0.0",
-      "restore": {
-        "projectUniqueName": "C:\\Users\\HMIF\\Documents\\GitHub\\ProyectoMedico\\SistemaMedicoAPI\\SistemaMedicoAPI\\SistemaMedicoAPI.csproj",
-        "projectName": "SistemaMedicoAPI",
-        "projectPath": "C:\\Users\\HMIF\\Documents\\GitHub\\ProyectoMedico\\SistemaMedicoAPI\\SistemaMedicoAPI\\SistemaMedicoAPI.csproj",
-        "packagesPath": "C:\\Users\\HMIF\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\HMIF\\Documents\\GitHub\\ProyectoMedico\\SistemaMedicoAPI\\SistemaMedicoAPI\\obj\\",
-        "projectStyle": "PackageReference",
-        "configFilePaths": [
-          "C:\\Users\\HMIF\\AppData\\Roaming\\NuGet\\NuGet.Config",
-=======
     "C:\\Users\\Bryan Paz\\Desktop\\Proyecto Programacion IV\\ProyectoMedico\\SistemaMedicoAPI\\SistemaMedicoAPI\\SistemaMedicoAPI.csproj": {}
   },
   "projects": {
@@ -31,7 +15,6 @@
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Bryan Paz\\AppData\\Roaming\\NuGet\\NuGet.Config",
->>>>>>> 5b10cb6ab5e77c88ebd4c37914f56ac68bdc878a
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [

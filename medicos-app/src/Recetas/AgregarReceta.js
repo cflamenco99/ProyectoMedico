@@ -1,14 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { useFormik } from 'formik';
-import axios from 'axios';
+import ls from 'local-storage';
 import { useHistory } from "react-router-dom";
 import swal from 'sweetalert';
-import Select from 'react-select'
-<<<<<<< Updated upstream
-=======
-import DatePicker from "react-datepicker";
->>>>>>> Stashed changes
-import "react-datepicker/dist/react-datepicker.css";
 
 import {
     Button,
@@ -21,157 +15,45 @@ import {
     Container,
     Row,
     Col,
-  } from "reactstrap";
+} from "reactstrap";
 
 import UserHeader from "components/Headers/UserHeader.js";
 
-
 const AgregarReceta = () => {
-<<<<<<< Updated upstream
-    const [Pacientes, setPacientes] = useState(0);
-
-    
-    useEffect(() => {
-      axios.get(`https://localhost:44310/api/Pacientes`)
-      .then(res => {
-        const Pacientes = res.data;
-        setPacientes(Pacientes);        
-      })
-    }, []);
-
-    const handleChange = (paciente) => {
-        formik.setFieldValue('primer nombre', primerNombre)
-        formik.setFieldValue('segundo nombre', segundoNombre)
-        formik.setFieldValue('primer apellido', primerApellido)
-        formik.setFieldValue('segundo apellido', segundoApellido)
-        formik.setFieldValue('direccion', direccion)
-        formik.setFieldValue('fecha nacimiento', fechaNacimiento)
-        ObtenerPacientes(paciente.IdPaciente)
-    }
-    const handleChangePacientes = (pacientes) => {
-        formik.setFieldValue('pacientes',pacientes)
-      }
-
-    function ObtenerPacientes(IdPaciente) {
-        axios.get(`https://localhost:44310/api/Pacientes/${IdPaciente}`)
-            .then(res => {
-                const ListaPacientes = res.data;
-                setPacientes(ListaPacientes);
-            })
-    }
-=======
-    const [listaPacientes, setlistaPacientes] = useState(0);
-    const [listaCitas, setListaCitas] = useState(1);
-
-    useEffect(() => {
-        axios.get(`https://localhost:44310/api/Pacientes`)
-        .then(res => {
-          const listaPacientes = res.data;
-          setlistaPacientes(listaPacientes);        
-        })
-      }, []);
-
-      const handleChange = (paciente) => {
-        formik.setFieldValue('paciente',paciente)
-        ObtenerReceta(paciente.idPaciente);
-      } 
-
-   const handleChangeReceta = (receta) => {
-        formik.setFieldValue('receta',receta)
-      }
-
-      function ObtenerReceta(idReceta){
-        axios.get(`https://localhost:44310/api/Citas/${idReceta}`)
-        .then(res => {
-          const listadoRecetas = res.data;
-          setListaCitas(listadoRecetas);
-        })      
-      }
->>>>>>> Stashed changes
     let history = useHistory();
 
     function abrirListadoRecetas() {
         history.push('/admin/listadoRecetas');
     }
 
-
-    const formik = useFormik({
-        initialValues: {
-            primerNombre: [],
-           segundoNombre: [],
-           primerApellido: [],
-           segundoApellido: [], 
-            IdPaciente:[],
-            medicinas: '',
-            diagnostico: '',
-            direccion: [],
-          fechaNacimiento: new Date()
-
-        },
-        onSubmit: values => {
-            guardarReceta(values);
-            formik.resetForm();
-        },
-    });
-
     function guardarReceta(receta) {
         if (
-            receta.IdPaciente >= 0 &&
-<<<<<<< Updated upstream
+            receta.id >= 0 &&
+            receta.primerNombre !== "" &&
+            receta.segundoNombre !== "" &&
+            receta.primerApellido !== "" &&
+            receta.segundoApellido !== "" &&
             receta.edad > 0 &&
+            receta.direccion !== "" &&
             receta.telefono > 0 &&
             receta.correo !== "" &&
-            receta.medicinas !== "" &&
-            receta.diagnostico !== "" &&
-            receta.fechaNacimiento !== undefined
-
-
-        ) {
-            const recetaDTO = {
-                IdPaciente = receta.IdPaciente,
-                Medicinas = receta.Medicinas,
-                Diagnostico = receta.Diagnostico,
-                IdCita = receta.IdCita,
-            };
-
-            axios.post(`https://localhost:44310/api/Recetas`, recetaDTO)
-                .then(res => {
-                    console.log(res);
-                    swal({
-                        text: "¡Receta guardado exitosamente!",
-                        icon: "success",
-                        buttons: false,
-                        timer: 2500
-                    });
-                    formik.resetForm();
-                });
-=======
             receta.medicinas !== ""&&
             receta.diagnostico !== ""&&
-            receta.IdCita >= 0 
+            receta.fechaCita !== "" &
+            receta.hora !== ""
             
         ) {
-            const RecetasDTO= {
-                IdPaciente: receta.IdPaciente,
-                Medicinas: receta.Medicinas,
-                Diagnostico:receta.Diagnostico,
-                IdCita: receta.IdCita
-
-            };
-
-            axios.post(`https://localhost:44310/api/Recetas`, RecetasDTO)
-            .then(res => {
-                console.log(res);
-                swal({
-                  text: "¡Receta guardado exitosamente!",
-                  icon: "success",
-                  buttons: false,
-                  timer: 2500
-                });
-                formik.resetForm();            
+            let listaGuardar = [];
+            let lista = ls.get("misRecetas");
+            if (lista && lista.length > 0) listaGuardar = lista;
+            listaGuardar = listaGuardar.concat(receta);
+            ls.set("misRecetas", listaGuardar);
+            swal({
+                text: "¡Receta Agregada Exitosamente!",
+                icon: "success",
+                buttons: false,
+                timer: 2000
             });
->>>>>>> Stashed changes
-
         } else {
             swal({
                 text: "¡Favor ingresar correctamente los datos!",
@@ -183,24 +65,21 @@ const AgregarReceta = () => {
         }
     }
 
-<<<<<<< Updated upstream
-    
-=======
     const formik = useFormik({
         initialValues: {
-            IdPaciente:'',
+            id: '',
             primerNombre: '',
             segundoNombre: '',
             primerApellido: '',
-            segundoApellido: '',          
-            pais:[],
-            ciudad:[],
-            codigoPostal:'',
+            segundoApellido: '',
+            edad: '',
             direccion: '',
-            fechaNacimiento: new Date(),
-            Medicinas:'',
-            Diagnostico:'',
-            IdCita:''
+            telefono: '',
+            correo: '',
+            medicinas:'',
+            diagnostico:'',
+            fechaCita: '',
+            hora: '',
 
         },
         onSubmit: values => {
@@ -208,7 +87,6 @@ const AgregarReceta = () => {
             formik.resetForm();
         },
     });
->>>>>>> Stashed changes
 
     return (
         <>
@@ -221,12 +99,12 @@ const AgregarReceta = () => {
                                 <Row className="align-items-center">
                                     <Col xs="8">
                                         <h1 className="mb-0">CLINICA CHAB </h1>
-                                        <h3> Direccion: Colonia Trejo 21 y 22 avenida SO 9 calle</h3>
-                                        <h3>Telefono: 2982-9800</h3>
-                                        <br></br>
-                                        <h1> DR. CARLOS FLAMENCO </h1>
-                                        <h2>Medico Especialista</h2>
-                                        <h2>MN.0000000</h2>
+                  <h3> Direccion: Colonia Trejo 21 y 22 avenida SO 9 calle</h3>
+                  <h3>Telefono: 2982-9800</h3>
+                  <br></br>
+                  <h1> DR. CARLOS FLAMENCO </h1>
+                  <h2>Medico Especialista</h2>
+                  <h2>MN.0000000</h2>
                                     </Col>
                                     <Col className="text-right" xs="4">
                                         <Button
@@ -251,9 +129,6 @@ const AgregarReceta = () => {
                                                     <label
                                                         className="form-control-label"
                                                     >
-<<<<<<< Updated upstream
-                                                        ID Paciente
-=======
                                                         ID Persona
                                                     </label>
                                                     <Input
@@ -262,7 +137,7 @@ const AgregarReceta = () => {
                                                         type="number"
                                                         id="id"
                                                         onChange={formik.handleChange}
-                                                        value={formik.values.IdPaciente}
+                                                        value={formik.values.id}
                                                     />
                                                 </FormGroup>
                                             </Col>
@@ -272,17 +147,15 @@ const AgregarReceta = () => {
                                                         className="form-control-label"
                                                     >
                                                         Edad
->>>>>>> Stashed changes
                                                     </label>
-                                                    <Select
-                                                        options={Pacientes}
+                                                    <Input
                                                         className="form-control-alternative"
-                                                        id="IDPaciente"
-                                                        onChange={handleChange}
-                                                        value={formik.values.IdPaciente}
-                                                        getOptionLabel={(option) => option.primerNombre + ' ' + option.primerApellido}
-                                                        getOptionValue={(option) => option.IdPaciente}
-                                                        placeholder="Seleccione un ID" />
+                                                        placeholder="Edad"
+                                                        type="number"
+                                                        id="edad"
+                                                        onChange={formik.handleChange}
+                                                        value={formik.values.edad}
+                                                    />
                                                 </FormGroup>
                                             </Col>
                                         </Row>
@@ -361,7 +234,41 @@ const AgregarReceta = () => {
                                     </div>
                                     <div className="pl-lg-4">
                                         <Row>
-                            
+                                            <Col lg="4">
+                                                <FormGroup>
+                                                    <label
+                                                        className="form-control-label"
+                                                    >
+                                                        Telefono
+                                                    </label>
+                                                    <Input
+                                                        className="form-control-alternative"
+                                                        placeholder="Telefono"
+                                                        type="tel"
+                                                        id="telefono"
+                                                        onChange={formik.handleChange}
+                                                        value={formik.values.telefono}
+                                                    />
+                                                </FormGroup>
+                                            </Col>
+                                            <Col lg="5">
+                                                <FormGroup>
+                                                    <label
+                                                        className="form-control-label"
+
+                                                    >
+                                                        Correo Electronico
+                                                    </label>
+                                                    <Input
+                                                        className="form-control-alternative"
+                                                        placeholder="Correo Electronico"
+                                                        type="email"
+                                                        id="correo"
+                                                        onChange={formik.handleChange}
+                                                        value={formik.values.correo}
+                                                    />
+                                                </FormGroup>
+                                            </Col>
                                             <Col lg="11">
                                                 <FormGroup>
                                                     <label
@@ -382,12 +289,12 @@ const AgregarReceta = () => {
                                         </Row>
                                         <hr className="my-4" />
                                         <Row>
-                                            <Col lg="11">
+                                        <Col lg="11">
                                                 <FormGroup>
                                                     <label
                                                         className="form-control-label"
                                                     >
-                                                        Medicinas
+                                                        Medicinas 
                                                     </label>
                                                     <Input
                                                         className="form-control-alternative"
@@ -395,7 +302,7 @@ const AgregarReceta = () => {
                                                         type="text"
                                                         id="medicinas"
                                                         onChange={formik.handleChange}
-                                                        value={formik.values.Medicinas}
+                                                        value={formik.values.medicinas}
                                                     />
                                                 </FormGroup>
                                             </Col>
@@ -412,7 +319,7 @@ const AgregarReceta = () => {
                                                         type="text"
                                                         id="diagnostico"
                                                         onChange={formik.handleChange}
-                                                        value={formik.values.Diagnostico}
+                                                        value={formik.values.diagnostico}
                                                     />
                                                 </FormGroup>
                                             </Col>
@@ -424,7 +331,7 @@ const AgregarReceta = () => {
                                                     <label
                                                         className="form-control-label"
                                                     >
-                                                        Fecha Nacimiento
+                                                        Fecha
                                                     </label>
                                                     <Input
                                                         className="form-control-alternative"
@@ -432,7 +339,24 @@ const AgregarReceta = () => {
                                                         type="date"
                                                         id="fechaCita"
                                                         onChange={formik.handleChange}
-                                                        value={formik.values.fechaNacimiento}
+                                                        value={formik.values.fechaCita}
+                                                    />
+                                                </FormGroup>
+                                            </Col>
+                                            <Col md="4">
+                                                <FormGroup>
+                                                    <label
+                                                        className="form-control-label"
+                                                    >
+                                                        Hora
+                                                    </label>
+                                                    <Input
+                                                        className="form-control-alternative"
+                                                        placeholder="Hora"
+                                                        type="time"
+                                                        id="hora"
+                                                        onChange={formik.handleChange}
+                                                        value={formik.values.hora}
                                                     />
                                                 </FormGroup>
                                             </Col>

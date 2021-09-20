@@ -16,6 +16,7 @@ import AgregarPacientes from "Pacientes/AgregarPacientes";
 import AgregarCitas from "AdminCitas/AgregarCitas";
 import AgregarReceta from "Recetas/AgregarReceta";
 import EditarPacientes from "Pacientes/EditarPacientes"
+import EditarCitas from "AdminCitas/EditarCitas"
 
 const Admin = (props) => {
   const mainContent = React.useRef(null);
@@ -81,6 +82,11 @@ const Admin = (props) => {
           <Route
             path="/admin/agregarCitas"
             component={AgregarCitas}
+          />
+
+          <Route
+            path="/admin/editarCita/:id"
+            component={EditarCitas}
           />
 
            <Route
