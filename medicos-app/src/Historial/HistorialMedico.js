@@ -1,95 +1,53 @@
-import React, { useState, useEffect } from 'react';
-import { useFormik } from 'formik';
+import React from 'react';
 import axios from 'axios';
-import { useHistory, useParams } from "react-router-dom";
+import { Link } from 'react-router-dom';
 import swal from 'sweetalert';
-import Select from 'react-select'
-import "react-datepicker/dist/react-datepicker.css";
+import { useHistory } from 'react-router-dom';
 
 import {
   Button,
   Card,
   CardHeader,
   CardBody,
-  FormGroup,
-  Form,
-  Input,
   Container,
+  FormGroup,
   Row,
   Col,
   Table,
-  
+  Input,
 } from "reactstrap";
 
 import UserHeader from "components/Headers/UserHeader.js";
 
-const HistorialMedico = () => {
 
-  let history = useHistory();
-  let { id } = useParams();
+export default class historialmedicos extends React.Component{
 
- const formik = useFormik({
-  initialValues: {
-      primerNombre: '',
-      segundoNombre: '',
-      primerApellido: '',
-      segundoApellido: '',          
-      ciudad:{},
-      idcita:'',
-      fechacita: "",
-      idrecetas: '',
-      medicinas: '',
-      diagnostico: ''
-      
-  },
-  onSubmit: values => {
-    HistorialMedico(values);        
-  },
- });
+  state={
+    historialmedico:[]
+  }
 
-useEffect(() => {
-axios.get(`https://localhost:44310/api/Historial/${id}`)
-.then(res => {
-  const infoHistorial = res.data;
-  formik.setFieldValue('primerNombre',infoHistorial.nombres.split(' ')[0]);
-  formik.setFieldValue('segundoNombre',infoHistorial.nombres.split(' ')[1]);
-  formik.setFieldValue('primerApellido',infoHistorial.apellidos.split(' ')[0]);
-  formik.setFieldValue('segundoApellido',infoHistorial.apellidos.split(' ')[1]);
-  formik.setFieldValue('idcita',infoHistorial.idcita);
-  formik.setFieldValue('fechacita',infoHistorial.fechacita).substr(0,10);
-  formik.setFieldValue('idrecetas', infoHistorial.idrecetas);
-  formik.setFieldValue('medicinas', infoHistorial.medicinas);
-  formik.setFieldValue('diagnostico', infoHistorial.diagnostico);
-  formik.setFieldValue('ciudad',infoHistorial.ciudad);
-   });
-   }, []);
+  componentDidMount(){
+    
+      axios.get(`https://localhost:44310/api/Historial`).
+      then(response=>
+        {console.log(response)
+          this.setState({historialmedico: response.data})
+        })
+        .catch(error=>
+          {console.log(error)
+          });
+  }
 
-   function buscarHistorial(historial){
-    if (
-      historial.primerNombre !== "" &&
-      historial.segundoNombre !== "" &&
-      historial.primerApellido !== "" &&
-      historial.segundoApellido !== "" &&
-      historial.ciudad !== undefined &&
-      historial.idcita !== "" &&
-      historial.fechacita !== undefined &&
-      historial.idrecetas !== "" &&
-      historial.medicinas !== "" &&
-      historial.diagnostico !== ""
-      
-    ) {
-      const historialDTO = { 
-        Nombres: historial.primerNombre + ' ' + historial.segundoNombre,
-        Apellidos: historial.primerApellido + ' ' + historial.segundoApellido,
-        IdCiudad: historial.ciudad.idCiudad,
-        IdCita: historial.idcita,
-        FechaCita: historial.fechacita,
-        IdRecetas: historial.idrecetas,
-        Medicinas: historial.medicinas,
-        Diagnostico: historial.diagnostico
-      };
+  render() {
 
-   
+    function ObtenerHistorial(idPaciente){
+      axios.get(`https://localhost:44310/api/Historial/${idPaciente}`)
+      .then(res => {
+        const ObtenerHistorial = res.data;
+        this.setState({ ObtenerHistorial: ObtenerHistorial });
+      })      
+    }
+    
     return (
       <>
       <UserHeader />
@@ -102,39 +60,37 @@ axios.get(`https://localhost:44310/api/Historial/${id}`)
                   <Col xs="8">
                     <h3 className="mb-0">Historial de Pacientes</h3>
                   </Col>
-                  <Col xs="5">
+                  <Col lg="6">
+                  <FormGroup>
                             <label
-                              className="form-control-label"> Ingrese su ID: </label>
-                            <input className="form-control-label" placeholder="Escriba aqui su ID" type="number" id="id_paciente"
-                              />
-                  </Col>  
-                  <Col className="text-right" xs="4">
-                                        <Button
-                                            color="primary"
-                                            onClick={buscarHistorial}
-                                            size="sm"
-                                        >
-                                            Buscar Historial
-                                        </Button>
-                  </Col>                    
-                </Row>
-              </CardHeader>
-
-              <CardBody>
-              <Col xs="5">
-                            <label className="form-control-label"> Paciente: </label>
-                            <Input
+                              className="form-control-label">
+                              Ingrese ID
+                            </label>
+                            <Input 
                               className="form-control-alternative"
-                              placeholder="Primer nombre"
+                              placeholder="Ingrese ID Aqui"
                               type="text"
                               id="primerNombre"
-                              onChange={formik.handleChange}
-                              value={formik.values.primerNombre + formik.values.segundoApellido}
-                            /></Col>  
-              <Col xs="1">
-                            <label className="form-control-label"> Ciudad: </label>
-                            <label className="form-control-label" placeholder="San Pedro Sula" type="text" id="ciudad"/>
-              </Col>  
+                              //value=""
+                            />
+                          </FormGroup>
+                  </Col>
+                  <CardHeader className="bg-white border-0">
+                  <Row className="align-items-center">
+                    <Col className="text-right" xs="4">
+                      <Button
+                        color="primary"
+                        onClick={ObtenerHistorial}
+                        size="sm"
+                      >
+                        Buscar Historial
+                      </Button>
+                    </Col>
+                  </Row>
+                </CardHeader>
+                </Row>
+              </CardHeader>
+              <CardBody>
                 <Row>
                   <div className="col">
                     <Card className="shadow">
@@ -144,27 +100,23 @@ axios.get(`https://localhost:44310/api/Historial/${id}`)
                       >
                         <thead className="thead-light">
                           <tr>
+                            <th scope="col">ID</th>
                             <th scope="col">Nombre Completo</th>
                             <th scope="col">Ciudad</th>
-                            <th scope="col">ID Cita</th>
+                            <th scope="col">Pais</th>
+                            <th scope="col">ID Ciudad</th>
                             <th scope="col">Fecha Cita</th>
-                            <th scope="col">ID Receta</th>
-                            <th scope="col">Medicinas</th>
-                            <th scope="col">Descripcion</th>
                           </tr>
                         </thead>
                         <tbody>
-                        {this.state.historialDTO.map( (currentValue, i) => 
+                        {this.state.historialmedico.map( (currentValue, i) => 
                         <tr key={i}>
                         <th scope="row">{currentValue.idPaciente}</th>
-                        <td>{currentValue.nombres + ' ' +currentValue.apellidos}</td>
-                        <td>{currentValue.ciudad}</td>
-                        <td>{currentValue.idcita}</td>
-                        <td>{currentValue.fechacita}</td>
-                        <td>{currentValue.idrecetas}</td>
-                        <td>{currentValue.medicinas}</td>    
-                        <td>{currentValue.diagnostico}</td>                        
-
+                        <td>{currentValue.Nombres + ' ' +currentValue.Apellidos}</td>
+                        <td>{currentValue.IdCiudad}</td>
+                        <td>{currentValue.IdCita}</td>
+                        <td>{currentValue.FechaCita}</td>
+                        
                         </tr>                        
                         )}
                         </tbody>
@@ -179,7 +131,6 @@ axios.get(`https://localhost:44310/api/Historial/${id}`)
       </Container>
     </>
     )
-};
-};
-};
-export default HistorialMedico;
+  }
+}
+
