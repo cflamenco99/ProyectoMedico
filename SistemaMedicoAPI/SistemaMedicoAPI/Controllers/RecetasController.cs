@@ -34,11 +34,15 @@ namespace SistemaMedicoAPI.Controllers
                 var result = from r in _db.Recetas
                              select new RecetasDTO
                              {
-                                IdRecetas = r.IdRecetas,
-                                 IdPaciente= r.IdPaciente,
-                                 Medicinas= r.Medicinas,
-                                 Diagnostico= r.Diagnostico,
-                                 IdCita= r.IdCita,
+                                 IdRecetas = r.IdRecetas,
+                                 IdPaciente = r.IdPaciente,
+                                 Nombres = r.Pacientes.Nombres,
+                                 Apellidos = r.Pacientes.Apellidos,
+                                 Direccion = r.Pacientes.Direccion,
+                                 FechaNacimiento = r.Pacientes.FechaNacimiento,
+                                 Medicinas = r.Medicinas,
+                                 Diagnostico = r.Diagnostico,
+
                              };
                 return Ok(await result.ToListAsync());
             }
@@ -59,12 +63,17 @@ namespace SistemaMedicoAPI.Controllers
             {
                 RecetasDTO RecetasDTO = new RecetasDTO
                 {
-                    IdRecetas = RecetasEF.IdRecetas,
+
                     IdPaciente = RecetasEF.IdPaciente,
+                    Nombres = _db.Pacientes.Where(x => x.IdPaciente == RecetasEF.IdPaciente).Select(x => x.Nombres).FirstOrDefault(),
+                    Apellidos = _db.Pacientes.Where(x => x.IdPaciente == RecetasEF.IdPaciente).Select(x => x.Apellidos).FirstOrDefault(),
+                    Direccion = _db.Pacientes.Where(x => x.IdPaciente == RecetasEF.IdPaciente).Select(x => x.Direccion).FirstOrDefault(),
+                    FechaNacimiento = _db.Pacientes.Where(x => x.IdPaciente == RecetasEF.IdPaciente).Select(x => x.FechaNacimiento).FirstOrDefault(),
+                    IdRecetas = RecetasEF.IdRecetas,
                     Medicinas = RecetasEF.Medicinas,
                     Diagnostico = RecetasEF.Diagnostico,
-                    IdCita = RecetasEF.IdCita,
-         
+
+
                 };
                 return RecetasDTO;
             }
@@ -80,11 +89,11 @@ namespace SistemaMedicoAPI.Controllers
             {
                 Recetas Receta = new Recetas
                 {
-                    IdRecetas = receta.IdRecetas,
+
                     IdPaciente = receta.IdPaciente,
                     Medicinas = receta.Medicinas,
                     Diagnostico = receta.Diagnostico,
-                    IdCita = receta.IdCita,
+
                 };
 
                 _db.Recetas.Add(Receta);
@@ -107,18 +116,17 @@ namespace SistemaMedicoAPI.Controllers
 
         // PUT api/<RecetasController>/
         [HttpPut("{id}")]
-  public async Task<ActionResult<RecetasDTO>> EditarReceta(RecetasDTO receta)
+        public async Task<ActionResult<RecetasDTO>> EditarReceta(int id, RecetasDTO receta)
         {
             try
             {
-                Recetas recetaEF = _db.Recetas.Find(receta.IdRecetas);
+                Recetas recetaEF = _db.Recetas.Find(id);
                 if (recetaEF != null)
                 {
-                    recetaEF.IdRecetas = receta.IdRecetas;
-                   recetaEF.IdPaciente = receta.IdPaciente;
-                   recetaEF.Medicinas = receta.Medicinas;
-                   recetaEF.Diagnostico = receta.Diagnostico;
-                   recetaEF.IdCita = receta.IdCita;
+
+                    recetaEF.Medicinas = receta.Medicinas;
+                    recetaEF.Diagnostico = receta.Diagnostico;
+
                     int result = await _db.SaveChangesAsync();
                     if (result > 0)
                     {
@@ -174,5 +182,3 @@ namespace SistemaMedicoAPI.Controllers
         }
     }
 }
-    
-
