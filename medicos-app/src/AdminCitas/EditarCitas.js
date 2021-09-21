@@ -78,18 +78,18 @@ const EditarCitas = () => {
       }, []);
 
     
-       const handleChange = (cita) => {
-/*         formik.setFieldValue('idPaciente', cita.idPaciente)
+      /*  const handleChange = (cita) => {
+       formik.setFieldValue('idPaciente', cita.idPaciente)
         formik.setFieldValue('primerNombre', cita.nombres.split(' ')[0]);
         formik.setFieldValue('segundoNombre', cita.nombres.split(' ')[1]);
         formik.setFieldValue('primerApellido', cita.apellidos.split(' ')[0]);
         formik.setFieldValue('segundoApellido', cita.apellidos.split(' ')[1]);
         formik.setFieldValue('direccion', cita.direccion);
-        formik.setFieldValue('fechaNacimiento', cita.fechaNacimiento.substr(0,10)); */ 
+        formik.setFieldValue('fechaNacimiento', cita.fechaNacimiento.substr(0,10)); 
         ObtenerCitas(cita.idCita);
         console.log(cita);
       
-      }  
+      }  */ 
 
       /* const handleChangeLista = (nombre) => {
         formik.setFieldValue('primerNombre', nombre)
@@ -120,7 +120,7 @@ const EditarCitas = () => {
             cita.segundoApellido !== "" &&
             cita.direccion !== "" &&
             cita.fechaNacimiento !== undefined &&
-            cita.fechaCita !== undefined
+            cita.fechaCita !== ''
            
         ) {
             const citasDTO = {
@@ -183,19 +183,19 @@ return (
                                 </h6>
                                 <div className="pl-lg-4">
                                     <Row>
-                                        <Col lg="4">
+                                        <Col lg="3">
                                             <FormGroup>
                                                 <label
                                                     className="form-control-label"
                                                 >
                                                     ID Paciente
                                                 </label> 
-                                                <Input  readOnly = "true" 
+                                                <Input  readOnly = {true} 
                                                     className="form-control"
                                                     placeholder="ID Paciente"
                                                     type="text"
                                                     id="idPaciente"
-                                                    onChange={handleChange}
+                                                    onChange={formik.handleChange}
                                                     value= {formik.values.idPaciente}                                                  
                                                 /> 
                                                {/*  <Select 
@@ -218,7 +218,7 @@ return (
                                                 >
                                                     Primer nombre
                                                 </label>                                          
-                                                    <Input  readOnly = "true" 
+                                                    <Input  readOnly = {true} 
                                                     className="form-control"
                                                     placeholder="Primer nombre"
                                                     type="text"
@@ -236,7 +236,7 @@ return (
                                                 >
                                                     Segundo nombre
                                                 </label>
-                                                <Input readOnly = "true"
+                                                <Input readOnly = {true}
                                                     className="form-control-alternative"
                                                     placeholder="Segundo nombre"
                                                     type="text"
@@ -255,7 +255,7 @@ return (
                                                 >
                                                     Primer apellido
                                                 </label>
-                                                <Input readOnly = "true"
+                                                <Input readOnly = {true}
                                                     className="form-control-alternative"
                                                     placeholder="Primer apellido"
                                                     type="text"
@@ -272,7 +272,7 @@ return (
                                                 >
                                                     Segundo apellido
                                                 </label>
-                                                <Input readOnly = "true"
+                                                <Input readOnly = {true}
                                                     className="form-control-alternative"
                                                     placeholder="Segundo apellido"
                                                     type="text"
@@ -297,7 +297,7 @@ return (
                                                 >
                                                     Direccion
                                                 </label>
-                                                <Input readOnly = "true"
+                                                <Input readOnly = {true}
                                                     className="form-control-alternative"
                                                     placeholder="Direccion"
                                                     type="text"
@@ -314,7 +314,7 @@ return (
                                                 >
                                                     Fecha de Nacimiento
                                                 </label>
-                                                <Input readOnly = "true"
+                                                <Input readOnly = {true}
                                                     className="form-control-alternative"
                                                     placeholder="Fecha Nacimiento"
                                                     type="date"

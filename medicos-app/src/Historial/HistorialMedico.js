@@ -28,7 +28,7 @@ export default class historialmedicos extends React.Component{
 
   componentDidMount(){
     
-      axios.get(`https://localhost:44310/api/Historial`).
+      axios.get(`https://localhost:44310/api/Historial`, HistorialDTO).
       then(response=>
         {console.log(response)
           this.setState({historialmedico: response.data})
@@ -106,6 +106,9 @@ export default class historialmedicos extends React.Component{
                             <th scope="col">Pais</th>
                             <th scope="col">ID Ciudad</th>
                             <th scope="col">Fecha Cita</th>
+                            <th scope="col">ID Receta</th>
+                            <th scope="col">Medicinas</th>
+                            <th scope="col">Diagnostico</th>
                           </tr>
                         </thead>
                         <tbody>
@@ -116,7 +119,9 @@ export default class historialmedicos extends React.Component{
                         <td>{currentValue.IdCiudad}</td>
                         <td>{currentValue.IdCita}</td>
                         <td>{currentValue.FechaCita}</td>
-                        
+                        <td>{currentValue.IdRecetas}</td>
+                        <td>{currentValue.Medicinas}</td>
+                        <td>{currentValue.Diagnostico}</td>
                         </tr>                        
                         )}
                         </tbody>
