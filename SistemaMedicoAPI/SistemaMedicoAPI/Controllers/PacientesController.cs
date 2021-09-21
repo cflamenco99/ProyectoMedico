@@ -122,15 +122,6 @@ namespace SistemaMedicoAPI.Controllers
             try
             {
                 Pacientes pacienteEF = _db.Pacientes.Find(id);
-                if (paciente.Nombres == pacienteEF.Nombres &&
-                    paciente.Apellidos == pacienteEF.Apellidos &&
-                    paciente.IdCiudad == pacienteEF.IdCiudad &&
-                    paciente.CodigoPostal == pacienteEF.CodigoPostal &&
-                    paciente.Direccion == pacienteEF.Direccion &&
-                    paciente.FechaNacimiento == pacienteEF.FechaNacimiento) 
-                {
-                    return Ok(new { status = "Modificado exitosamente" });
-                }
                 if (pacienteEF != null)
                 {
                     pacienteEF.Nombres = paciente.Nombres;

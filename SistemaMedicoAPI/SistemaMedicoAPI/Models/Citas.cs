@@ -13,14 +13,10 @@ namespace SistemaMedicoAPI.Models
         [Key]
         public int IdCita { get; set; }
 
-        
-
         [ForeignKey("Pacientes")]
         public int IdPaciente { get; set; }
 
         [Column(TypeName = "Date")]
         public DateTime FechaCita { get; set; }
-
-        public virtual Pacientes Pacientes { get; set; }
     }
 }

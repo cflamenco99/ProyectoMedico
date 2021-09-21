@@ -103,8 +103,7 @@ export default class historialmedicos extends React.Component{
                             <th scope="col">ID</th>
                             <th scope="col">Nombre Completo</th>
                             <th scope="col">Ciudad</th>
-                            <th scope="col">Pais</th>
-                            <th scope="col">ID Ciudad</th>
+                            <th scope="col">ID Cita</th>
                             <th scope="col">Fecha Cita</th>
                             <th scope="col">ID Receta</th>
                             <th scope="col">Medicinas</th>
