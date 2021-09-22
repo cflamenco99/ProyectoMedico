@@ -21,8 +21,8 @@ namespace SistemaMedicoAPI.Models
 
         public string Diagnostico { get; set; }
 
-        [ForeignKey("Citas")]
-        public int IdCita { get; set; }
+        public virtual Pacientes Pacientes { get; set; }
+
 
     }
 }

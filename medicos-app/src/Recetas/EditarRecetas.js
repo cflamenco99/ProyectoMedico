@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useFormik } from 'formik';
 import axios from 'axios';
-import { useHistory} from "react-router-dom";
+import { useHistory, useParams} from "react-router-dom";
 import swal from 'sweetalert';
 import Select from 'react-select'
 import "react-datepicker/dist/react-datepicker.css";
@@ -20,52 +20,19 @@ import {
     Label,
   } from "reactstrap";
 
-  import UserHeader from "components/Headers/UserHeader.js";
-  import { option } from 'commander';
 
-  const AgregarReceta = () => {
-    const [listaPacientes, setListaPacientes] = useState([]);
+import UserHeader from "components/Headers/UserHeader.js";
+import { option } from 'commander';
+
+const EditarRecetas = () => {
+    const [ListadoRecetas, setListadoRecetas] = useState([]);
     const [lista, setLista] = useState([]);
+   
 
-    useEffect(() => {
-        axios.get(`https://localhost:44310/api/Pacientes`)
-        .then(res => {
-          const listaPacientes = res.data;    
-          setListaPacientes(listaPacientes); 
-          console.log(listaPacientes);      
-        })
-      }, []);
+    let history = useHistory();
+    let { id } = useParams();
 
-      const handleChange = (paciente) => {
-        formik.setFieldValue('paciente', paciente)
-        formik.setFieldValue('idPaciente', paciente.idPaciente)
-        formik.setFieldValue('primerNombre', paciente.nombres.split(' ')[0])
-        formik.setFieldValue('segundoNombre', paciente.nombres.split(' ')[1])
-        formik.setFieldValue('primerApellido', paciente.apellidos.split(' ')[0])
-        formik.setFieldValue('segundoApellido', paciente.apellidos.split(' ')[1])
-        formik.setFieldValue('direccion', paciente.direccion)
-        formik.setFieldValue('fechaNacimiento', paciente.fechaNacimiento.substr(0,10))
-         ObtenerPaciente(paciente.idPaciente)
-
-      }
-
-      function ObtenerPaciente(idPaciente){
-        axios.get(`https://localhost:44310/api/Pacientes/${idPaciente}`)
-        .then(res => {
-          const listaP = res.data;
-          setLista(listaP);
-          console.log(listaP);
-          
-        })      
-      }
-
-      let history = useHistory();
-
-      function abrirListadoRecetas() {
-          history.push('/admin/ListadoRecetas');
-      }
-
-      const formik = useFormik({
+    const formik = useFormik({
         initialValues: {
             paciente: '',
             idPaciente: '',
@@ -76,17 +43,57 @@ import {
             direccion: '',
             medicinas:'',
             diagnostico:'',
-            fechaNacimiento: new Date(), 
+            fechaNacimiento: '', 
             
          
         },
         onSubmit: values => {
-            guardarReceta(values);
+            editarRecetas(values);
             console.log(values);
         },
     });
 
-    function guardarReceta(receta) {
+    useEffect(() => {
+        axios.get(`https://localhost:44310/api/Recetas/${id}`)
+        .then(res => {
+          const InfoRecetas = res.data; 
+          formik.setFieldValue('idPaciente', InfoRecetas.idPaciente)
+          formik.setFieldValue('primerNombre', InfoRecetas.nombres.split(' ')[0]);
+          formik.setFieldValue('segundoNombre', InfoRecetas.nombres.split(' ')[1]);
+          formik.setFieldValue('primerApellido', InfoRecetas.apellidos.split(' ')[0]);
+          formik.setFieldValue('segundoApellido', InfoRecetas.apellidos.split(' ')[1]);
+          formik.setFieldValue('direccion', InfoRecetas.direccion);
+          formik.setFieldValue('medicinas', InfoRecetas.medicinas);
+          formik.setFieldValue('diagnostico', InfoRecetas.diagnostico);
+          formik.setFieldValue('fechaNacimiento', InfoRecetas.fechaNacimiento.substr(0,10));  
+
+          setLista(InfoRecetas); 
+          console.log(InfoRecetas);      
+        });
+        axios.get(`https://localhost:44310/api/Recetas/`)
+        .then(res => {
+          const listaPa = res.data;
+          setListadoRecetas(listaPa);
+          console.log(listaPa);
+        }) 
+
+      }, []);
+
+      function ObtenerRecetas(idReceta){
+        axios.get(`https://localhost:44310/api/Paciente/${idReceta}`)
+        .then(res => {
+          const listaPa = res.data;
+          setLista(listaPa);
+          console.log(listaPa);
+        })      
+      }
+
+
+    function abrirListadoRecetas() {
+        history.push('/admin/ListadoRecetas');
+    }
+
+    function editarRecetas(receta) {
         if (
             receta.idPaciente >=0 &&
             receta.primerNombre !== "" &&
@@ -97,24 +104,24 @@ import {
             receta.medicinas !== "" &&
             receta.diagnostico !== "" &&
             receta.fechaNacimiento !== undefined 
-            
            
         ) {
             const recetasDTO = {
-                idPaciente : receta.idPaciente,   
+
                 medicinas : receta.medicinas,
                 diagnostico : receta.diagnostico
             }
-            axios.post(`https://localhost:44310/api/Recetas`, recetasDTO)
+            axios.put(`https://localhost:44310/api/Recetas/${id}`, recetasDTO)
             .then(res => {
-              console.log(res);
               swal({
-                text: "¡Receta agregada exitosamente!",
+                text: "¡Receta editada exitosamente!",
                 icon: "success",
                 buttons: false,
                 timer: 2500
+              }).then(() => {
+                abrirListadoRecetas();
               });
-              formik.resetForm();            
+              /* formik.resetForm();  */           
             });
            
         } else {
@@ -128,7 +135,6 @@ import {
             
         }
     }
-
 
     return (
         <>
@@ -173,15 +179,14 @@ import {
                                                 >
                                                     ID Paciente
                                                 </label>
-                                                <Select 
-                                                    options={listaPacientes} 
-                                                    className="form-control-alternative" 
+                                                <Input  readOnly = {true} 
+                                                    className="form-control"
+                                                    placeholder="ID Paciente"
+                                                    type="text"
                                                     id="idPaciente"
-                                                    onChange={handleChange}
-                                                    value={formik.values.paciente}
-                                                    getOptionLabel={(option) =>option.idPaciente+' - '+option.nombres.split(' ')[0]+' '+option.apellidos.split(' ')[0]}
-                                                    getOptionValue={(option) => option.idPaciente}
-                                                    placeholder="Seleccione un Id"/>
+                                                    onChange={formik.handleChange}
+                                                    value= {formik.values.idPaciente}                                                  
+                                                /> 
                                             </FormGroup>
                                         </Col>
                                     </Row>
@@ -192,8 +197,8 @@ import {
                                                     className="form-control-label"
                                                 >
                                                     Primer nombre
-                                                </label>                                          
-                                                    <Input  readOnly={true} 
+                                                    </label>                                          
+                                                    <Input  readOnly = {true} 
                                                     className="form-control"
                                                     placeholder="Primer nombre"
                                                     type="text"
@@ -211,7 +216,7 @@ import {
                                                 >
                                                     Segundo nombre
                                                 </label>
-                                                <Input readOnly={true} 
+                                                <Input readOnly = {true}
                                                     className="form-control-alternative"
                                                     placeholder="Segundo nombre"
                                                     type="text"
@@ -357,6 +362,3 @@ import {
         </>
     )
 }
-
-export default AgregarReceta;
-
