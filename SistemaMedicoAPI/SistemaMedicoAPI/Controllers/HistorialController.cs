@@ -45,17 +45,23 @@ namespace SistemaMedicoAPI.Controllers
             else
                 return BadRequest("No existe Historial Medico para este Paciente");
         }
+
+        // GET api/Historial/citas/5
+        [HttpGet("citas/{id}")]
         public async Task<ActionResult<List<Citas>>> ObtenerCitasPorID(int id)
         {
             List<Citas> HistorialEF = await _db.Citas.Where(x=> x.IdPaciente == id).ToListAsync();
 
             if (HistorialEF != null)
             {
+
                 return HistorialEF;
             }
             else
                 return NotFound();
         }
+        // GET api/Historial/recetas/5
+        [HttpGet("recetas/{id}")]
         public async Task<ActionResult<List<Recetas>>> ObtenerRecetasPorId(int id)
         {
             List<Recetas> HistorialEF = await _db.Recetas.Where(x => x.IdPaciente == id).ToListAsync();

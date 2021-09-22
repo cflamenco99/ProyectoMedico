@@ -16,6 +16,10 @@ namespace SistemaMedicoAPI.Models.DTOs
         public int IdRecetas { get; set; }
         public string Medicinas { get; set; }
         public string Diagnostico { get; set; }
-}
+        public virtual Recetas Recetas { get; set; }
+        public virtual Citas Citas { get; set; }
+
+
+    }
 }
 
