@@ -3,3 +3,6 @@
 package-lock.json
 /build
 .eslintcache
+
+# Local Netlify folder
+.netlify
