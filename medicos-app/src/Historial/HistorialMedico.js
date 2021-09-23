@@ -1,9 +1,10 @@
-import React from 'react';
-import axios from 'axios';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
 import { useFormik } from 'formik';
+import axios from 'axios';
+import { useHistory } from "react-router-dom";
 import swal from 'sweetalert';
-import { useHistory } from 'react-router-dom';
+import Select from 'react-select'
+import "react-datepicker/dist/react-datepicker.css";
 
 import {
   Button,
@@ -21,39 +22,52 @@ import {
 
 import UserHeader from "components/Headers/UserHeader.js";
 
-export default class Historial extends React.Component{
+export default class ListaHistorial extends React.Component{
   constructor(props) {
     super(props);
-    this.state = {listaHistorial: []};
-  }
-
-  ObtenerPacientes(){
-    axios.get(`https://localhost:44310/api/Historial`)
-      .then(res => {
-        const listaHistorial = res.data;
-        this.setState({ listaHistorial: listaHistorial });
-      })
-  }
-
-  ObtenerInfoCitas(id){
-      axios.get(`https://localhost:44310/api/Historial/citas/${id}`)
-        .then(res => {
-      const listaHistorialCitas = res.data;
-      this.setState({ listaHistorialCitas: listaHistorialCitas });
-    })
-  }
-
-  ObtenerInfoRecetas(id){
-    axios.get(`https://localhost:44310/api/Historial/recetas/${id}`)
-      .then(res => {
-    const listaHistorialRecetas = res.data;
-    this.setState({ listaHistorialRecetas: listaHistorialRecetas });
-  })
-}
+    this.state = {listaPacientes: [], inputValue: ''};
     
-  
+    this.handleClick = this.handleClick.bind(this);
+  }
 
-  render() {
+  componentDidMount(){
+    this.ObtenerPaciente(); 
+  }
+
+  ObtenerPaciente(){
+    axios.get(`https://localhost:44310/api/Pacientes/`)
+      .then(res => {
+        const listaPacientes = res.data;
+        console.log(listaPacientes)
+        this.setState({ listaPacientes: listaPacientes });
+      });
+  }
+
+  handleClick(){   
+    console.log(this.state.inputValue);  
+     
+    axios.get(`https://localhost:44310/api/Historial/citas/${this.state.inputValue}`)
+    .then(res => {
+      const listaCitas = res.data;
+      console.log(listaCitas)
+      this.setState({ listaCitas: listaCitas });
+    });
+
+    axios.get(`https://localhost:44310/api/Historial/recetas/${this.state.inputValue}`)
+    .then(res => {
+      const listaRecetas = res.data;
+      console.log(listaRecetas)
+      this.setState({ listaRecetas: listaRecetas });
+    });
+  }
+
+  updateInputValue(evt) {
+    this.setState({
+      inputValue: evt.target.value
+    });
+  }
+
+render(){
     return (
       <>
       <UserHeader />
@@ -68,23 +82,21 @@ export default class Historial extends React.Component{
                     <div class="form-group row">
                       <label for="inputid" class="col-sm-2 col-form-label">ID Paciente</label>
                     <div class="col-sm-3">
-                       <Input type="ID" class="form-control" id="Ingrese ID" placeholder="ID"> </Input>
+                       <Input type="text" class="form-control" id="Ingrese ID" placeholder="ID" value={this.state.inputValue} onChange={evt => this.updateInputValue(evt)}></Input>
                     </div>
                     </div>
                   </Col>                   
-                                    <div class="container">
-                                    <Row> 
+                                    
                                     <Col className="text-left" xs="4">
                                         <Button
                                             color="primary"
-                                            onClick={this.ObtenerPacientes}
+                                            onClick={this.handleClick}
                                             size="sm"
                                         >
                                             Buscar Historial
                                         </Button>
                                     </Col>
-                                    </Row>
-                                    </div>
+                                    
                 </Row>
               </CardHeader>
               <CardBody>
@@ -105,7 +117,8 @@ export default class Historial extends React.Component{
                                                         placeholder="Primer nombre"
                                                         type="text"
                                                         id="primerNombre"
-                                                        readonly="readonly"
+                                                        readonly="readonly"   
+                                                        //onChange={}
                                                         //value={}
                                                     />
                                                 </FormGroup>
@@ -123,7 +136,8 @@ export default class Historial extends React.Component{
                                                         type="text"
                                                         id="segundoNombre"
                                                         readonly="readonly"
-                                                       //value={}
+                                                        //onChange={formik.handleChange}
+                                                        //value={formik.values.segundoNombre}
                                                     />
                                                 </FormGroup>
                                             </Col>
@@ -161,7 +175,7 @@ export default class Historial extends React.Component{
                                                         id="segundoApellido"
                                                         readonly="readonly"
                                                        // onChange={formik.handleChange}
-                                                        //value={formik.values.segundoApellido}
+                                                        //value={currentValues.segundoApellido}
                                                     />
                                                 </FormGroup>
                                             </Col>
@@ -183,10 +197,10 @@ export default class Historial extends React.Component{
                           </tr>
                         </thead>
                         <tbody>
-                        {this.state.listaHistorial.map( (currentValue, i) => 
+                        {this.state.listaPacientes.map( (currentValue, i) => 
                         <tr key={i}>
                         <th scope="row">{currentValue.idCita}</th>
-                        <td>{currentValue.idCita}</td>
+                        <td>{currentValue.fechaCita}</td>
                         </tr>                        
                         )}
                         </tbody>
@@ -208,11 +222,11 @@ export default class Historial extends React.Component{
                           </tr>
                         </thead>
                         <tbody>
-                        {this.state.listaHistorial.map( (currentValue, i) => 
+                        {this.state.listaPacientes.map( (currentValue, i) => 
                         <tr key={i}>
                         <th scope="row">{currentValue.idReceta}</th>
-                        <td>{currentValue.Medicinas}</td>
-                        <td>{currentValue.Diagnostico}</td>
+                        <td>{currentValue.medicinas}</td>
+                        <td>{currentValue.diagnostico}</td>
                         </tr>                        
                         )}
                         </tbody>
@@ -229,5 +243,5 @@ export default class Historial extends React.Component{
       </Container>
     </>
     )
-  }
-}
+  };
+};
