@@ -15,6 +15,7 @@ import { useFormik } from "formik";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
 import swal from "sweetalert";
+import ls from 'local-storage';
 
 const Login = () => {
   let history = useHistory();
@@ -29,6 +30,7 @@ const Login = () => {
   });
 
   function redireccionarIndex() {
+    ls.set("login", 1);    
     history.push("/admin/index");
   }
 
