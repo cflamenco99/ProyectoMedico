@@ -18,5 +18,7 @@ namespace SistemaMedicoAPI.Models
 
         [Column(TypeName = "Date")]
         public DateTime FechaCita { get; set; }
+
+        public virtual Pacientes Pacientes { get; set; }
     }
 }

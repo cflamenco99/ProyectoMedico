@@ -36,6 +36,10 @@ namespace SistemaMedicoAPI.Controllers
                              {
                                  IdCita = c.IdCita,
                                  IdPaciente = c.IdPaciente,
+                                 Nombres = c.Pacientes.Nombres,
+                                 Apellidos = c.Pacientes.Apellidos,
+                                 Direccion = c.Pacientes.Direccion,
+                                 FechaNacimiento = c.Pacientes.FechaNacimiento,
                                  FechaCita = c.FechaCita
                              };
                 return Ok(await result.ToListAsync());
@@ -59,6 +63,10 @@ namespace SistemaMedicoAPI.Controllers
                 {
                     IdCita = CitasEF.IdCita,
                     IdPaciente = CitasEF.IdPaciente,
+                    Nombres = _db.Pacientes.Where(x => x.IdPaciente == CitasEF.IdPaciente).Select(x => x.Nombres).FirstOrDefault(),
+                    Apellidos = _db.Pacientes.Where(x => x.IdPaciente == CitasEF.IdPaciente).Select(x => x.Apellidos).FirstOrDefault(),
+                    Direccion = _db.Pacientes.Where(x => x.IdPaciente == CitasEF.IdPaciente).Select(x => x.Direccion).FirstOrDefault(),
+                    FechaNacimiento = _db.Pacientes.Where(x => x.IdPaciente == CitasEF.IdPaciente).Select(x => x.FechaNacimiento).FirstOrDefault(),
                     FechaCita = CitasEF.FechaCita
                 };
                 return CitasDTO;
@@ -75,7 +83,7 @@ namespace SistemaMedicoAPI.Controllers
             {
                 Citas Cita = new Citas
                 {
-                    IdCita = cita.IdCita,
+
                     IdPaciente = cita.IdPaciente,
                     FechaCita = cita.FechaCita
                 };
@@ -100,15 +108,13 @@ namespace SistemaMedicoAPI.Controllers
 
         // PUT api/<CitasController>/5
         [HttpPut("{id}")]
-        public async Task<ActionResult<CitasDTO>> EditarCita(CitasDTO cita)
+        public async Task<ActionResult<CitasDTO>> EditarCita(int id, CitasDTO cita)
         {
             try
             {
-                Citas citaEF = _db.Citas.Find(cita.IdCita);
+                Citas citaEF = _db.Citas.Find(id);
                 if (citaEF != null)
                 {
-                    citaEF.IdCita = cita.IdCita;
-                    citaEF.IdPaciente = cita.IdPaciente;
                     citaEF.FechaCita = cita.FechaCita;
                     int result = await _db.SaveChangesAsync();
                     if (result > 0)
