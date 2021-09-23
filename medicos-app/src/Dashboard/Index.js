@@ -1,7 +1,8 @@
-import { useState } from "react";
+import React, { useState, useEffect } from 'react';
 import classnames from "classnames";
 import Chart from "chart.js";
 import { Line, Bar } from "react-chartjs-2";
+import ls from 'local-storage';
 
 import {
   Button,
@@ -27,10 +28,21 @@ import {
 } from "variables/charts.js";
 
 import Header from "components/Headers/Header.js";
+import { useHistory } from "react-router-dom";
 
 const Index = (props) => {
   const [activeNav, setActiveNav] = useState(1);
   const [chartExample1Data, setChartExample1Data] = useState("data1");
+  let history = useHistory();
+
+  
+  useEffect(() => {
+    let login = ls.get("login");
+    if(login != 1)
+    {
+      history.push("/auth/login");
+    }
+  }, []);
 
   if (window.Chart) {
     parseOptions(Chart, chartOptions());
