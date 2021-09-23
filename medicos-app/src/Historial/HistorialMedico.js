@@ -21,34 +21,27 @@ import {
 } from "reactstrap";
 
 import UserHeader from "components/Headers/UserHeader.js";
-import ListadoPacientes from 'Pacientes/ListadoPacientes';
 
 export default class ListaHistorial extends React.Component{
   constructor(props) {
     super(props);
-    this.state = {listaPacientes: [], 
+    this.state = {
+      Paciente: {nombres: '', apellidos: ''}, 
       listaRecetas: [], 
       listaCitas: [],
-      inputValue: ''};
+      inputValue: ''
+    };
     
     this.handleClick = this.handleClick.bind(this);
-  }
+  }  
 
-  componentDidMount(){
-    this.ObtenerPaciente(); 
-  }
-
-  ObtenerPaciente(){
-    axios.get(`https://localhost:44310/api/Pacientes/`)
+  handleClick(){
+    axios.get(`https://localhost:44310/api/Pacientes/${this.state.inputValue}`)
       .then(res => {
-        const listaPacientes = res.data;
-        console.log(listaPacientes)
-        this.setState({ listaPacientes: listaPacientes });
-      });
-  }
-
-  handleClick(){   
-    console.log(this.state.inputValue); 
+        const inforPaciente = res.data;
+        console.log(inforPaciente)
+        this.setState({ Paciente: inforPaciente });
+    });
      
     axios.get(`https://localhost:44310/api/Historial/citas/${this.state.inputValue}`)
     .then(res => {
@@ -79,28 +72,26 @@ render(){
         <Row>
           <Col className="order-xl-1" xl="12">
             <Card className="bg-secondary shadow">
-              <CardHeader className="bg-white border-0">
+              <CardHeader className="bg-white border-1">
+              <h3 className="mb-0">Informacion del Paciente</h3>
                 <Row className="align-items-center">
-                  <Col xs="8">
-                    <h3 className="mb-0">Informacion del Paciente</h3>
-                    <div class="form-group row">
-                      <label for="inputid" class="col-sm-2 col-form-label">ID Paciente</label>
-                    <div class="col-sm-3">
-                       <Input type="text" class="form-control" id="Ingrese ID" placeholder="ID" value={this.state.inputValue} onChange={evt => this.updateInputValue(evt)}></Input>
-                    </div>
-                    </div>
-                  </Col>                   
-                                    
-                                    <Col className="text-left" xs="4">
-                                        <Button
+                <div className="col-sm-2">
+                  <label className="form-label">Ingrese ID del paciente: </label>                  
+                </div>
+
+                  <div className="col-sm-3">
+                  <Input type="text" className="form-control" id="Ingrese ID" placeholder="ID" value={this.state.inputValue} onChange={evt => this.updateInputValue(evt)}></Input>
+                  </div>
+
+                  <div className="col-sm-3">
+                  <Button
                                             color="primary"
                                             onClick={this.handleClick}
-                                            size="sm"
+                                            className="btn btn-xl btn-primary"
                                         >
-                                            Buscar Historial
+                                            Buscar
                                         </Button>
-                                    </Col>
-                                    
+                  </div>      
                 </Row>
               </CardHeader>
               <CardBody>
@@ -121,9 +112,8 @@ render(){
                                                         placeholder="Primer nombre"
                                                         type="text"
                                                         id="primerNombre"
-                                                        readonly="readonly"   
-                                                        //onChange={}
-                                                        //value={}
+                                                        readOnly={true}   
+                                                        value={this.state.Paciente.nombres.split(' ')[0]}
                                                     />
                                                 </FormGroup>
                                             </Col>
@@ -139,9 +129,8 @@ render(){
                                                         placeholder="Segundo nombre"
                                                         type="text"
                                                         id="segundoNombre"
-                                                        readonly="readonly"
-                                                        //onChange={formik.handleChange}
-                                                        //value={formik.values.segundoNombre}
+                                                        readOnly={true}
+                                                        value={this.state.Paciente.nombres.split(' ')[1]}
                                                     />
                                                 </FormGroup>
                                             </Col>
@@ -159,9 +148,8 @@ render(){
                                                         placeholder="Primer apellido"
                                                         type="text"
                                                         id="primerApellido"
-                                                        readonly="readonly"
-                                                        //onChange={formik.handleChange}
-                                                        //value={formik.values.primerApellido}
+                                                        readOnly={true}
+                                                        value={this.state.Paciente.apellidos.split(' ')[0]}
                                                     />
                                                 </FormGroup>
                                             </Col>
@@ -177,9 +165,8 @@ render(){
                                                         placeholder="Segundo apellido"
                                                         type="text"
                                                         id="segundoApellido"
-                                                        readonly="readonly"
-                                                       // onChange={formik.handleChange}
-                                                        //value={currentValues.segundoApellido}
+                                                        readOnly={true}
+                                                        value={this.state.Paciente.apellidos.split(' ')[1]}                                                       
                                                     />
                                                 </FormGroup>
                                             </Col>
