@@ -47,7 +47,7 @@ import {
     });
     
     useEffect(() => {
-      axios.get(`https://localhost:44310/api/Pacientes/${id}`)
+      axios.get(`https://sistemamedicoapi20210916185716.azurewebsites.net/api/Pacientes/${id}`)
       .then(res => {
         const infoPaciente = res.data;
         formik.setFieldValue('primerNombre',infoPaciente.nombres.split(' ')[0]);
@@ -61,7 +61,7 @@ import {
         formik.setFieldValue('ciudad',{idCiudad: infoPaciente.idCiudad, descripcion: infoPaciente.ciudad});
       });
 
-      axios.get(`https://localhost:44310/api/PaisesCiudades`)
+      axios.get(`https://sistemamedicoapi20210916185716.azurewebsites.net/api/PaisesCiudades`)
       .then(res => {
         const listaPaises = res.data;
         setListaPaises(listaPaises);        
@@ -78,7 +78,7 @@ import {
     }
 
     function ObtenerCiudades(idPais){
-      axios.get(`https://localhost:44310/api/PaisesCiudades/${idPais}`)
+      axios.get(`https://sistemamedicoapi20210916185716.azurewebsites.net/api/PaisesCiudades/${idPais}`)
       .then(res => {
         const listaCiudades = res.data;
         setListaCiudades(listaCiudades);
@@ -109,7 +109,7 @@ import {
           Direccion: paciente.direccion,
           FechaNacimiento: paciente.fechaNacimiento
         };
-        axios.put(`https://localhost:44310/api/Pacientes/${id}`, pacienteDTO)
+        axios.put(`https://sistemamedicoapi20210916185716.azurewebsites.net/api/Pacientes/${id}`, pacienteDTO)
           .then(res => {
             swal({
               text: "¡Paciente editado exitosamente!",

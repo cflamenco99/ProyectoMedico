@@ -41,7 +41,7 @@ const Login = () => {
         Clave: credenciales.clave,
       };
       axios
-        .post(`https://localhost:44310/api/Usuarios`, credencialesDTO)
+        .post(`https://sistemamedicoapi20210916185716.azurewebsites.net/api/Usuarios`, credencialesDTO)
         .then((res) => {
           redireccionarIndex();
         }).
