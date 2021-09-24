@@ -345,7 +345,6 @@ const EditarRecetas = () => {
                                                 />
                                                 </FormGroup>
                                             </Col>
-                                            <h5>Sello</h5>
                                         </Row>
                                         <Row>
                                         <Button type="submit" className="col-md-2 offset-md-5" color="primary">
@@ -362,3 +361,4 @@ const EditarRecetas = () => {
         </>
     )
 }
+export default EditarRecetas;

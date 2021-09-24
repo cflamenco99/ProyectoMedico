@@ -17,6 +17,7 @@ import AgregarCitas from "AdminCitas/AgregarCitas";
 import AgregarReceta from "Recetas/AgregarReceta";
 import EditarPacientes from "Pacientes/EditarPacientes"
 import EditarCitas from "AdminCitas/EditarCitas"
+import EditarRecetas from "Recetas/EditarRecetas";
 
 const Admin = (props) => {
   const mainContent = React.useRef(null);
@@ -92,6 +93,11 @@ const Admin = (props) => {
            <Route
             path="/admin/agregarReceta"
             component={AgregarReceta}
+          />
+
+          <Route
+            path="/admin/editarReceta"
+            component={EditarRecetas}
           />
 
          <Redirect from="*" to="/auth/login" />
