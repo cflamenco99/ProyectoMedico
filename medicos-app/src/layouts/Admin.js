@@ -96,7 +96,7 @@ const Admin = (props) => {
           />
 
           <Route
-            path="/admin/editarReceta"
+            path="/admin/editarReceta/:id"
             component={EditarRecetas}
           />
 
