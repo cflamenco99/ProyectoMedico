@@ -22,5 +22,16 @@ namespace SistemaMedicoAPI.Models
         public string Direccion { get; set; }
         [Column(TypeName = "Date")]
         public DateTime FechaNacimiento { get; set; }
+        [ForeignKey("Usuarios")]
+        public int UsuarioAgrega { get; set; }
+
+        [Column(TypeName = "Date")]
+        public DateTime FechaAgrega { get; set; }
+        [ForeignKey("Usuarios")]
+        public int UsuarioModifica { get; set; }
+
+        [Column(TypeName = "Date")]
+        public DateTime FechaModifica { get; set; }
+        public virtual Usuarios Usuarios { get; set; }
     }
 } 

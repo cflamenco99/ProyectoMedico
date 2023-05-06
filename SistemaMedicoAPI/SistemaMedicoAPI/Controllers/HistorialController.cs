@@ -3,7 +3,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using SistemaMedicoAPI.Models;
 using SistemaMedicoAPI.Models.DTOs;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -16,11 +15,9 @@ namespace SistemaMedicoAPI.Controllers
     public class HistorialController : ControllerBase
     {
         private SistemaMedicoDBContext _db;
-        private readonly ILogger<HistorialController> _logger;
 
-        public HistorialController(ILogger<HistorialController> logger, SistemaMedicoDBContext db)
+        public HistorialController(SistemaMedicoDBContext db)
         {
-            _logger = logger;
             _db = db;
         }
 

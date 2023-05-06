@@ -1,10 +1,6 @@
-﻿
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace SistemaMedicoAPI.Models
 {
@@ -12,14 +8,25 @@ namespace SistemaMedicoAPI.Models
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Key]
+        public int IdHistorialMedico { get; set; }
+        [ForeignKey("Pacientes")]
         public int IdPaciente { get; set; }
-        public string NombrePaciente { get; set; }
-        public string ApellidoPaciente { get; set; }
-        public string Pais { get; set; }
-        public string  Ciudad { get; set; }
+        public virtual Pacientes Pacientes { get; set; }
+        public string Observaciones { get; set; }
+        
         [Column(TypeName = "Date")]
-        public  DateTime FechaCita { get; set; }
-        public string DoctorTurno { get; set; }
-        public string Descripcion { get; set; }
+        public  DateTime Fecha { get; set; }
+
+        [ForeignKey("Usuarios")]
+        public int UsuarioAgrega { get; set; }
+
+        [Column(TypeName = "Date")]
+        public DateTime FechaAgrega { get; set; }
+        [ForeignKey("Usuarios")]
+        public int UsuarioModifica { get; set; }
+
+        [Column(TypeName = "Date")]
+        public DateTime FechaModifica { get; set; }
+        public virtual Usuarios Usuarios { get; set; }
     }
 }

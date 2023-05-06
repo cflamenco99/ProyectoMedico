@@ -1,14 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using SistemaMedicoAPI.Models.DTOs;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace SistemaMedicoAPI.Models
 {
     public class Usuarios
     {
+        public Usuarios()
+        {
+        }
+
+        public Usuarios(CredencialesDTO credencial)
+        {
+            Correo = credencial.Correo;
+            Clave = credencial.Clave;
+        }
+
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Key]
         public int IdUsuario { get; set; }

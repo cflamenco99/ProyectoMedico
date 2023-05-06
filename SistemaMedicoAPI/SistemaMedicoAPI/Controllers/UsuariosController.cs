@@ -3,7 +3,6 @@ using Microsoft.Extensions.Logging;
 using SistemaMedicoAPI.Models;
 using SistemaMedicoAPI.Models.DTOs;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -34,6 +33,32 @@ namespace SistemaMedicoAPI.Controllers
                     return Ok("Inicio de sesion exitoso.");
                 }
                 return NotFound("Usuario o contraseña incorrectos.");                
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex.Message);
+                return BadRequest(ex.Message);
+            }
+        }
+
+        // POST: api/Usuarios/CrearUsuario
+        [HttpPost, Route("CrearUsuario")]
+        public async Task<ActionResult<CredencialesDTO>> CrearUsuario(CredencialesDTO credenciales)
+        {
+            try
+            {
+                Usuarios usuario = new Usuarios(credenciales);
+                _db.Usuarios.Add(usuario);
+
+                int result = await _db.SaveChangesAsync();
+                if (result > 0)
+                {
+                    return CreatedAtAction("AgregarUsuario", new { status = "Agregado exitosamente" });
+                }
+                else
+                {
+                    return BadRequest("Ocurrio un problema al agregar el usuario");
+                }
             }
             catch (Exception ex)
             {
