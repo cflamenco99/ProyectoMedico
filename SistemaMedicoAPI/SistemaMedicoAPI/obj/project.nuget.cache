@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "4nSUkKIyAYBEuhKoiGEAiXhAPI19gn4xQAzlMgQmaQ9UDxi6GWCeDHLQHSN8+Nrmcc/KS0hVx2/FpawPT7TvDQ==",
+  "dgSpecHash": "Y05TJvJfUA5yBNtzyN0DvmMdQTrg/XHYQTrZv6Ups0BOKViugQaYIlBpCw6tEgWyqrx2eP9f2gKWN/TsLFjyZg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\cflam\\OneDrive\\Documentos\\GitHub\\ProyectoMedico\\SistemaMedicoAPI\\SistemaMedicoAPI\\SistemaMedicoAPI.csproj",
+  "projectFilePath": "C:\\Users\\cflam\\Documents\\GitHub\\ProyectoMedico\\SistemaMedicoAPI\\SistemaMedicoAPI\\SistemaMedicoAPI.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\cflam\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\cflam\\.nuget\\packages\\microsoft.aspnetcore.html.abstractions\\2.2.0\\microsoft.aspnetcore.html.abstractions.2.2.0.nupkg.sha512",
