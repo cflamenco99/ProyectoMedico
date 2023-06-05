@@ -5,8 +5,8 @@ EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
-COPY ["SistemaMedicoAPI/SistemaMedicoAPI.csproj", "SistemaMedicoAPI/"]
-RUN dotnet restore "SistemaMedicoAPI/SistemaMedicoAPI.csproj"
+COPY ["SistemaMedicoAPI/SistemaMedicoAPI/SistemaMedicoAPI.csproj", "SistemaMedicoAPI/"]
+RUN dotnet restore "SistemaMedicoAPI/SistemaMedicoAPI/SistemaMedicoAPI.csproj"
 COPY . .
 WORKDIR "/src/SistemaMedicoAPI"
 RUN dotnet build "SistemaMedicoAPI.csproj" -c Release -o /app/build
