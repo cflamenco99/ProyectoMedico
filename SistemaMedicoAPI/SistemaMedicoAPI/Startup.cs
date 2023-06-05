@@ -15,22 +15,12 @@ namespace SistemaMedicoAPI
         {
             Configuration = configuration;
         }
-        public const string PolicyCORS = "SistemaMedicoPolicy";
 
         public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddCors(options =>
-            {
-                options.AddPolicy(name: PolicyCORS,
-                                  policy =>
-                                  {
-                                      policy.WithOrigins("https://medicosapp.netlify.app");
-                                  });
-            });
-
             services.AddDbContext<SistemaMedicoDBContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("SistemaMedicoDB")));
 
@@ -58,8 +48,6 @@ namespace SistemaMedicoAPI
             });
 
             app.UseRouting();
-
-            app.UseCors(PolicyCORS);
 
             app.UseAuthorization();
 
