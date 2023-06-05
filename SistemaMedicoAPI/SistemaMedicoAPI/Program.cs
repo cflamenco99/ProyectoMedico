@@ -21,7 +21,6 @@ namespace SistemaMedicoAPI
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
-                    webBuilder.UseUrls("http://medicos-api.herokuapp.com:80", "https://medicos-api.herokuapp.com:443");
                 });
     }
 }
