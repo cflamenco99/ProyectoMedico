@@ -67,8 +67,6 @@ namespace SistemaMedicoAPI
             {
                 endpoints.MapControllers();
             });
-            
-            app.UseHttpsRedirection();
         }
     }
 }
