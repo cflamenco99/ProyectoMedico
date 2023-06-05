@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 
 namespace SistemaMedicoAPI.Controllers
 {
+    [EnableCors(Startup.PolicyCORS)]
     [Route("api/[controller]")]
     [ApiController]
     public class PacientesController : ControllerBase
