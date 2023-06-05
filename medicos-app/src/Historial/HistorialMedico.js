@@ -36,21 +36,21 @@ export default class ListaHistorial extends React.Component{
   }  
 
   handleClick(){
-    axios.get(`https://sistemamedicoapi20210916185716.azurewebsites.net/api/Pacientes/${this.state.inputValue}`)
+    axios.get(`http://mindsetgx2020-001-site3.atempurl.com/api/Pacientes/${this.state.inputValue}`)
       .then(res => {
         const inforPaciente = res.data;
         console.log(inforPaciente)
         this.setState({ Paciente: inforPaciente });
     });
      
-    axios.get(`https://sistemamedicoapi20210916185716.azurewebsites.net/api/Historial/citas/${this.state.inputValue}`)
+    axios.get(`http://mindsetgx2020-001-site3.atempurl.com/api/Historial/citas/${this.state.inputValue}`)
     .then(res => {
       const listaCitas = res.data;
       console.log(listaCitas)
       this.setState({ listaCitas: listaCitas });
     });
 
-    axios.get(`https://sistemamedicoapi20210916185716.azurewebsites.net/api/Historial/recetas/${this.state.inputValue}`)
+    axios.get(`http://mindsetgx2020-001-site3.atempurl.com/api/Historial/recetas/${this.state.inputValue}`)
     .then(res => {
       const listaRecetas = res.data;
       console.log(listaRecetas)

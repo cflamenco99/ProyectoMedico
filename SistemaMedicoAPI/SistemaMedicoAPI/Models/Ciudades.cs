@@ -13,14 +13,14 @@ namespace SistemaMedicoAPI.Models
 
         public virtual Paises Paises { get; set; } 
 
-        [ForeignKey("Paises")]
+        [ForeignKey("IdPais")]
         public int IdPais { get; set; }
-        [ForeignKey("Usuarios")]
+        [ForeignKey("IdUsuario")]
         public int UsuarioAgrega { get; set; }
 
         [Column(TypeName = "Date")]
         public DateTime FechaAgrega { get; set; }
-        [ForeignKey("Usuarios")]
+        [ForeignKey("IdUsuario")]
         public int UsuarioModifica { get; set; }
 
         [Column(TypeName = "Date")]

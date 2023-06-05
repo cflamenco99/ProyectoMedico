@@ -54,7 +54,7 @@ const EditarCitas = () => {
 
 
     useEffect(() => {
-        axios.get(`https://sistemamedicoapi20210916185716.azurewebsites.net/api/Citas/${id}`)
+        axios.get(`http://mindsetgx2020-001-site3.atempurl.com/api/Citas/${id}`)
         .then(res => {
           const InfoCitas = res.data; 
           formik.setFieldValue('idPaciente', InfoCitas.idPaciente)
@@ -68,7 +68,7 @@ const EditarCitas = () => {
           setLista(InfoCitas); 
           console.log(InfoCitas);      
         });
-        axios.get(`https://sistemamedicoapi20210916185716.azurewebsites.net/api/Citas/`)
+        axios.get(`http://mindsetgx2020-001-site3.atempurl.com/api/Citas/`)
         .then(res => {
           const listaP = res.data;
           setListaCitas(listaP);
@@ -97,7 +97,7 @@ const EditarCitas = () => {
       } */
 
       function ObtenerCitas(idCita){
-        axios.get(`https://sistemamedicoapi20210916185716.azurewebsites.net/api/Paciente/${idCita}`)
+        axios.get(`http://mindsetgx2020-001-site3.atempurl.com/api/Paciente/${idCita}`)
         .then(res => {
           const listaP = res.data;
           setLista(listaP);
@@ -127,7 +127,7 @@ const EditarCitas = () => {
 
                 fechaCita : cita.fechaCita
             }
-            axios.put(`https://sistemamedicoapi20210916185716.azurewebsites.net/api/Citas/${id}`, citasDTO)
+            axios.put(`http://mindsetgx2020-001-site3.atempurl.com/api/Citas/${id}`, citasDTO)
             .then(res => {
               swal({
                 text: "¡Cita editada exitosamente!",

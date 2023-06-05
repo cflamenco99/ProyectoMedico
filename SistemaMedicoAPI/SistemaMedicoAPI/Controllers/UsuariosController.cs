@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using SistemaMedicoAPI.Commons;
 using SistemaMedicoAPI.Models;
 using SistemaMedicoAPI.Models.DTOs;
 using System;
@@ -27,7 +28,7 @@ namespace SistemaMedicoAPI.Controllers
         {
             try
             {
-                Usuarios usuario = _db.Usuarios.Where(x => x.Correo == credenciales.Correo && x.Clave == credenciales.Clave).FirstOrDefault();
+                Usuarios usuario = _db.Usuarios.Where(x => x.Correo == credenciales.Correo && x.Clave == Encriptacion.Encriptar(credenciales.Clave)).FirstOrDefault();
                 if (usuario != null)
                 {
                     return Ok("Inicio de sesion exitoso.");
@@ -53,7 +54,7 @@ namespace SistemaMedicoAPI.Controllers
                 int result = await _db.SaveChangesAsync();
                 if (result > 0)
                 {
-                    return CreatedAtAction("AgregarUsuario", new { status = "Agregado exitosamente" });
+                    return Ok(new { status = "Agregado exitosamente" }); ;
                 }
                 else
                 {

@@ -41,7 +41,7 @@ const Login = () => {
         Clave: credenciales.clave,
       };
       axios
-        .post(`https://sistemamedicoapi20210916185716.azurewebsites.net/api/Usuarios`, credencialesDTO)
+        .post(`http://mindsetgx2020-001-site3.atempurl.com/api/Usuarios`, credencialesDTO)
         .then((res) => {
           redireccionarIndex();
         }).

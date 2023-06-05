@@ -28,7 +28,7 @@ import {
     const [lista, setLista] = useState([]);
 
     useEffect(() => {
-        axios.get(`https://sistemamedicoapi20210916185716.azurewebsites.net/api/Pacientes`)
+        axios.get(`http://mindsetgx2020-001-site3.atempurl.com/api/Pacientes`)
         .then(res => {
           const listaPacientes = res.data;    
           setListaPacientes(listaPacientes); 
@@ -50,7 +50,7 @@ import {
       }
 
       function ObtenerPaciente(idPaciente){
-        axios.get(`https://sistemamedicoapi20210916185716.azurewebsites.net/api/Pacientes/${idPaciente}`)
+        axios.get(`http://mindsetgx2020-001-site3.atempurl.com/api/Pacientes/${idPaciente}`)
         .then(res => {
           const listaP = res.data;
           setLista(listaP);
@@ -105,7 +105,7 @@ import {
                 medicinas : receta.medicinas,
                 diagnostico : receta.diagnostico
             }
-            axios.post(`https://sistemamedicoapi20210916185716.azurewebsites.net/api/Recetas`, recetasDTO)
+            axios.post(`http://mindsetgx2020-001-site3.atempurl.com/api/Recetas`, recetasDTO)
             .then(res => {
               console.log(res);
               swal({

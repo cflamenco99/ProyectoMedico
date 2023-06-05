@@ -29,7 +29,7 @@ export default class ListadoPacientes extends React.Component{
   }
 
   ObtenerPacientes(){
-    axios.get(`https://sistemamedicoapi20210916185716.azurewebsites.net/api/Pacientes`)
+    axios.get(`http://mindsetgx2020-001-site3.atempurl.com/api/Pacientes`)
       .then(res => {
         const listaPacientes = res.data;
         this.setState({ listaPacientes: listaPacientes });
@@ -46,7 +46,7 @@ export default class ListadoPacientes extends React.Component{
     })
     .then((willDelete) => {
       if (willDelete) {
-        axios.delete(`https://sistemamedicoapi20210916185716.azurewebsites.net/api/Pacientes/${id}`)
+        axios.delete(`http://mindsetgx2020-001-site3.atempurl.com/api/Pacientes/${id}`)
           .then(res => {
             this.ObtenerPacientes();
             swal("¡El paciente ha sido eliminado!", {

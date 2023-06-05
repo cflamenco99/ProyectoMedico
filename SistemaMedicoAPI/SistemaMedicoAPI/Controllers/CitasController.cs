@@ -90,7 +90,7 @@ namespace SistemaMedicoAPI.Controllers
                 int result = await _db.SaveChangesAsync();
                 if (result > 0)
                 {
-                    return CreatedAtAction("AgregarCita", new { status = "Agregado exitosamente" });
+                    return Ok(new { status = "Agregado exitosamente" });
                 }
                 else
                 {

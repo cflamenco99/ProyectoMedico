@@ -100,7 +100,7 @@ namespace SistemaMedicoAPI.Controllers
                 int result = await _db.SaveChangesAsync();
                 if (result > 0)
                 {
-                    return CreatedAtAction("AgregarReceta", new { status = "Agregado exitosamente" });
+                    return Ok(new { status = "Agregado exitosamente" });
                 }
                 else
                 {

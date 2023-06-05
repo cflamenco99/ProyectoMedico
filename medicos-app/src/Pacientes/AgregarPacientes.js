@@ -27,7 +27,7 @@ import {
     const [listaCiudades, setListaCiudades] = useState(1);
     
     useEffect(() => {
-      axios.get(`https://sistemamedicoapi20210916185716.azurewebsites.net/api/PaisesCiudades`)
+      axios.get(`http://mindsetgx2020-001-site3.atempurl.com/api/PaisesCiudades`)
       .then(res => {
         const listaPaises = res.data;
         setListaPaises(listaPaises);        
@@ -44,7 +44,7 @@ import {
     }
 
     function ObtenerCiudades(idPais){
-      axios.get(`https://sistemamedicoapi20210916185716.azurewebsites.net/api/PaisesCiudades/${idPais}`)
+      axios.get(`http://mindsetgx2020-001-site3.atempurl.com/api/PaisesCiudades/${idPais}`)
       .then(res => {
         const listaCiudades = res.data;
         setListaCiudades(listaCiudades);
@@ -94,7 +94,7 @@ import {
           Direccion: paciente.direccion,
           FechaNacimiento: paciente.fechaNacimiento
         };
-        axios.post(`https://sistemamedicoapi20210916185716.azurewebsites.net/api/Pacientes`, pacienteDTO)
+        axios.post(`http://mindsetgx2020-001-site3.atempurl.com/api/Pacientes`, pacienteDTO)
           .then(res => {
             console.log(res);
             swal({

@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace SistemaMedicoAPI.Models
 {
@@ -13,12 +10,12 @@ namespace SistemaMedicoAPI.Models
         [Key]
         public int IdPais { get; set; }
         public string Descripcion { get; set; }
-        [ForeignKey("Usuarios")]
+        [ForeignKey("IdUsuario")]
         public int UsuarioAgrega { get; set; }
 
         [Column(TypeName = "Date")]
         public DateTime FechaAgrega { get; set; }
-        [ForeignKey("Usuarios")]
+        [ForeignKey("IdUsuario")]
         public int UsuarioModifica { get; set; }
 
         [Column(TypeName = "Date")]

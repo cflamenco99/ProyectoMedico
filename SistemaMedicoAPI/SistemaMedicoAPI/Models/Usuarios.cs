@@ -1,4 +1,6 @@
-﻿using SistemaMedicoAPI.Models.DTOs;
+﻿using Newtonsoft.Json.Linq;
+using SistemaMedicoAPI.Commons;
+using SistemaMedicoAPI.Models.DTOs;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -13,7 +15,7 @@ namespace SistemaMedicoAPI.Models
         public Usuarios(CredencialesDTO credencial)
         {
             Correo = credencial.Correo;
-            Clave = credencial.Clave;
+            Clave = Encriptacion.Encriptar(credencial.Clave);
         }
 
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]

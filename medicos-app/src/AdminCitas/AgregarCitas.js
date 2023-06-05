@@ -31,7 +31,7 @@ const AgregarCitas = () => {
      
 
     useEffect(() => {
-        axios.get(`https://sistemamedicoapi20210916185716.azurewebsites.net/api/Pacientes`)
+        axios.get(`http://mindsetgx2020-001-site3.atempurl.com/api/Pacientes`)
         .then(res => {
           const listaPacientes = res.data;    
           setListaPacientes(listaPacientes); 
@@ -59,7 +59,7 @@ const AgregarCitas = () => {
       } */
 
       function ObtenerPaciente(idPaciente){
-        axios.get(`https://sistemamedicoapi20210916185716.azurewebsites.net/api/Pacientes/${idPaciente}`)
+        axios.get(`http://mindsetgx2020-001-site3.atempurl.com/api/Pacientes/${idPaciente}`)
         .then(res => {
           const listaP = res.data;
           setLista(listaP);
@@ -111,7 +111,7 @@ const AgregarCitas = () => {
                 idPaciente : cita.idPaciente,   
                 fechaCita : cita.fechaCita
             }
-            axios.post(`https://sistemamedicoapi20210916185716.azurewebsites.net/api/Citas`, citasDTO)
+            axios.post(`http://mindsetgx2020-001-site3.atempurl.com/api/Citas`, citasDTO)
             .then(res => {
               console.log(res);
               swal({

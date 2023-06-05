@@ -31,7 +31,7 @@ export default class ListadoRecetas extends React.Component{
   }
 
   obtenerRecetas(){
-    axios.get(`https://sistemamedicoapi20210916185716.azurewebsites.net/api/Recetas`)
+    axios.get(`http://mindsetgx2020-001-site3.atempurl.com/api/Recetas`)
       .then(res => {
         const listaR = res.data;
         this.setState({ listaR: listaR });
@@ -48,7 +48,7 @@ export default class ListadoRecetas extends React.Component{
     })
     .then((willDelete) => {
       if (willDelete) {
-        axios.delete(`https://sistemamedicoapi20210916185716.azurewebsites.net/api/Recetas/${id}`)
+        axios.delete(`http://mindsetgx2020-001-site3.atempurl.com/api/Recetas/${id}`)
           .then(res => {
             this.obtenerRecetas();
             swal("¡La receta ha sido eliminada!", {

@@ -10,7 +10,7 @@ namespace SistemaMedicoAPI.Models
         [Key]
         public int IdCita { get; set; }
 
-        [ForeignKey("Pacientes")]
+        [ForeignKey("IdPaciente")]
         public int IdPaciente { get; set; }
 
         [Column(TypeName = "Date")]
@@ -18,13 +18,12 @@ namespace SistemaMedicoAPI.Models
 
         public virtual Pacientes Pacientes { get; set; }
 
-
-        [ForeignKey("Usuarios")]
+        [ForeignKey("IdUsuario")]
         public int UsuarioAgrega { get; set; }
 
         [Column(TypeName = "Date")]
         public DateTime FechaAgrega { get; set; }
-        [ForeignKey("Usuarios")]
+        [ForeignKey("IdUsuario")]
         public int UsuarioModifica { get; set; }
 
         [Column(TypeName = "Date")]
