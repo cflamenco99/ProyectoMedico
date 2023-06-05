@@ -6,9 +6,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using SistemaMedicoAPI.Models;
-using Swashbuckle.AspNetCore.Swagger;
-using Swashbuckle.AspNetCore.SwaggerGen;
-using Swashbuckle.AspNetCore.SwaggerUI;
 
 namespace SistemaMedicoAPI
 {
@@ -25,9 +22,14 @@ namespace SistemaMedicoAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddCors(option => option.AddPolicy(PolicyCORS, builder => {
-                builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
-            }));
+            services.AddCors(options =>
+            {
+                options.AddPolicy(name: PolicyCORS,
+                                  policy =>
+                                  {
+                                      policy.WithOrigins("https://medicosapp.netlify.app");
+                                  });
+            });
 
             services.AddDbContext<SistemaMedicoDBContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("SistemaMedicoDB")));
