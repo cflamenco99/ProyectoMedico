@@ -41,7 +41,7 @@ const Login = () => {
         Clave: credenciales.clave,
       };
       axios
-        .post(`http://mindsetgx2020-001-site3.atempurl.com/api/Usuarios`, credencialesDTO)
+        .post(`https://medicos-api.herokuapp.com/api/Usuarios`, credencialesDTO)
         .then((res) => {
           redireccionarIndex();
         }).
