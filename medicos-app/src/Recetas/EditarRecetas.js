@@ -54,7 +54,7 @@ const EditarRecetas = () => {
     });
 
     useEffect(() => {
-        axios.get(`http://mindsetgx2020-001-site3.atempurl.com/api/Recetas/${id}`)
+        axios.get(`https://medicos-api.herokuapp.com/api/Recetas/${id}`)
         .then(res => {
           const InfoRecetas = res.data; 
           formik.setFieldValue('idPaciente', InfoRecetas.idPaciente)
@@ -70,7 +70,7 @@ const EditarRecetas = () => {
           setLista(InfoRecetas); 
           console.log(InfoRecetas);      
         });
-        axios.get(`http://mindsetgx2020-001-site3.atempurl.com/api/Recetas/`)
+        axios.get(`https://medicos-api.herokuapp.com/api/Recetas/`)
         .then(res => {
           const listaPa = res.data;
           setListadoRecetas(listaPa);
@@ -80,7 +80,7 @@ const EditarRecetas = () => {
       }, []);
 
       function ObtenerRecetas(idReceta){
-        axios.get(`http://mindsetgx2020-001-site3.atempurl.com/api/Paciente/${idReceta}`)
+        axios.get(`https://medicos-api.herokuapp.com/api/Paciente/${idReceta}`)
         .then(res => {
           const listaPa = res.data;
           setLista(listaPa);
@@ -111,7 +111,7 @@ const EditarRecetas = () => {
                 medicinas : receta.medicinas,
                 diagnostico : receta.diagnostico
             }
-            axios.put(`http://mindsetgx2020-001-site3.atempurl.com/api/Recetas/${id}`, recetasDTO)
+            axios.put(`https://medicos-api.herokuapp.com/api/Recetas/${id}`, recetasDTO)
             .then(res => {
               swal({
                 text: "¡Receta editada exitosamente!",

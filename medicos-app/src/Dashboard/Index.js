@@ -167,28 +167,10 @@ const Index = (props) => {
                 </thead>
                 <tbody>
                   <tr>
-                    <th scope="row">Bryan Paz</th>
-                    <td>22</td>
-                    <td>2345-6789</td>
-                    <td> bryanpz@gmail.com</td>
-                  </tr>
-                  <tr>
                   <th scope="row">Carlos Flamenco</th>
                     <td>20</td>
                     <td>2345-6339</td>
                     <td> carlosflam@gmail.com</td>
-                  </tr>
-                  <tr>
-                  <th scope="row">Alvaro Vicente</th>
-                    <td>28</td>
-                    <td>3475-6789</td>
-                    <td> alvarovicent@hotmail.com</td>
-                  </tr>
-                  <tr>
-                  <th scope="row">Heyzi Irias</th>
-                    <td>18</td>
-                    <td>2345-6349</td>
-                    <td> heyfu@gmail.com</td>
                   </tr>
                 </tbody>
               </Table>

@@ -14,7 +14,7 @@ import {
 import { useFormik } from "formik";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
-import swal from "sweetalert";
+import swal from "sweetalert2";
 import ls from 'local-storage';
 
 const Login = () => {
@@ -35,35 +35,56 @@ const Login = () => {
   }
 
   function iniciarSesion(credenciales) {
+
+    swal.fire({
+      title: 'Iniciando sesion',
+      timerProgressBar: true,
+      didOpen: () => {
+        swal.showLoading();
+      },
+      showConfirmButton: false,  
+      allowOutsideClick: false,
+      position: "center"
+    });
+
     if (credenciales.correo !== "" && credenciales.clave !== "") {
       const credencialesDTO = {
         Correo: credenciales.correo,
         Clave: credenciales.clave,
       };
+      
       axios
         .post(`https://medicos-api.herokuapp.com/api/Usuarios`, credencialesDTO)
         .then((res) => {
+          swal.close();
           redireccionarIndex();
         }).
         catch(err => {
-          swal({
+          swal.fire({
             text: "¡No hemos encontrado tu usuario!",
             className: "text-center",
             icon: "error",
-            buttons: false,
+            showConfirmButton: false,
             timer: 3500,
+            didOpen: () => {
+              swal.hideLoading();
+            },
           });
         });
     } else {
-      swal({
+      swal.fire({
         text: "¡No puedes dejar campos vacios!",
         className: "text-center",
         icon: "error",
-        buttons: false,
+        showConfirmButton: false,
         timer: 2000,
+        didOpen: () => {
+          swal.hideLoading();
+        },
       });
     }
   }
+
   return (
     <>
       <Col lg="5" md="7">
@@ -83,7 +104,7 @@ const Login = () => {
                   <Input
                     placeholder="Correo electronico"
                     type="email"
-                    autoComplete="new-email"
+                    autoComplete="new-password"
                     id="correo"
                     onChange={formik.handleChange}
                     value={formik.values.correo}

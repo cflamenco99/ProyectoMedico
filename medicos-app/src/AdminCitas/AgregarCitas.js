@@ -31,7 +31,7 @@ const AgregarCitas = () => {
      
 
     useEffect(() => {
-        axios.get(`http://mindsetgx2020-001-site3.atempurl.com/api/Pacientes`)
+        axios.get(`https://medicos-api.herokuapp.com/api/Pacientes`)
         .then(res => {
           const listaPacientes = res.data;    
           setListaPacientes(listaPacientes); 
@@ -59,7 +59,7 @@ const AgregarCitas = () => {
       } */
 
       function ObtenerPaciente(idPaciente){
-        axios.get(`http://mindsetgx2020-001-site3.atempurl.com/api/Pacientes/${idPaciente}`)
+        axios.get(`https://medicos-api.herokuapp.com/api/Pacientes/${idPaciente}`)
         .then(res => {
           const listaP = res.data;
           setLista(listaP);
@@ -111,7 +111,7 @@ const AgregarCitas = () => {
                 idPaciente : cita.idPaciente,   
                 fechaCita : cita.fechaCita
             }
-            axios.post(`http://mindsetgx2020-001-site3.atempurl.com/api/Citas`, citasDTO)
+            axios.post(`https://medicos-api.herokuapp.com/api/Citas`, citasDTO)
             .then(res => {
               console.log(res);
               swal({

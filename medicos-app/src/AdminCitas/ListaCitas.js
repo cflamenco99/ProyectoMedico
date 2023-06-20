@@ -30,7 +30,7 @@ export default class ListaCitas extends React.Component{
   }
  
   obtenerCitas(){
-    axios.get(`http://mindsetgx2020-001-site3.atempurl.com/api/Citas`)
+    axios.get(`https://medicos-api.herokuapp.com/api/Citas`)
       .then(res => {
         const listaC = res.data;
         this.setState({ listaC: listaC });
@@ -47,7 +47,7 @@ export default class ListaCitas extends React.Component{
     })
     .then((willDelete) => {
       if (willDelete) {
-        axios.delete(`http://mindsetgx2020-001-site3.atempurl.com/api/Citas/${id}`)
+        axios.delete(`https://medicos-api.herokuapp.com/api/Citas/${id}`)
           .then(res => {
             this.obtenerCitas();
             swal("¡La cita ha sido eliminada!", {

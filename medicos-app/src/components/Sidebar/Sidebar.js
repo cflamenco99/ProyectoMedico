@@ -10,7 +10,7 @@ import {
 const Sidebar = (props) => {
 
   const createLinks = (routes) => {
-    return routes.map((prop, key) => {
+    return routes.filter(x=> x.name != "Login").map((prop, key) => {
       return (
         <NavItem key={key}>
           <NavLink

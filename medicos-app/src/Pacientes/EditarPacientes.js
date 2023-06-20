@@ -47,7 +47,7 @@ import {
     });
     
     useEffect(() => {
-      axios.get(`http://mindsetgx2020-001-site3.atempurl.com/api/Pacientes/${id}`)
+      axios.get(`https://medicos-api.herokuapp.com/api/Pacientes/${id}`)
       .then(res => {
         const infoPaciente = res.data;
         formik.setFieldValue('primerNombre',infoPaciente.nombres.split(' ')[0]);
@@ -61,7 +61,7 @@ import {
         formik.setFieldValue('ciudad',{idCiudad: infoPaciente.idCiudad, descripcion: infoPaciente.ciudad});
       });
 
-      axios.get(`http://mindsetgx2020-001-site3.atempurl.com/api/PaisesCiudades`)
+      axios.get(`https://medicos-api.herokuapp.com/api/PaisesCiudades`)
       .then(res => {
         const listaPaises = res.data;
         setListaPaises(listaPaises);        
@@ -78,7 +78,7 @@ import {
     }
 
     function ObtenerCiudades(idPais){
-      axios.get(`http://mindsetgx2020-001-site3.atempurl.com/api/PaisesCiudades/${idPais}`)
+      axios.get(`https://medicos-api.herokuapp.com/api/PaisesCiudades/${idPais}`)
       .then(res => {
         const listaCiudades = res.data;
         setListaCiudades(listaCiudades);
@@ -109,7 +109,7 @@ import {
           Direccion: paciente.direccion,
           FechaNacimiento: paciente.fechaNacimiento
         };
-        axios.put(`http://mindsetgx2020-001-site3.atempurl.com/api/Pacientes/${id}`, pacienteDTO)
+        axios.put(`https://medicos-api.herokuapp.com/api/Pacientes/${id}`, pacienteDTO)
           .then(res => {
             swal({
               text: "¡Paciente editado exitosamente!",
