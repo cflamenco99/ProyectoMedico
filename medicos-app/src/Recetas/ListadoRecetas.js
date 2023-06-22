@@ -31,7 +31,7 @@ export default class ListadoRecetas extends React.Component{
   }
 
   obtenerRecetas(){
-    axios.get(`https://localhost:44310/api/Recetas`)
+    axios.get(`https://medicos-api.herokuapp.com/api/Recetas`)
       .then(res => {
         const listaR = res.data;
         this.setState({ listaR: listaR });
@@ -48,7 +48,7 @@ export default class ListadoRecetas extends React.Component{
     })
     .then((willDelete) => {
       if (willDelete) {
-        axios.delete(`https://localhost:44310/api/Recetas/${id}`)
+        axios.delete(`https://medicos-api.herokuapp.com/api/Recetas/${id}`)
           .then(res => {
             this.obtenerRecetas();
             swal("¡La receta ha sido eliminada!", {

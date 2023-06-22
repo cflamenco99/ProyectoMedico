@@ -28,7 +28,7 @@ import {
     const [lista, setLista] = useState([]);
 
     useEffect(() => {
-        axios.get(`https://localhost:44310/api/Pacientes`)
+        axios.get(`https://medicos-api.herokuapp.com/api/Pacientes`)
         .then(res => {
           const listaPacientes = res.data;    
           setListaPacientes(listaPacientes); 
@@ -50,7 +50,7 @@ import {
       }
 
       function ObtenerPaciente(idPaciente){
-        axios.get(`https://localhost:44310/api/Pacientes/${idPaciente}`)
+        axios.get(`https://medicos-api.herokuapp.com/api/Pacientes/${idPaciente}`)
         .then(res => {
           const listaP = res.data;
           setLista(listaP);
@@ -105,7 +105,7 @@ import {
                 medicinas : receta.medicinas,
                 diagnostico : receta.diagnostico
             }
-            axios.post(`https://localhost:44310/api/Recetas`, recetasDTO)
+            axios.post(`https://medicos-api.herokuapp.com/api/Recetas`, recetasDTO)
             .then(res => {
               console.log(res);
               swal({
