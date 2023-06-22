@@ -1,32 +1,16 @@
 ﻿using System;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SistemaMedicoAPI.Models
 {
     public class Historial
     {
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        [Key]
         public int IdHistorialMedico { get; set; }
-        [ForeignKey("IdPaciente")]
-        public int IdPaciente { get; set; }
-        public virtual Pacientes Pacientes { get; set; }
+        public int IdPaciente { get; set; }        
         public string Observaciones { get; set; }
-        
-        [Column(TypeName = "Date")]
         public  DateTime Fecha { get; set; }
-
-        [ForeignKey("IdUsuario")]
-        public int UsuarioAgrega { get; set; }
-
-        [Column(TypeName = "Date")]
-        public DateTime FechaAgrega { get; set; }
-        [ForeignKey("IdUsuario")]
-        public int UsuarioModifica { get; set; }
-
-        [Column(TypeName = "Date")]
-        public DateTime FechaModifica { get; set; }
-        public virtual Usuarios Usuarios { get; set; }
+        public int UsuarioAgrega { get; set; } = 3;
+        public DateTime FechaAgrega { get; set; } = DateTime.Now;
+        public int? UsuarioModifica { get; set; }
+        public DateTime? FechaModifica { get; set; }
     }
 }

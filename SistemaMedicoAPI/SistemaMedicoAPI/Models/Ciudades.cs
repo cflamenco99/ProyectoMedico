@@ -1,30 +1,15 @@
 ﻿using System;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SistemaMedicoAPI.Models
 {
     public class Ciudades
     {
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        [Key]
         public int IdCiudad { get; set; }
         public string Descripcion { get; set; }
-
-        public virtual Paises Paises { get; set; } 
-
-        [ForeignKey("IdPais")]
         public int IdPais { get; set; }
-        [ForeignKey("IdUsuario")]
-        public int UsuarioAgrega { get; set; }
-
-        [Column(TypeName = "Date")]
-        public DateTime FechaAgrega { get; set; }
-        [ForeignKey("IdUsuario")]
-        public int UsuarioModifica { get; set; }
-
-        [Column(TypeName = "Date")]
-        public DateTime FechaModifica { get; set; }
-        public virtual Usuarios Usuarios { get; set; }
+        public int UsuarioAgrega { get; set; } = 3;
+        public DateTime FechaAgrega { get; set; } = DateTime.Now;
+        public int? UsuarioModifica { get; set; }
+        public DateTime? FechaModifica { get; set; }
     }
 }

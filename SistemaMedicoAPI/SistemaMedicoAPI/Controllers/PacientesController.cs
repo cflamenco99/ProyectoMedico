@@ -42,10 +42,11 @@ namespace SistemaMedicoAPI.Controllers
                                  CodigoPostal = p.CodigoPostal,
                                  Direccion = p.Direccion,
                                  FechaNacimiento = p.FechaNacimiento,
-                                 Ciudad = p.Ciudades.Descripcion,
-                                 Pais = p.Ciudades.Paises.Descripcion
-                             };               
-                return Ok(await result.ToListAsync());
+                                 Ciudad = _db.Ciudades.Where(x => x.IdCiudad == p.IdCiudad).Select(x => x.Descripcion).FirstOrDefault(),
+                                 Pais = (from c in _db.Ciudades join pa in _db.Paises on c.IdPais equals pa.IdPais where c.IdCiudad == p.IdCiudad select pa.Descripcion).FirstOrDefault()
+                             };
+                var datos = await result.ToListAsync();
+                return Ok(datos);
             }
             catch (Exception ex)
             {

@@ -36,10 +36,10 @@ namespace SistemaMedicoAPI.Controllers
                              {
                                  IdRecetas = r.IdRecetas,
                                  IdPaciente = r.IdPaciente,
-                                 Nombres = r.Pacientes.Nombres,
-                                 Apellidos = r.Pacientes.Apellidos,
-                                 Direccion = r.Pacientes.Direccion,
-                                 FechaNacimiento = r.Pacientes.FechaNacimiento,
+                                 Nombres = _db.Pacientes.Where(x => x.IdPaciente == r.IdPaciente).Select(x => x.Nombres).FirstOrDefault(),
+                                 Apellidos = _db.Pacientes.Where(x => x.IdPaciente == r.IdPaciente).Select(x => x.Apellidos).FirstOrDefault(),
+                                 Direccion = _db.Pacientes.Where(x => x.IdPaciente == r.IdPaciente).Select(x => x.Direccion).FirstOrDefault(),
+                                 FechaNacimiento = _db.Pacientes.Where(x => x.IdPaciente == r.IdPaciente).Select(x => x.FechaNacimiento).FirstOrDefault(),
                                  Medicinas = r.Medicinas,
                                  Diagnostico = r.Diagnostico,
 

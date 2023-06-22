@@ -34,10 +34,10 @@ namespace SistemaMedicoAPI.Controllers
                              {
                                  IdCita = c.IdCita,
                                  IdPaciente = c.IdPaciente,
-                                 Nombres = c.Pacientes.Nombres,
-                                 Apellidos = c.Pacientes.Apellidos,
-                                 Direccion = c.Pacientes.Direccion,
-                                 FechaNacimiento = c.Pacientes.FechaNacimiento,
+                                 Nombres = _db.Pacientes.Where(x => x.IdPaciente == c.IdPaciente).Select(x => x.Nombres).FirstOrDefault(),
+                                 Apellidos = _db.Pacientes.Where(x => x.IdPaciente == c.IdPaciente).Select(x => x.Apellidos).FirstOrDefault(),
+                                 Direccion = _db.Pacientes.Where(x => x.IdPaciente == c.IdPaciente).Select(x => x.Direccion).FirstOrDefault(),
+                                 FechaNacimiento = _db.Pacientes.Where(x => x.IdPaciente == c.IdPaciente).Select(x => x.FechaNacimiento).FirstOrDefault(),
                                  FechaCita = c.FechaCita
                              };
                 return Ok(await result.ToListAsync());

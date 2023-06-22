@@ -1,4 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using SistemaMedicoAPI.Models.Maps;
+using System;
 
 namespace SistemaMedicoAPI.Models
 {
@@ -18,13 +21,13 @@ namespace SistemaMedicoAPI.Models
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Paises>().ToTable("Paises");
-            modelBuilder.Entity<Ciudades>().ToTable("Ciudades");
-            modelBuilder.Entity<Pacientes>().ToTable("Pacientes");
-            modelBuilder.Entity<Usuarios>().ToTable("Usuarios");
-            modelBuilder.Entity<Citas>().ToTable("Citas");
-            modelBuilder.Entity<Recetas>().ToTable("Recetas");
-           modelBuilder.Entity<Historial>().ToTable("HistorialMedico");
+            modelBuilder.Entity(new Action<EntityTypeBuilder<Pacientes>>(new PacientesMap().Configure));
+            modelBuilder.Entity(new Action<EntityTypeBuilder<Citas>>(new CitasMap().Configure));
+            modelBuilder.Entity(new Action<EntityTypeBuilder<Ciudades>>(new CiudadesMap().Configure));
+            modelBuilder.Entity(new Action<EntityTypeBuilder<Historial>>(new HistorialMedicoMap().Configure));
+            modelBuilder.Entity(new Action<EntityTypeBuilder<Paises>>(new PaisesMap().Configure));
+            modelBuilder.Entity(new Action<EntityTypeBuilder<Recetas>>(new RecetasMap().Configure));
+            modelBuilder.Entity(new Action<EntityTypeBuilder<Usuarios>>(new UsuariosMap().Configure));
         }
     }
 }

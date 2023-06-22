@@ -18,8 +18,6 @@ namespace SistemaMedicoAPI.Models
             Clave = Encriptacion.Encriptar(credencial.Clave);
         }
 
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        [Key]
         public int IdUsuario { get; set; }
         public string Correo { get; set; }
         public string Clave { get; set; }

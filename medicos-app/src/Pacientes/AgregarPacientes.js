@@ -27,7 +27,7 @@ import {
     const [listaCiudades, setListaCiudades] = useState(1);
     
     useEffect(() => {
-      axios.get(`https://medicos-api.herokuapp.com/api/PaisesCiudades`)
+      axios.get(`https://localhost:44310/api/PaisesCiudades`)
       .then(res => {
         const listaPaises = res.data;
         setListaPaises(listaPaises);        
@@ -44,7 +44,7 @@ import {
     }
 
     function ObtenerCiudades(idPais){
-      axios.get(`https://medicos-api.herokuapp.com/api/PaisesCiudades/${idPais}`)
+      axios.get(`https://localhost:44310/api/PaisesCiudades/${idPais}`)
       .then(res => {
         const listaCiudades = res.data;
         setListaCiudades(listaCiudades);
@@ -94,7 +94,7 @@ import {
           Direccion: paciente.direccion,
           FechaNacimiento: paciente.fechaNacimiento
         };
-        axios.post(`https://medicos-api.herokuapp.com/api/Pacientes`, pacienteDTO)
+        axios.post(`https://localhost:44310/api/Pacientes`, pacienteDTO)
           .then(res => {
             console.log(res);
             swal({
