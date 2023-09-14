@@ -1,17 +1,15 @@
-FROM mcr.microsoft.com/dotnet/core/sdk:3.1-bionic AS build
+FROM mcr.microsoft.com/dotnet/core/sdk:3.1 AS build-env
 WORKDIR /app
 
-COPY *.sln .
-COPY SistemaMedicoAPI/*.csproj ./SistemaMedicoAPI/
+COPY *.csproj ./
 RUN dotnet restore
 
-COPY SistemaMedicoAPI/. ./SistemaMedicoAPI/
-WORKDIR /app/SistemaMedicoAPI
+COPY . ./
 RUN dotnet publish -c Release -o out
 
-FROM mcr.microsoft.com/dotnet/core/aspnet:3.1-bionic AS runtime
+
+FROM mcr.microsoft.com/dotnet/core/aspnet:3.1
 WORKDIR /app
-COPY --from=build /app/SistemaMedicoAPI/out .
 EXPOSE 80
-EXPOSE 443
+COPY --from=build-env /app/out .
 CMD ["dotnet", "SistemaMedicoAPI.dll"]
