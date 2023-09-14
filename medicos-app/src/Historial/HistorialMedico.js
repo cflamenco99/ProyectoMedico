@@ -36,21 +36,21 @@ export default class ListaHistorial extends React.Component{
   }  
 
   handleClick(){
-    axios.get(`https://localhost:44310/api/Pacientes/${this.state.inputValue}`)
+    axios.get(`https://medicos-api.herokuapp.com/api/Pacientes/${this.state.inputValue}`)
       .then(res => {
         const inforPaciente = res.data;
         console.log(inforPaciente)
         this.setState({ Paciente: inforPaciente });
     });
      
-    axios.get(`https://localhost:44310/api/Historial/citas/${this.state.inputValue}`)
+    axios.get(`https://medicos-api.herokuapp.com/api/Historial/citas/${this.state.inputValue}`)
     .then(res => {
       const listaCitas = res.data;
       console.log(listaCitas)
       this.setState({ listaCitas: listaCitas });
     });
 
-    axios.get(`https://localhost:44310/api/Historial/recetas/${this.state.inputValue}`)
+    axios.get(`https://medicos-api.herokuapp.com/api/Historial/recetas/${this.state.inputValue}`)
     .then(res => {
       const listaRecetas = res.data;
       console.log(listaRecetas)
