@@ -31,7 +31,7 @@ const AgregarCitas = () => {
      
 
     useEffect(() => {
-        axios.get(`https://medicos-api.herokuapp.com/api/Pacientes`)
+        axios.get(`https://localhost:44310/api/Pacientes`)
         .then(res => {
           const listaPacientes = res.data;    
           setListaPacientes(listaPacientes); 
@@ -59,7 +59,7 @@ const AgregarCitas = () => {
       } */
 
       function ObtenerPaciente(idPaciente){
-        axios.get(`https://medicos-api.herokuapp.com/api/Pacientes/${idPaciente}`)
+        axios.get(`https://localhost:44310/api/Pacientes/${idPaciente}`)
         .then(res => {
           const listaP = res.data;
           setLista(listaP);
@@ -111,7 +111,7 @@ const AgregarCitas = () => {
                 idPaciente : cita.idPaciente,   
                 fechaCita : cita.fechaCita
             }
-            axios.post(`https://medicos-api.herokuapp.com/api/Citas`, citasDTO)
+            axios.post(`https://localhost:44310/api/Citas`, citasDTO)
             .then(res => {
               console.log(res);
               swal({

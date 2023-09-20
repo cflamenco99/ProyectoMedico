@@ -54,7 +54,7 @@ const Login = () => {
       };
       
       axios
-        .post(`https://medicos-api.herokuapp.com/api/Usuarios`, credencialesDTO)
+        .post(`https://localhost:44310/api/Usuarios`, credencialesDTO)
         .then((res) => {
           swal.close();
           redireccionarIndex();
